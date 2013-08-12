@@ -1,30 +1,54 @@
 from common import bc
 import sys
+import collections
+from functools import total_ordering
 
 class Node(object):
     def __init__(self, weight):
         self.weight = weight
         self.edges = set()
-        self.minpathsum = 0
 
     def add(self, other):
-        if other in self.edges:
-            print "{0} already connected to {1}".format(self,other)
+        # A->B is B->A. undirected edges.
         self.edges.add(other)
+        other.edges.add(self)
 
     def __str__(self):
         return "Node({0})".format(self.weight)
     def __repr__(self):
         return str(self)
 
+class Graph(object):
+    def __init__(self, nodes=set()):
+        self.nodes = nodes
+
+    def add_node(self, node):
+        prev_size = len(self.nodes)
+        self.nodes.add(node)
+        next_size = len(self.nodes)
+        if next_size == prev_size:
+            print("not a new node!")
+
+    def unconnected_nodes(self):
+        nodes = set()
+        for node in self.nodes:
+            if len(node.edges) == 0:
+                nodes.add(node)
+        return nodes
+
 class Matrix(object):
     def __init__(self, filename):
         f = open(filename).read()
+        self.graph = Graph()
         matrix_str = f.strip().split("\n")
         matrix_int = []
 
         for row in matrix_str:
-            row_int = [Node(int(cell)) for cell in row.split(",")]
+            row_int = []
+            for cell in row.split(","):
+                node = Node(int(cell))
+                self.graph.add_node(node)
+                row_int.append(node)
             matrix_int.append(row_int)
 
         self.matrix = matrix_int
@@ -32,10 +56,20 @@ class Matrix(object):
         self.cols = len(matrix_int[0])
         self.start_nodes = []
         self.end_nodes = []
+        self.actual_start = Node(0)
+        self.actual_end = Node(0)
+        self.graph.add_node(self.actual_start)
+        self.graph.add_node(self.actual_end)
 
         for rownum in xrange(self.rows):
             self.start_nodes.append(self.matrix[rownum][0])
             self.end_nodes.append(self.matrix[rownum][-1])
+
+        for node in self.start_nodes:
+            self.actual_start.add(node)
+
+        for node in self.end_nodes:
+            node.add(self.actual_end)
 
         for colnum in xrange(self.cols):
             for rownum in xrange(self.rows):
@@ -59,11 +93,42 @@ class Matrix(object):
             print
 
     def solve(self):
-        pass
+        start = self.actual_start
+        end = self.actual_end
+
+        # working with Dijkstra's algorithm
+        # http://www.cs.auckland.ac.nz/software/AlgAnim/dijkstra.html
+        D = {}      # final distances
+        P = {}      # predecessors
+        Q = {}      # estimated non-final distances
+        D[start] = 0
+        VS = self.graph.nodes.difference(set([start]))
+        VS = reachable(start)
+
+        while VS:
+            currentVS = sorted(VS, key=lambda self: self.weight)
+            closest = currentVS.pop(0)
+            print closest
+
+
+            VS = set(currentVS)
+
+def reachable(subgraph = set(), n=1):
+    """returns nodes that are n degrees away from a subgraph"""
+    # when subgraph = one node
+    if not isinstance(subgraph, collections.Iterable):
+        subgraph = set([subgraph])
+
+    reached = set()
+    for node in subgraph:
+        for node2 in node.edges:
+            reached.add(node2)
+    if n > 1:
+        reached.update(reachable(reached, n-1))
+    return reached
 
 
 m1 = Matrix("matrix-easy.txt")
-#m1.solve()
-m1.print_2d(selected=[(3,3)])
-print m1.matrix[3][3].weight
-print m1.matrix[3][3].edges
+#m1.print_2d(selected=[(3,3)])
+
+m1.solve()
