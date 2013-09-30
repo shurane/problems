@@ -58,10 +58,31 @@ class Matrix(object):
             check_and_queue(rownum  , colnum+1, checked, queue)
             check_and_queue(rownum+1, colnum+1, checked, queue)
 
-        print path[-1][-1]
-        #self.print_2d(matrix=path)
+            def reconstruct_path():
+                reconstructed_path= []
+                colnum=self.rows - 1
+                rownum=self.cols -1
+                reconstructed_path.append((rownum,colnum))
+                running_total = path[rownum][colnum]
+                while colnum != 0 or rownum != 0:
+                    #print("running_total:", running_total)
+                    left = path[rownum][colnum-1] if (colnum-1) >= 0 else sys.maxint
+                    up = path[rownum-1][colnum] if (rownum-1) >= 0 else sys.maxint
 
-m1 = Matrix("matrix-easy.txt")
-m1.solve()
+                    if left < up:
+                        colnum = colnum -1
+                    else:
+                        rownum = rownum -1
+
+                    running_total -= self.matrix[rownum][colnum]
+                    reconstructed_path.append((rownum,colnum))
+
+                return reconstructed_path
+
+        print path[-1][-1]
+        self.print_2d(selected=reconstruct_path())
+
+#m1 = Matrix("matrix-easy.txt")
+#m1.solve()
 m2 = Matrix("matrix.txt")
 m2.solve()
