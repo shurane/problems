@@ -1,7 +1,8 @@
 from collections import defaultdict
+import sys
 
 class Cell(object):
-    def __init__(self,row,col, data=None):
+    def __init__(self,row,col, data=0):
         self.row = row
         self.col = col
         self.data = data
@@ -25,8 +26,10 @@ class Cell(object):
 
     def __str__(self):
         return "Cell(row={0:2},col={1:2}{2}{3})".format(self.row,self.col,
-                ",data={0}".format(self.data) if self.data else "",
+                ",data={0:4}".format(self.data),
                 ",name={0}".format(self.name) if self.name else "")
+    def __repr__(self):
+        return self.__str__()
 
 class Matrix(object):
     def __init__(self,filename):
@@ -48,6 +51,9 @@ class Matrix(object):
         self.rows = num_rows
         self.cols = num_cells
         self.graph = defaultdict(set)
+
+        self.start = Cell.special("start")
+        self.end = Cell.special("end")
 
     def __str__(self):
         results = []
@@ -82,6 +88,12 @@ class Matrix(object):
     def lookup_edges(self, cell):
         return self.graph[cell]
 
+    def print_graph(self):
+        for k,v in self.graph.iteritems():
+            print "Edges for {0}".format(k)
+            for c in v:
+                print "    {0}".format(c)
+
     def create_graph(self):
         """graph of possible movements from any cell"""
         for row_index, row in enumerate(self.matrix):
@@ -97,22 +109,60 @@ class Matrix(object):
                 cell = self.lookup(row_index,col_index+1)
                 self.add_edge(rowcol,cell)
 
-        start = Cell.special("start")
-        end = Cell.special("end")
+        # create start and end lookups
+        # could be better to just create all nodes in self.graph initially
+        self.lookup_edges(self.start)
+        self.lookup_edges(self.end)
         # add edge from start to self.matrix[*][0]
         # add edge from self.matrix[*][-1] to end
         for row_index, row in enumerate(self.matrix):
             cell = self.lookup(row_index, 0)
-            self.add_edge(start, cell)
+            self.add_edge(self.start, cell)
 
             cell = self.lookup(row_index, self.cols - 1)
-            self.add_edge(cell, end)
+            self.add_edge(cell, self.end)
 
-        for k,v in self.graph.iteritems():
-            print "Edges for {0}".format(k)
-            for c in v:
-                print "    {0}".format(c)
+    def shortest_path(self,start=None):
+        """shortest path!"""
+        # it seems like I'm not inserting into 'visited' correctly
+
+        if start == None:
+            start = self.start
+        dist = {}
+        visited = set()
+
+        for cell in self.graph.iterkeys():
+            dist[cell] = sys.maxint
+        dist[start] = 0
+
+        queue = [start]
+        while queue:
+            #print(len(visited),len(queue))
+            node = queue.pop(0)
+            visited.add(node)
+            further_nodes = sorted(self.lookup_edges(node), key=lambda n: n.data)
+            print "before", len(further_nodes)
+            further_nodes = [f_node for f_node in further_nodes if not (f_node in visited)]
+            print "after ", len(further_nodes)
+            #closest_node = further_nodes[0] if further_nodes else None
+
+            #print "====", node
+            for closest_node in further_nodes:
+                current_dist = dist[node] + closest_node.data
+                if current_dist < dist[closest_node]:
+                    "found closer node"
+                    dist[closest_node] = current_dist
+
+                if closest_node not in visited:
+                    queue.append(closest_node)
+                print closest_node, "distance so far", dist[closest_node]
+
+            # oof, sorting everytime? not a good idea. but works for now.
+            queue = sorted(queue, key=lambda n: n.data)
+            #print queue
 
 m1 = Matrix("matrix-easy.txt")
 m1.create_graph()
+m1.shortest_path()
+
 
