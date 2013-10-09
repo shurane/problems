@@ -1,16 +1,5 @@
 import itertools
 
-def skip_multiples(start=0,multiples=[]):
-    num = start
-    while True:
-        factorless=True
-        for multiple in multiples:
-            if num % multiple == 0:
-                factorless = False
-        if factorless:
-            yield num
-        num += 1
-
 def prime_sieve(upto=10000):
     numbers = [number for number in xrange(upto)]
     is_prime = [True for number in xrange(upto)]
