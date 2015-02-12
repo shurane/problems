@@ -28,6 +28,7 @@
       '(70 "seventy")
       '(80 "eighty")
       '(90 "ninety")
+      ; TODO more clever way to generate for hundreds, thousands, etc?
       '(100 "one hundred")
       '(200 "two hundred")
       '(300 "three hundred")
@@ -67,16 +68,7 @@
                                 list
                                 (init digits)
                                 (cdr digits)))])
-    (printf "digits: ~a~n" digits)
-    (flatten (reverse (for/list ([digit-pair digit-pairs])
-      (let ([next (foldl + 0 digit-pair)])
-        (printf "digit-pair:~a, next:~a ~n" digit-pair next)
-        (cond
-          ; TODO this isn't correct, but it works
-          [(hash-has-key? number-letter-mapping next) (hash-ref number-letter-mapping next)]
-          [(hash-has-key? number-letter-mapping (car digit-pair)) (hash-ref number-letter-mapping (car digit-pair))]
-          [else (error (string-append "Uh oh what happened" digit-pairs))])
-        ))))))
+    (reverse digits)))
 
 ; TODO go from back of list to front with a left and right iterator of sorts
 ; Soooo '(1000 700 40 3) --> (list '(40 3) '(700 40) '(1000 700))
