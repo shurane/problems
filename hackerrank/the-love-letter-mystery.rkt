@@ -6,18 +6,6 @@
     ['()  (error "empty list")]
     [_    (take lst (- (length lst) 1))]))
 
-(define (palindrome? s)
-  (let ([left (string-ref s 0)]
-        [right (string-ref s (- (string-length s) 1))])
-    (cond
-      [(eq? (string-length s) 0) #t]
-      [(eq? (string-length s) 1) #t]
-      [(eq? (string-length s) 2) (eq? left right)]
-      [else
-        (and
-          (eq? left right)
-          (palindrome? (substring s 1 (- (string-length s) 1))))])))
-
 (define (palindromify-chars s)
   (cond
     [(eq? (length s) 0) 0]
