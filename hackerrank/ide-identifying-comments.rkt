@@ -19,6 +19,10 @@
 (define (match-both-comments s)
   (regexp-match* #rx"//.*?(?=\n)|/\\*.*?\\*/" s))
 
+(define (strip-leading-whitespace s)
+;|^[[:space:]]* <-- not needed I think
+  (regexp-replace* #px"\n[[:space:]]*" s "\n"))
+
 (define input (string-join (keep-reading) "\n"))
 (for ([comment (match-both-comments input)])
-  (displayln comment))
+  (displayln (strip-leading-whitespace comment)))
