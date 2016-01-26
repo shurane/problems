@@ -1,28 +1,38 @@
 #lang racket
 
 ; https://www.hackerrank.com/challenges/sherlock-and-array
+; TODO this is slow on big inputs, check input files
 
 (define (solve-case c)
-  (let* ([c-length (first c)]
-         [c-elems (second c)]
-         [elems (for/list ([i (in-range c-length)])
+  (let* ([n (first c)]
+         [array (second c)]
+         [left 0]
+         [right (sequence-fold + 0 array)]
+         [elems (for/vector ([i (in-range n)])
            ;(format "solve-case left:~a middle:~a right:~a ~n" 
+           ;(list
+             ;(vector-take array i) 
+             ;(vector-ref array i)
+             ;(vector-drop array (+ i 1))))]
+           (set! left (+ left (sequence-ref array i)))
+           (set! right (- right (sequence-ref array i)))
            (list
-             (take c-elems i) 
-             (list-ref c-elems i)
-             (drop c-elems (+ i 1))))]
-         [results (filter equal-left-right elems)])
-         (if (= (length results) 0)
+             left
+             (sequence-ref array i)
+             right))]
+         [results (vector-filter equal-left-right elems)])
+         (if (= (sequence-length results) 0)
            "NO"
            "YES")))
 
 (define (equal-left-right elems)
-  (= (apply + (first elems)) 
-     (apply + (third elems))))
+  (= (sequence-fold + 0 (first elems)) 
+     (sequence-fold + 0 (third elems))))
 
+; TODO this is better done as a struct? or something instead of just a list
 (define (grab-case)
   (let ([n      (string->number (read-line))]
-        [array  (map string->number (string-split (read-line)))])
+        [array  (list->vector (map string->number (string-split (read-line))))])
     (list n array)))
 
 (define (grab-all-cases t)
