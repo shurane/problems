@@ -57,7 +57,7 @@ bool matches(std::vector<std::vector<int>> a, std::vector<std::vector<int>> b){
 int main(int argc, char** argv){
     int  t;
     std::cin >> t;
-    //std::cout << "lol: " << t << std::endl;
+    //std::cout << "num cases: " << t << std::endl;
 
     for (int i=0; i<t; i++){
         int r;
