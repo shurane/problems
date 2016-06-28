@@ -2,9 +2,6 @@
 #include <vector>
 #include "prettyprint.hpp"
 
-// using numpy naming convention
-// typedef std::vector<std::vector<int>> np_array;
-
 std::vector<std::vector<int>> readmatrix(int r, int c){
     std::vector<std::vector<int>> rows;
     for (int ri=0; ri<r; ri++){
