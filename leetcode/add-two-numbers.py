@@ -41,71 +41,36 @@ class Solution(object):
         :type l2: ListNode
         :rtype: ListNode
         """
+        # programcreek helped a lot... http://www.programcreek.com/2012/12/add-two-numbers/
         
         d1 = l1
         d2 = l2
         l3 = ListNode(None)
         d3prev = None
         d3 = l3
-        carryOver = 0
-        while d1 != None and d2 != None:
-            temp = carryOver + d1.val + d2.val
-            if temp >= 10:
-                carryOver = temp / 10
-                temp = temp % 10
-            else:
-                carryOver = 0
+        carry = 0
+        while d1 != None or d2 != None:
 
-            d3.val = temp
-            
-            d1 = d1.next
-            d2 = d2.next
-
-            d3.next = ListNode(None)
-            d3prev = d3
-            d3 = d3.next
-
-
-        if d1:
-            while d1:
-                d3.val = d1.val + carryOver
-
-                if (d3.val >= 10):
-                    carryOver = d3.val / 10
-                    d3.val = d3.val % 10
-                else:
-                    carryOver = 0
-
+            if d1 != None:
+                carry += d1.val
                 d1 = d1.next
 
-                d3.next = ListNode(None)
-                d3prev = d3
-                d3 = d3.next
-        elif d2:
-            while d2:
-                d3.val = d2.val + carryOver
-
-                if (d3.val >= 10):
-                    carryOver = d3.val / 10
-                    d3.val = d3.val % 10
-                else:
-                    carryOver = 0
-
+            if d2 != None:
+                carry += d2.val
                 d2 = d2.next
 
-                d3.next = ListNode(None)
-                d3prev = d3
-                d3 = d3.next
 
-
-        if carryOver != 0:
-            d3.val = carryOver
-            d3prev = d3
+            d3.next = ListNode(carry % 10)
             d3 = d3.next
+            carry = carry / 10
 
-        d3prev.next = None
+        if carry != 0:
+            next = ListNode(carry)
+            d3.next = next
 
-        return l3
+        # discard the first node
+        return l3.next
+
 
 s = Solution()
 n1 = ListNode.fromList([2,4,3])
@@ -123,13 +88,13 @@ n8 = ListNode.fromList([1])
 n9 = ListNode.fromList([9,9])
 n10 = ListNode.fromList([1])
 
-# print s.addTwoNumbers(n1, n2)
-# print s.addTwoNumbers(n3, n2)
+print s.addTwoNumbers(n1, n2)
+print s.addTwoNumbers(n3, n2)
 
-# print "=================="
+print "=================="
 
-# print s.addTwoNumbers(n4, n2)
-# print s.addTwoNumbers(n2, n4)
-# print s.addTwoNumbers(n5, n6)
-# print s.addTwoNumbers(n7, n8)
+print s.addTwoNumbers(n4, n2)
+print s.addTwoNumbers(n2, n4)
+print s.addTwoNumbers(n5, n6)
+print s.addTwoNumbers(n7, n8)
 print s.addTwoNumbers(n9, n10)
