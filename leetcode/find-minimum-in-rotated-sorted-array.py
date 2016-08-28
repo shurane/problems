@@ -1,24 +1,24 @@
-import blessings
-term = blessings.Terminal()
+# import blessings
+# term = blessings.Terminal()
 
-def colorized_array(arr, begin, mid, end):
-    result = ""
-    space = " "
-    for i in range(len(arr)):
-        if i == len(arr) - 1:
-            space = ""
+# def colorized_array(arr, begin, mid, end):
+    # result = ""
+    # space = " "
+    # for i in range(len(arr)):
+        # if i == len(arr) - 1:
+            # space = ""
         
-        r = "{: 3d}".format(arr[i])
-        if i == begin:
-            result += term.red(r) + space
-        elif i == end:
-            result += term.blue(r) + space
-        # sometimes mid might overlap with begin or end
-        elif i == mid:
-            result += term.green(r) + space
-        else:
-            result += str(r) + space
-    return result
+        # r = "{: 3d}".format(arr[i])
+        # if i == begin:
+            # result += term.red(r) + space
+        # elif i == end:
+            # result += term.blue(r) + space
+        # # sometimes mid might overlap with begin or end
+        # elif i == mid:
+            # result += term.green(r) + space
+        # else:
+            # result += str(r) + space
+    # return result
 
 class Solution(object):
     def findMin(self, nums):
@@ -36,26 +36,19 @@ class Solution(object):
         while begin <= end:
             mid = begin + (end - begin)/2
 
-            carr = colorized_array(nums, begin, mid, end)
-            print "{: 3d}".format(begin), "{: 3d}".format(mid), "{: 3d}".format(end), 
-            print "lowest:{: 3d}, nums:{}".format(lowest, carr)
+            # carr = colorized_array(nums, begin, mid, end)
+            # print "{: 3d}".format(begin), "{: 3d}".format(mid), "{: 3d}".format(end), 
+            # print "lowest:{: 3d}, nums:{}".format(lowest, carr)
 
-            if nums[mid] < lowest:
-                lowest = nums[mid]
+            lowest = min(lowest, nums[begin], nums[mid], nums[end])
 
             # go down the half that isn't sorted
             if nums[begin] > nums[mid]:
                 # left half unsorted
                 end = mid - 1
-            elif nums[mid] > nums[end]:
+            else:
                 # right half unsorted
                 begin = mid + 1
-            else:
-                # we found the pivot
-                lowestSeen = min(nums[begin], nums[mid], nums[end])
-                if lowestSeen < lowest:
-                    lowest = lowestSeen
-                break
         return lowest
 
 
