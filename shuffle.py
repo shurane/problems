@@ -5,17 +5,19 @@ term = blessings.Terminal()
 # this looks suspiciously a lot like the fisher yates algorithm
 lst = range(30)
 
-
 def colorized(lst, yellows=[]):
     result = "["
     delim = ", "
     for i in range(len(lst)):
         if i == len(lst) - 1:
             delim = ""
+
+        v = "{: 3d}".format(lst[i])
+
         if i in yellows:
-            result += term.yellow(str(lst[i])) + delim
+            result += term.yellow(v) + delim
         else:
-            result +=             str(lst[i])  + delim
+            result +=             v  + delim
 
     result += "]"
     return result
