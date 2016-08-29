@@ -1,14 +1,14 @@
 class Solution(object):
-    def __init__(self):
+    # def __init__(self):
         # prealloc array up to 10,000
-        self.climbStairs(10000)
+        # self.climbStairs(10000)
 
     def climbStairs(self, n):
         """
         :type n: int
         :rtype: int
         """
-        length = max(n+1, 3)
+        length = max(n+1, 3) # at least [0, 1, 2], since I'm doing 1-based indexing
         if not hasattr(self, 'arr'):
             # print "creating memoized arr of length {}".format(length)
             self.arr = [0 for i in xrange(length)]
@@ -33,4 +33,4 @@ class Solution(object):
 # print s.climbStairs(4)
 # print s.climbStairs(5)
 # print s.climbStairs(20)
-# print s.climbStairs(20)
+# print s.climbStairs(50)
