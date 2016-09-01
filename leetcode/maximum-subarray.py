@@ -19,20 +19,31 @@ class Solution(object):
         
         # TODO There's a divide and conquer way, how does that work?
 
-        maxes = [nums[0] for i in nums]
+        # maxes = [nums[0] for i in nums]
+        # highest = nums[0]
+        # for i in xrange(1, len(nums)):
+            # maxes[i] = max(maxes[i-1] + nums[i],
+                           # # maxes[i-1],
+                                        # nums[i])
+            # if maxes[i] > highest:
+                # highest = maxes[i]
+
         highest = nums[0]
+        prev = nums[0]
+
         for i in xrange(1, len(nums)):
-            maxes[i] = max(maxes[i-1] + nums[i],
-                           # maxes[i-1],
-                                        nums[i])
-            if maxes[i] > highest:
-                highest = maxes[i]
+            temp = max(prev + nums[i], nums[i])
+
+            if temp > highest:
+                highest = temp
+
+            prev = temp
 
         return highest
         
         
 s = Solution()
-# assert s.maxSubArray([-2,1,-3,4,-1,2,1,-5,4]) == 6
-# assert s.maxSubArray([100,-1,-1,-1,-1,-1,-1,100]) == 194
-# assert s.maxSubArray([-1,-1,-1,-1,100,-1,-1,100]) == 198
-# assert s.maxSubArray([1]) == 1
+assert s.maxSubArray([-2,1,-3,4,-1,2,1,-5,4]) == 6
+assert s.maxSubArray([100,-1,-1,-1,-1,-1,-1,100]) == 194
+assert s.maxSubArray([-1,-1,-1,-1,100,-1,-1,100]) == 198
+assert s.maxSubArray([1]) == 1
