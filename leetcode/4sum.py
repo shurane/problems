@@ -1,4 +1,6 @@
+import random
 
+random.seed(0)
 
 class Solution(object):
 
@@ -18,6 +20,7 @@ class Solution(object):
         """
 
         #brute force approach would be n**4, 4 for loops
+        # at least it's useful to know that it's correct
 
         n = len(nums)
         quadruplets = []
@@ -28,8 +31,11 @@ class Solution(object):
                         if nums[i] + nums[j] + nums[k] + nums[l] == target:
                             quadruplets.append([nums[i],nums[j],nums[k],nums[l]])
         return quadruplets
-        
+
 
 s = Solution()
+# print s.fourSumSlow([1, 0, -1, 0, -2, 2], 0)
 
-print s.fourSumSlow([1, 0, -1, 0, -2, 2], 0)
+randnums = [random.randint(-50, 50) for i in range(100000)]
+randtarget = random.randint(0,100)
+print s.fourSumSlow(randnums, randtarget)
