@@ -17,7 +17,7 @@ class TreeNode(object):
         else:
             insertBSTStyle(self.right, x)
 
-    def str_helper(self, side="", indent=0):
+    def strHelper(self, side="", indent=0):
         prefix = indent * " " + side
         if self.val == None:
             return ""
@@ -32,7 +32,7 @@ class TreeNode(object):
             return s
 
     def __str__(self):
-        return self.str_helper()
+        return self.strHelper()
 
 class Solution(object):
     def isSameTree(self, p, q):
@@ -45,6 +45,8 @@ class Solution(object):
         if p == None and q == None:
             return True
         elif p == None or q == None:
+            return False
+        elif p.val != q.val:
             return False
         else:
             return self.isSameTree(p.left, q.left) \
