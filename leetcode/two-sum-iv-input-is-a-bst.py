@@ -41,3 +41,6 @@ class Solution:
             
             return None
         
+# O(nlogn) without using any extra space in 41 minutes
+# it's interesting, there are quite a few solutions to this.
+# see this discussion: https://leetcode.com/problems/two-sum-iv-input-is-a-bst/solution/
