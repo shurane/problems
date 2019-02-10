@@ -1,5 +1,7 @@
 class Solution:
     def diStringMatch(self, S: 'str') -> 'List[int]':
+        # this solution is non working
+
         N = len(S)
         lst = list(range(N + 1))
         match = []
