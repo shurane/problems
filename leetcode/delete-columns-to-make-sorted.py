@@ -13,7 +13,7 @@ class Solution:
                     indexes.append(i)
                     break
         # print(indexes)
-        return len(indexes)
+        return len(indexes)     
 
 s = Solution()
 
