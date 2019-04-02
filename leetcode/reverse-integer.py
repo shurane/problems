@@ -4,36 +4,29 @@ class Solution(object):
         :type x: int
         :rtype: int
         """
-        result = 0
-        negative = 1
+        sign = -1 if x < 0 else 1
+        x = abs(x)
+        y = 0
 
-        if x < 0:
-            negative = -1
-            x = abs(x)
+        while x != 0:
+            y = y * 10 + (x % 10)
+            x = x / 10 # python 2
 
-        while x > 0:
-            result *= 10
-            result += (x % 10)
-            x /= 10
+        y *= sign
 
-        if result > 2147483647:
-            result = 0
+        if y > 2**31 - 1 or y < -2**31:
+            y = 0
 
-        return result * negative
-
-    def reverseStr(self, x):
-        negative = 1
-        if x < 0:
-            negative = -1
-        result = int(str(abs(x))[::-1])
-        if result > 2**31-1:
-            result = 0
-        return result * negative
+        return y
 
 s = Solution()
-
-assert s.reverse(123) == 321
-assert s.reverse(-123) == -321
-assert s.reverse(1534236469) == 0
-assert s.reverse(1563847412) == 0
-assert s.reverse(0) == 0
+print(s.reverse(500))
+print(s.reverse(-500))
+print(s.reverse(-123))
+print(s.reverse(123))
+print(s.reverse(-321))
+print(s.reverse(321))
+print(s.reverse(2147483648))
+print(s.reverse(1111111111))
+print(s.reverse(1111111112))
+print(s.reverse(1111111113))
