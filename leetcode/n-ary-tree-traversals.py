@@ -56,11 +56,58 @@ class Solution:
         return values
 
     # https://leetcode.com/problems/n-ary-tree-level-order-traversal/
-    def levelorder(self, root):
-        pass
+    def levelorder(self, root, level=0):
+        if not root: return []
+
+        values = [(level, root.val)]
+
+        for child in root.children:
+            values.extend(self.levelorder(child, level=level + 1))
+
+        # doesn't look elegant, but technically it's recursive + a reconstruction afterwards
+        if level == 0:
+            levels = []
+            for l, value in values:
+                if len(levels) <= l:
+                    levels.append([])
+                
+                levels[l].append(value)
+            
+            return levels
+
+        else:
+            return values
+            
 
     def levelorder_iterative(self, root):
-        pass
+        if not root: return []
+
+        levels = []
+        queue = [(0, root)]
+
+        while queue:
+            level, node = queue.pop(0)
+            for child in node.children:
+                queue.append((level + 1, child))
+
+            if len(levels) <= level:
+                levels.append([])
+
+            levels[level].append(node.val)
+        
+        return levels
+
+    def levelorder_iterative2(self, root):
+        # inspiration from https://leetcode.com/problems/n-ary-tree-level-order-traversal/discuss/148877/Python-5-lines-BFS-solution
+        queue = [root]
+        levels = []
+
+        while queue:
+            levels.append([node.val for node in queue])
+            queue = [child for node in queue for child in node.children if child]
+
+        return levels
+            
 
 s = Solution()
 
@@ -84,3 +131,5 @@ assert s.preorder(t1) == [1,3,5,6,2,4]
 assert s.preorder_iterative(None) == []
 assert s.preorder_iterative(Node(1, [Node(2), Node(3)])) == [1,2,3]
 assert s.preorder_iterative(t1) == [1,3,5,6,2,4]
+
+assert s.levelorder_iterative2(t1) == [[1], [3,2,4], [5,6]]
