@@ -24,7 +24,7 @@ class TreeNode:
         return s
 
 def create_tree(lst: 'List'):
-    # passing through values twice. inefficient, but simple to write without recursion
+    # look at helpers2.py for the updated version that uses only a single loop
     q = []
     for value in lst:
         if value != None:
