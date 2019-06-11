@@ -1,3 +1,5 @@
+from typing import List
+
 class TreeNode:
     def __init__(self, x):
         self.val = x
@@ -23,7 +25,7 @@ class TreeNode:
 
         return s
 
-def create_tree(lst: 'List'):
+def create_tree(lst: List):
     if len(lst) == 0:
         return None
 
@@ -45,7 +47,7 @@ def create_tree(lst: 'List'):
 
     return q[0]
 
-def create_tree_recursive(lst: 'List', i=0):
+def create_tree_recursive(lst: List, i: int = 0):
     if not lst:
         return None
 
@@ -60,6 +62,12 @@ def create_tree_recursive(lst: 'List', i=0):
         node.right = create_tree_recursive(lst, right)
 
     return node
+
+def height(self, root: TreeNode) -> int:
+    if not root:
+        return 0
+    else:
+        return 1 + max(self.height(root.left), self.height(root.right))
 
 ## testing for tree methods
 # for lst in [[1,2,3,4,5,6], [1,2,3,4,None,6]]:
