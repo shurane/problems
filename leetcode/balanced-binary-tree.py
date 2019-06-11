@@ -7,6 +7,8 @@ class Solution:
         elif self.isNoneOrLeaf(root.left) and self.isNoneOrLeaf(root.right):
             return True
         else:
+            # each call to height is O(n) -- for n elements, that's O(n**2)
+            # TODO make it linear
             diffLessThan1 = abs(self.height(root.left) - self.height(root.right)) <= 1
             if diffLessThan1:
                 left  = self.isBalanced(root.left)
