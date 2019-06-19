@@ -40,16 +40,3 @@ class Solution:
             # currentDepth == requiredDepth
             # don't recurse, just return the current node
             return [node]
-
-    def helperDFS2(self, node: 'Node', currentDepth: int, requiredDepth: int) -> List['Node']:
-        # print(f"val={node and node.val}, currentDepth={currentDepth}, requiredDepth={requiredDepth}")
-        if not node:
-            return []
-        elif currentDepth < requiredDepth:
-            left = self.helperDFS(node.left, currentDepth + 1, requiredDepth)
-            right = self.helperDFS(node.right, currentDepth + 1, requiredDepth)
-            return left + right
-        else:
-            # currentDepth == requiredDepth
-            # don't recurse, just return the current node
-            return [node]
