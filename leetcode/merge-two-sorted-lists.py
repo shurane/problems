@@ -1,29 +1,4 @@
-# Definition for singly-linked list.
-class ListNode:
-    def __init__(self, x):
-        self.val = x
-        self.next = None
-
-    def __repr__(self):
-        s = f"{self.val}"
-        c = self.next
-        while c:
-            s += f" -> {c.val}"
-            c = c.next
-        
-        return s
-
-def fromList(lst):
-    if not lst:
-        return None
-
-    head = ListNode(lst[0])
-    c = head
-    for i in range(1, len(lst)):
-        c.next = ListNode(lst[i])
-        c = c.next
-
-    return head
+from helpers2 import ListNode
 
 class Solution:
     def mergeTwoListsRecursive(self, l1, l2):
@@ -31,7 +6,7 @@ class Solution:
             return l2
         elif not l2:
             return l1
-    
+
         if l1.val < l2.val:
             c = ListNode(l1.val)
             c.next = self.mergeTwoListsRecursive(l1.next, l2)
@@ -62,11 +37,11 @@ class Solution:
         return head.next
 
 
-l1 = fromList([1,3,5,7])
-l2 = fromList([2,4,6,8])
-l3 = fromList([1,2,3])
-l4 = fromList([4,5,6])
-l5 = fromList([4,5,6,7,8,9,10,11])
+l1 = ListNode.fromList([1,3,5,7])
+l2 = ListNode.fromList([2,4,6,8])
+l3 = ListNode.fromList([1,2,3])
+l4 = ListNode.fromList([4,5,6])
+l5 = ListNode.fromList([4,5,6,7,8,9,10,11])
 
 s = Solution()
 print(s.mergeTwoLists(l1, l2))
