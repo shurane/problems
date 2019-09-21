@@ -84,6 +84,12 @@ class ListNode:
 
         return s
 
+    def __iter__(self):
+        current = self
+        while current:
+            yield current
+            current = current.next
+
     def __eq__(self, other):
         if not other:
             return False
@@ -102,17 +108,18 @@ class ListNode:
         return True
 
     @classmethod
-    def fromList(cls, lst):
-        if not lst:
-            return None
+    def fromList(cls, lst: List):
+        head = ListNode(None)
+        current = head
+        for elem in lst:
+            current.next = ListNode(elem)
+            current = current.next
 
-        head = ListNode(lst[0])
-        c = head
-        for i in range(1, len(lst)):
-            c.next = ListNode(lst[i])
-            c = c.next
+        return head.next
 
-        return head
+    @classmethod
+    def fromArgs(cls, *args):
+        return ListNode.fromList(args)
 
     @classmethod
     def reverseList(start, end):
@@ -133,3 +140,4 @@ assert ListNode.fromList([])            != ListNode.fromList([1,2,3])
 assert ListNode.fromList([1,2,3])       != ListNode.fromList([])
 assert ListNode.fromList([1,2,3])       != ListNode.fromList([1,2,3,4])
 assert ListNode.fromList([1,2,3,4])     != ListNode.fromList([1,2,3])
+assert ListNode.fromArgs(1,2,3)         == ListNode.fromList([1,2,3])
