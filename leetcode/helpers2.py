@@ -141,3 +141,24 @@ assert ListNode.fromList([1,2,3])       != ListNode.fromList([])
 assert ListNode.fromList([1,2,3])       != ListNode.fromList([1,2,3,4])
 assert ListNode.fromList([1,2,3,4])     != ListNode.fromList([1,2,3])
 assert ListNode.fromArgs(1,2,3)         == ListNode.fromList([1,2,3])
+
+def compareListOfLists(first: List[List[str]], second: List[List[str]]) -> bool:
+    if len(first) != len(second):
+        return False
+
+    # sort the inner and outer lists
+    first  = sorted([sorted(lst) for lst in first])
+    second = sorted([sorted(lst) for lst in second])
+
+    for l, r in zip(first, second):
+        if l != r:
+            return False
+
+    return True
+
+assert compareListOfLists([], []) == True
+assert compareListOfLists([["a"]], []) == False
+assert compareListOfLists([["a"]], ["a"]) == True
+assert compareListOfLists([["a", "b"], ["c"]], [["c"], ["b", "a"]]) == True
+assert compareListOfLists([["a", "b"], ["c", "d"]], [["d", "c"], ["b", "a"]]) == True
+assert compareListOfLists([["a", "b"], ["c"]], [["d"], ["b", "a"]]) == False
