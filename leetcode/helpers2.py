@@ -25,6 +25,7 @@ class TreeNode:
 
         return s
 
+# TODO this should be part of class Tree
 def create_tree(lst: List):
     if len(lst) == 0:
         return None
@@ -47,6 +48,7 @@ def create_tree(lst: List):
 
     return q[0]
 
+# TODO this should be part of class Tree
 def create_tree_recursive(lst: List, i: int = 0):
     if not lst:
         return None
