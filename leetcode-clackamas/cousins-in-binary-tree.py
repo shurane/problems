@@ -31,10 +31,11 @@ class Solution:
         q = [ParentChild(None, root, 0)]
         results = []
 
+        # BFS approach
         while q:
             parent, node, level = q.pop(0)
             # print(f"q.pop(): parent:{parent}, node:{node}, level:{level}")
-            
+
             maybeResult = self.helper(parent, node, x, y, level)
             if maybeResult:
                 results.append(maybeResult)
@@ -75,4 +76,3 @@ t2.right.right = TreeNode(5)
 assert s.isCousins(t1, 4, 3) == False
 assert s.isCousins(t2, 5, 4) == True
 assert s.isCousins(None, 5, 4) == False
-
