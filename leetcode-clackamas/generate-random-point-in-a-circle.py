@@ -16,6 +16,10 @@ class Solution:
         # notes after wrong submission
         # apparently r needs to be generated randomly between (0,radius)
         # see https://leetcode.com/problems/generate-random-point-in-a-circle/discuss/1113679/Python-Polar-coordinates-explained-with-diagrams-and-math
+        # see the answer by lenchen1112 (modified to fit the code below):
+        # area = math.pi * self.radius ** 2
+        # r = math.sqrt(random.uniform(0, area) / math.pi)
+
         angle = random.uniform(0, math.pi * 2)
         r = self.radius * math.sqrt(random.random())
         x = r * math.cos(angle)
