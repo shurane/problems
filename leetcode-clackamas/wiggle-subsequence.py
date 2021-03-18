@@ -2,13 +2,12 @@ from typing import List
 
 class Solution:
     def wiggleMaxLength(self, nums: List[int]) -> int:
-        if len(nums) <= 1:
-            return len(nums)
-        elif len(nums) == 2:
-            if nums[1] - nums[0] != 0:
-                return 2
-            else:
-                return 1
+        # turns out this is a greedy approach
+        # see @archit91's answer in https://leetcode.com/explore/challenge/card/march-leetcoding-challenge-2021/590/week-3-march-15th-march-21st/3676/discuss/1115385/Short-and-Easy-w-Explanation-or-O(N)-time-O(1)-Space
+
+        # there is a DP solution to this that looks very similar to the buying and selling stock question
+        # https://leetcode.com/explore/challenge/card/march-leetcoding-challenge-2021/590/week-3-march-15th-march-21st/3676/discuss/1115235/Python-5-lines-dp-with-O(n)-explained
+        # this problem is really about finding the most max and min peaks. Kind of sounds like taking the derivative of a function and finding all points where it is equal to 0
 
         prev = 0
         i = 1
@@ -19,14 +18,9 @@ class Solution:
             if not prev > 0 and diff > 0 or not prev < 0 and diff < 0:
                 count += 1
                 prev = diff
-
             i += 1
-
         # print(nums, count)
         return count
-
-# the DP solution to this is very similar to buying and selling stock
-# https://leetcode.com/explore/challenge/card/march-leetcoding-challenge-2021/590/week-3-march-15th-march-21st/3676/discuss/1115235/Python-5-lines-dp-with-O(n)-explained
 
 s = Solution()
 assert s.wiggleMaxLength([1]) == 1
