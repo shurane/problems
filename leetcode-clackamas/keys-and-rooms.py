@@ -2,10 +2,7 @@ from typing import List
 
 class Solution:
     def canVisitAllRooms(self, rooms: List[List[int]]) -> bool:
-        if len(rooms) == 1:
-            return True
-
-        keys = set()
+        keys = set([0])
         visit = [k for k in rooms[0]]
         while visit:
             k = visit.pop(0)
@@ -19,10 +16,7 @@ class Solution:
             #     keys.add(k)
             #     visit.extend(l for l in rooms[k])
 
-        keysToAllRoomsExceptZero = len(keys) == len(rooms) - 1 and 0 not in keys
-        keysToAllRooms = len(keys) == len(rooms)
-
-        return keysToAllRoomsExceptZero or keysToAllRooms
+        return len(keys) == len(rooms)
 
 
 s = Solution()
