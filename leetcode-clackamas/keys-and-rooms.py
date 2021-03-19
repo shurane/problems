@@ -2,6 +2,11 @@ from typing import List
 
 class Solution:
     def canVisitAllRooms(self, rooms: List[List[int]]) -> bool:
+        # BFS approach
+        # There's also an iterative DFS that looks pretty similar https://leetcode.com/explore/challenge/card/march-leetcoding-challenge-2021/590/week-3-march-15th-march-21st/3677/discuss/133855/Straight-Forward
+        # There's a recursive DFS too, which I don't recall how to approach https://leetcode.com/explore/challenge/card/march-leetcoding-challenge-2021/590/week-3-march-15th-march-21st/3677/discuss/1116703/Python-Simple-dfs-+-oneliner-explained
+        # I should probably brush up on adjacency matrices at some point, too
+
         keys = set([0])
         visit = [k for k in rooms[0]]
         while visit:
