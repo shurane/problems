@@ -22,6 +22,8 @@ class Solution:
         return list(pvisit.intersection(avisit))
 
     def reachable(self, matrix, visited, y: int, x: int) -> bool:
+        # see https://leetcode.com/explore/challenge/card/march-leetcoding-challenge-2021/591/week-4-march-22nd-march-28th/3684/discuss/90739/Python-DFS-bests-85.-Tips-for-all-DFS-in-matrix-question.
+        # also see https://leetcode.com/explore/challenge/card/march-leetcoding-challenge-2021/591/week-4-march-22nd-march-28th/3684/discuss/438276/Python-beats-98.-DFS-template-for-Matrix
         height = len(matrix)
         width = len(matrix[0])
         directions = [(-1, 0), (1, 0), (0, -1), (0, 1)]
