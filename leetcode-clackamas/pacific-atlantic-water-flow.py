@@ -46,23 +46,6 @@ class Solution:
                 if 0 <= nexti < height and 0 <= nextj < width and matrix[nexti][nextj] >= value:
                     q.append((nexti, nextj))
 
-            ## hardcoding
-            ## left of cell
-            # if j - 1 >= 0 and matrix[i][j - 1] >= value:
-            #     q.append([i, j - 1])
-
-            ## left of cell
-            # if j + 1 < width and matrix[i][j + 1] >= value:
-            #     q.append([i, j + 1])
-
-            ## top of cell
-            # if i - 1 >= 0 and matrix[i - 1][j] >= value:
-            #     q.append([i - 1, j])
-
-            ## bottom of cell
-            # if i + 1 < height and matrix[i + 1][j] >= value:
-            #     q.append([i + 1, j])
-
 s = Solution()
 s.pacificAtlantic([[1,2,2,3,5],
                    [3,2,3,4,4],
