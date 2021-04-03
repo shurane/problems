@@ -1,12 +1,12 @@
 
 ## March 2021
-- [ ] design-hashmap.py
-- [ ] coin-change.py
-- [ ] pacific-atlantic-water-flow.py
-- [ ] palindromic-substrings.py
-- [ ] flip-binary-tree-to-match-preorder-traversal.py
-- [ ] russian-doll-envelopes.py
-- [ ] stamping-the-envelope.py
+- [ ] design-hashmap
+- [ ] coin-change
+- [ ] pacific-atlantic-water-flow
+- [ ] palindromic-substrings
+- [ ] flip-binary-tree-to-match-preorder-traversal
+- [ ] russian-doll-envelopes (related to Longest Increasing Subsequence problem)
+- [ ] stamping-the-envelope
 
 ## April 2021
-- [ ] ones-and-zeroes.py
+- [ ] ones-and-zeroes
