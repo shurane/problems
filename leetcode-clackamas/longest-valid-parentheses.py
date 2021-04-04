@@ -1,17 +1,6 @@
 # from colorama import init, Fore
 # init()
 
-# from dataclasses import dataclass
-# @dataclass
-# class Paren:
-#     index: int = None
-#     char: str = None
-
-# from typing import NamedTuple
-# class Paren(NamedTuple):
-#     index: int = None
-#     char: str = None
-
 class Solution:
     def longestValidParentheses(self, s: str) -> int:
         if not s:
@@ -68,18 +57,18 @@ class Solution:
 
 s = Solution()
 
-assert s.longestValidParentheses("") == 0
-assert s.longestValidParentheses("(()") == 2
-assert s.longestValidParentheses(")()())") == 4
-assert s.longestValidParentheses(")(()())") == 6
-assert s.longestValidParentheses("(()())") == 6
-assert s.longestValidParentheses("(()())()") == 8
-assert s.longestValidParentheses("()(()())()") == 10
-assert s.longestValidParentheses("(())(())") == 8
-assert s.longestValidParentheses("((())(()))") == 10
-assert s.longestValidParentheses(")(((((()())()()))()(()))(") == 22
-assert s.longestValidParentheses("()(())((()))(((())))((((()))))") == 30
-assert s.longestValidParentheses("((()())(()()))((()())(()()))") == 28
-assert s.longestValidParentheses("((()())(()()))((()())(()()))((()())(()()))") == 42
-assert s.longestValidParentheses("()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()") == 100
+# assert s.longestValidParentheses("") == 0
+# assert s.longestValidParentheses("(()") == 2
+# assert s.longestValidParentheses(")()())") == 4
+# assert s.longestValidParentheses(")(()())") == 6
+# assert s.longestValidParentheses("(()())") == 6
+# assert s.longestValidParentheses("(()())()") == 8
+# assert s.longestValidParentheses("()(()())()") == 10
+# assert s.longestValidParentheses("(())(())") == 8
+# assert s.longestValidParentheses("((())(()))") == 10
+# assert s.longestValidParentheses(")(((((()())()()))()(()))(") == 22
+# assert s.longestValidParentheses("()(())((()))(((())))((((()))))") == 30
+# assert s.longestValidParentheses("((()())(()()))((()())(()()))") == 28
+# assert s.longestValidParentheses("((()())(()()))((()())(()()))((()())(()()))") == 42
+# assert s.longestValidParentheses("()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()") == 100
 assert s.longestValidParentheses(")(()(()(((())(((((()()))((((()()(()()())())())()))()()()())(())()()(((()))))()((()))(((())()((()()())((())))(())))())((()())()()((()((())))))((()(((((()((()))(()()(())))((()))()))())") == 132
