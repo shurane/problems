@@ -19,7 +19,6 @@ class Solution:
                 else:
                     # found unmatching parens
                     return False
-
         return len(stack) == 0
 
 s = Solution()
