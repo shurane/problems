@@ -9,7 +9,6 @@ class Solution:
         # similar to longest-palindromic-substring
         longest = ""
         depths = dict()
-        # print("starting on", s)
         i = 0
         while i < len(s) - 1:
             l, r = i, i + 2
@@ -57,18 +56,18 @@ class Solution:
 
 s = Solution()
 
-# assert s.longestValidParentheses("") == 0
-# assert s.longestValidParentheses("(()") == 2
-# assert s.longestValidParentheses(")()())") == 4
-# assert s.longestValidParentheses(")(()())") == 6
-# assert s.longestValidParentheses("(()())") == 6
-# assert s.longestValidParentheses("(()())()") == 8
-# assert s.longestValidParentheses("()(()())()") == 10
-# assert s.longestValidParentheses("(())(())") == 8
-# assert s.longestValidParentheses("((())(()))") == 10
-# assert s.longestValidParentheses(")(((((()())()()))()(()))(") == 22
-# assert s.longestValidParentheses("()(())((()))(((())))((((()))))") == 30
-# assert s.longestValidParentheses("((()())(()()))((()())(()()))") == 28
-# assert s.longestValidParentheses("((()())(()()))((()())(()()))((()())(()()))") == 42
-# assert s.longestValidParentheses("()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()") == 100
+assert s.longestValidParentheses("") == 0
+assert s.longestValidParentheses("(()") == 2
+assert s.longestValidParentheses(")()())") == 4
+assert s.longestValidParentheses(")(()())") == 6
+assert s.longestValidParentheses("(()())") == 6
+assert s.longestValidParentheses("(()())()") == 8
+assert s.longestValidParentheses("()(()())()") == 10
+assert s.longestValidParentheses("(())(())") == 8
+assert s.longestValidParentheses("((())(()))") == 10
+assert s.longestValidParentheses(")(((((()())()()))()(()))(") == 22
+assert s.longestValidParentheses("()(())((()))(((())))((((()))))") == 30
+assert s.longestValidParentheses("((()())(()()))((()())(()()))") == 28
+assert s.longestValidParentheses("((()())(()()))((()())(()()))((()())(()()))") == 42
+assert s.longestValidParentheses("()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()") == 100
 assert s.longestValidParentheses(")(()(()(((())(((((()()))((((()()(()()())())())()))()()()())(())()()(((()))))()((()))(((())()((()()())((())))(())))())((()())()()((()((())))))((()(((((()((()))(()()(())))((()))()))())") == 132
