@@ -1,53 +1,48 @@
-from typing import List, Tuple
+from typing import List
 
 class Solution:
     def longestIncreasingPath(self, matrix: List[List[int]]) -> int:
         m = len(matrix)
         n = len(matrix[0])
 
-        # print("longestIncreasingPath")
-        longest: List[Tuple[int, int]] = []
+        longest = 0
+        # had some help from https://leetcode.com/problems/longest-increasing-path-in-a-matrix/discuss/78308/15ms-Concise-Java-Solution for figuring out the cache
+        cache: List[List[int]] = [[0 for j in range(n)] for i in range(m)]
         for row in range(m):
             for col in range(n):
-                if (row, col) not in longest:
-                    current = helper(matrix, m, n, row, col, [(row, col)])
-                    if len(current) > len(longest):
-                        longest = current
+                current = helper(matrix, m, n, row, col, cache)
+                if current > longest:
+                    # can reconstruct the path by backtracking the (row, col) values in cache
+                    longest = current
 
-        mapping = [matrix[i][j] for i, j in longest]
-        print("longest", longest)
-        print("mapping", mapping)
+        # print("cache", cache)
+        # print("longest", longest)
+        return longest
 
-        return len(longest)
-
-def helper(matrix: List[List[int]], m: int, n: int, r: int, c: int,
-           visited=[]) -> List[Tuple[int, int]]:
+def helper(matrix: List[List[int]], m: int, n: int, r: int, c: int, cache: List[List[int]]) -> int:
+    if cache[r][c] != 0: return cache[r][c]
 
     directions = [(-1, 0), (1, 0), (0, -1), (0, 1)]
-    longest: List[Tuple[int, int]] = []
+    longest = 0
     for i, j in directions:
         rr = r + i
         cc = c + j
-        if 0 <= rr < m and 0 <= cc < n \
-                       and (rr, cc) not in visited \
-                       and matrix[rr][cc] > matrix[r][c]:
-            print("from", r, c, "->", rr, cc, visited, [matrix[i][j] for i, j in visited])
-            copy = visited.copy()
-            copy.append((rr, cc))
-            result = helper(matrix, m, n, rr, cc, copy)
+        if 0 <= rr < m and 0 <= cc < n and matrix[rr][cc] > matrix[r][c]:
+            # print("from", r, c, "->", rr, cc)
+            result = helper(matrix, m, n, rr, cc, cache)
 
-            if len(result) > len(longest):
+            if result > longest:
                 longest = result
-
-    return [(r, c)] + longest
+    cache[r][c] = 1 + longest
+    return cache[r][c]
 
 s = Solution()
 
-# assert s.longestIncreasingPath([[1]]) == 1
-# assert s.longestIncreasingPath([[9,9,4],[6,6,8],[2,1,1]]) == 4
-# assert s.longestIncreasingPath([[1,2,3],[6,5,4],[7,8,9]]) == 9
-# assert s.longestIncreasingPath([[9,8,7],[4,5,6],[3,2,1]]) == 9
-# assert s.longestIncreasingPath([[7,8,9],[4,5,6],[3,2,1]]) == 7
+assert s.longestIncreasingPath([[1]]) == 1
+assert s.longestIncreasingPath([[9,9,4],[6,6,8],[2,1,1]]) == 4
+assert s.longestIncreasingPath([[1,2,3],[6,5,4],[7,8,9]]) == 9
+assert s.longestIncreasingPath([[9,8,7],[4,5,6],[3,2,1]]) == 9
+assert s.longestIncreasingPath([[7,8,9],[4,5,6],[3,2,1]]) == 7
 
 medMatrix = [
     [0,1,2,3,4],
@@ -55,11 +50,11 @@ medMatrix = [
     [10,11,12,13,14],
     [19,18,17,16,15],
     [20,21,22,23,24],
-    # [29,28,27,26,25],
-    # [30,31,32,33,34],
-    # [39,38,37,36,35],
-    # [40,41,42,43,44],
-    # [49,48,47,46,45]
+    [29,28,27,26,25],
+    [30,31,32,33,34],
+    [39,38,37,36,35],
+    [40,41,42,43,44],
+    [49,48,47,46,45]
 ]
 
 bigMatrix = [
@@ -79,4 +74,5 @@ bigMatrix = [
     [139,138,137,136,135,134,133,132,131,130],
     [0,0,0,0,0,0,0,0,0,0]]
 
-s.longestIncreasingPath(medMatrix)
+assert s.longestIncreasingPath(medMatrix) == 50
+assert s.longestIncreasingPath(bigMatrix) == 140
