@@ -5,6 +5,20 @@ class ListNode:
     def __repr__(self):
         return f"ListNode({self.val})"
 
+    def __eq__(self, other):
+        a = self
+        b = other
+        while a and b:
+            if a.val != b.val:
+                return False
+            a = a.next
+            b = b.next
+
+        if (not a and b) or (a and not b):
+            return False
+
+        return True
+
     def printAll(self):
         return ListNode.print(self)
 
