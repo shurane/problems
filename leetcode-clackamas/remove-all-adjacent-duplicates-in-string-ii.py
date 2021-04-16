@@ -5,6 +5,9 @@ class Solution:
         # what kind of solution would this be called? it's not using a stack or a 2 pointer approach, according to solutions on leetcode
         # the main slowness here is from constantly changing the string, which ends up creating a new string
         # It's still O(n*k) type of solution, just could be a bit more efficient
+
+        # possibly this is a brute force solution. If we kept track of counts, we could save some effort
+        # see Approach 1 vs Approach 2 in https://leetcode.com/explore/challenge/card/april-leetcoding-challenge-2021/595/week-3-april-15th-april-21st/3710/discuss/929906/Javascript-5-solutions-(Two-Pointers-Stack-Brute-Force)-Implementation
         i = 0
         while i < len(s) - k + 1:
             # print(f"i:{i:2}, k:{k:2}, len(s): {len(s):2}", f"{s[:i]}{Fore.GREEN}{s[i]}{Fore.RESET}{s[i+1:]}")
