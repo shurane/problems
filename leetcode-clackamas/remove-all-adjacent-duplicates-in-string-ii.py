@@ -6,7 +6,7 @@ class Solution:
         # the main slowness here is from constantly changing the string, which ends up creating a new string
         # It's still O(n*k) type of solution, just could be a bit more efficient
 
-        # possibly this is a brute force solution. If we kept track of counts, we could save some effort
+        # possibly this is a brute force solution. If we kept track of counts, we could save some effort when we have to recount, at the expense of some extra space
         # see Approach 1 vs Approach 2 in https://leetcode.com/explore/challenge/card/april-leetcoding-challenge-2021/595/week-3-april-15th-april-21st/3710/discuss/929906/Javascript-5-solutions-(Two-Pointers-Stack-Brute-Force)-Implementation
         i = 0
         while i < len(s) - k + 1:
