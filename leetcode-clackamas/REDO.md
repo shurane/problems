@@ -16,6 +16,8 @@
 - [ ] longest-valid-parentheses
 - [ ] longest-increasing-path-in-a-matrix
 - [ ] beautiful-arrangement-ii
+- [ ] number-of-submatrices-that-sum-to-target
+- [ ] combination-sum-iv
 
 etc:
     - levenshtein/edit distance (DP)
