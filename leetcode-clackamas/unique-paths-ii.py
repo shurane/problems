@@ -19,6 +19,7 @@ class Solution:
                 if obstacleGrid[i][j] != 1:
                     counts[i][j] = counts[i-1][j] + counts[i][j-1]
 
+        # https://stackoverflow.com/a/59123981/198348 for formatting a 2D matrix
         # print("counts")
         # print(*(" ".join([f"{i:2}" for i in row]) for row in counts), sep="\n")
 
