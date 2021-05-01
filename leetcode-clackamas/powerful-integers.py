@@ -1,18 +1,18 @@
 from typing import List
+from math import log
 
 class Solution:
     def powerfulIntegers(self, x: int, y: int, bound: int) -> List[int]:
         elems = set()
-        i = 0
-        while x ** i < bound:
-            j = 0
-            while x ** i + y ** j <= bound:
-                elems.add(x ** i + y ** j)
-                j += 1
-                if y == 1: break
-            i += 1
+        # interesting idea to use log to find the upper bound. See https://leetcode.com/problems/powerful-integers/solution/
+        xbound = 1 if x == 1 else int(log(bound, x))
+        ybound = 1 if y == 1 else int(log(bound, y))
 
-            if x == 1: break
+        for i in range(xbound + 1):
+            for j in range(ybound + 1):
+                value = x ** i + y ** j
+                if value <= bound:
+                    elems.add(value)
 
         elems = sorted(elems)
         # print(x, y, bound, elems)
