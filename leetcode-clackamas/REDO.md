@@ -21,5 +21,9 @@
 - [ ] rotate-images
 - [ ] furthest-building-you-can-reach
 
+## May 2021
+- [ ] prefix-and-suffix-search
+- [ ] course-schedule-iii
+
 etc:
     - levenshtein/edit distance (DP)
