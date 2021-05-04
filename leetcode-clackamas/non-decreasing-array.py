@@ -3,6 +3,10 @@ from typing import List
 class Solution:
     def checkPossibility(self, nums: List[int]) -> bool:
         # this problem is kind of annoying. IMO there's not much of a clean solution to it. Maybe there's a clever way using a stack or heap?
+        # https://leetcode.com/problems/non-decreasing-array/discuss
+        # https://leetcode.com/problems/non-decreasing-array/discuss/106842/The-easiest-python-solution
+
+        # there are also ways to do this by modifying the original array based on which of the two elements to change
         gt = 0
         for i in range(len(nums) - 1):
             if nums[i] > nums[i+1]:
