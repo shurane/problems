@@ -100,8 +100,8 @@ class TreeNode:
     def fromList(cls, lst):
         if not lst: return None
 
-        head = TreeNode(lst[0])
-        tree = [head]
+        root = TreeNode(lst[0])
+        tree = [root]
 
         for i in range(1, len(lst)):
             node = None
@@ -116,5 +116,5 @@ class TreeNode:
             else:
                 tree[parent].right = node
 
-        return head
+        return root
 
