@@ -1,6 +1,8 @@
 from typing import List
 
 class Solution:
+    # documents a couple different solutions: https://leetcode.com/problems/jump-game-ii/discuss/1192401/Easy-Solutions-w-Explanation-or-Optimizations-from-Brute-Force-to-DP-to-Greedy-BFS
+    # apparently the BFS solution is O(n) vs the dp which is O(n**2). Need to reason it out.
     def jump(self, nums: List[int]) -> int:
         dp = [len(nums) for i in nums]
         dp[-1] = 0
