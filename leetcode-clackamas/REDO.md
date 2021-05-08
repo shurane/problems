@@ -24,6 +24,7 @@
 ## May 2021
 - [ ] prefix-and-suffix-search
 - [ ] course-schedule-iii
+- [ ] delete-operation-for-two-strings
 
 etc:
     - levenshtein/edit distance (DP)
