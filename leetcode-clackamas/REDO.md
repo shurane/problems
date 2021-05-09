@@ -25,6 +25,7 @@
 - [ ] prefix-and-suffix-search
 - [ ] course-schedule-iii
 - [ ] delete-operation-for-two-strings (similar to edit distance, but only involves deletion)
+- [ ] super-palindromes
 
 etc:
     - levenshtein/edit distance (DP)
