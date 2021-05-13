@@ -2,45 +2,26 @@ from typing import List
 
 class NumMatrix:
     def __init__(self, matrix: List[List[int]]):
-        self.matrix = matrix
-        self.rows = len(matrix)
-        self.cols = len(matrix[0])
+        n = len(matrix)
+        m = len(matrix[0])
 
-        self.prefixSum = [[0 for _ in row] for row in matrix]
-        self.prefixSum[0][0] = matrix[0][0]
-        for i in range(1, self.rows):
-            self.prefixSum[i][0] = matrix[i][0] + self.prefixSum[i-1][0]
+        self.prefixSum = [[0 for _ in range(n+1)] for __ in range(m+1)]
 
-        for j in range(1, self.cols):
-            self.prefixSum[0][j] = matrix[0][j] + self.prefixSum[0][j-1]
-
-        for i in range(1, self.rows):
-            for j in range(1, self.cols):
+        for i in range(n):
+            for j in range(m):
                 self.prefixSum[i][j] = self.prefixSum[i-1][j] + self.prefixSum[i][j-1] - self.prefixSum[i-1][j-1] + matrix[i][j]
 
         # https://stackoverflow.com/a/59123981/198348 for formatting a 2D matrix
         # print(*(" ".join([f"{i:2}" for i in row]) for row in self.prefixSum), sep="\n")
 
     def sumRegion(self, row1: int, col1: int, row2: int, col2: int) -> int:
-        # think of it as 4 quadrants, and we want the bottom right quadrant
-        bottomright = self.prefixSum[row2][col2]
+        # think of it as 4 quadrants, and we want only the bottom right quadrant
+        # see https://leetcode.com/problems/range-sum-query-2d-immutable/discuss/75358/Clean-and-easy-to-understand-java-solution for a diagram by vincent_chan
 
-        topleft = 0
-        topright = 0
-        bottomleft = 0
-        if row1 == 0 and col1 == 0:
-            # we can just take bottomright as the answer because the range sum encompasses a square from 0,0
-            pass
-        elif row1 == 0:
-            # only bottomleft exists
-            bottomleft = self.prefixSum[row2][col1 - 1]
-        elif col1 == 0:
-            # only topright exists
-            topright = self.prefixSum[row1 - 1][col2]
-        else:
-            topleft = self.prefixSum[row1 - 1][col1 - 1]
-            bottomleft = self.prefixSum[row1 - 1][col2]
-            topright = self.prefixSum[row2][col1 - 1]
+        topleft     = self.prefixSum[row1 - 1][col1 - 1]
+        bottomleft  = self.prefixSum[row1 - 1][col2    ]
+        topright    = self.prefixSum[row2    ][col1 - 1]
+        bottomright = self.prefixSum[row2    ][col2    ]
 
         ans = bottomright - bottomleft - topright + topleft
 
