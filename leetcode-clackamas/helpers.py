@@ -62,6 +62,22 @@ class TreeNode:
         self.left = left
         self.right = right
 
+    def __eq__(self, other):
+        if not other: return False
+
+        sq, oq = [self], [other]
+
+        while sq and oq:
+            s, o = sq.pop(0), oq.pop(0)
+            if not s and not o: continue
+            if s and not o or not s and o: return False
+            elif s.val != o.val: return False
+
+            sq.extend([s.left, s.right])
+            oq.extend([o.left, o.right])
+
+        return True
+
     def inorder(self):
         q = [self]
         while q:
@@ -109,7 +125,7 @@ class TreeNode:
             tree.append(node)
             parent = (i-1) // 2
 
-            if not node and not tree[parent]: continue
+            if not node or not tree[parent]: continue
 
             if i % 2 == 1:
                 tree[parent].left = node
@@ -118,3 +134,16 @@ class TreeNode:
 
         return root
 
+    @classmethod
+    def fromListDirectional(cls, lst, dir=D.r):
+        if not lst: return None
+
+        direction = "right" if dir == D.r else "left"
+        dummy = TreeNode()
+        current = dummy
+
+        for elem in lst:
+            setattr(current, direction, TreeNode(elem))
+            current = getattr(current, direction)
+
+        return getattr(dummy, direction)
