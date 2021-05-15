@@ -6,7 +6,7 @@ class Solution:
         # iterating it as a linked list, but doing some moving to shift left to the right while preserving preorder traversal
         current = root
         while current:
-            if  current.left:
+            if current.left:
                 temp = current.left
                 while temp.right:
                     temp = temp.right
