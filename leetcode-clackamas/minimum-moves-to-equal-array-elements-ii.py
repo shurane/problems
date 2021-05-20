@@ -20,10 +20,16 @@ class Solution:
         # print(median, diff)
         return diff
 
-    def minMoves2(self, nums: List[int]) -> int:
+    def minMoves2_median(self, nums: List[int]) -> int:
         # https://leetcode.com/problems/minimum-moves-to-equal-array-elements-ii/discuss/94923/2-lines-Python-2-ways
         median = sorted(nums)[len(nums) // 2]
         return sum(abs(num - median) for num in nums)
+
+    def minMoves2(self, nums: List[int]) -> int:
+        # https://leetcode.com/problems/minimum-moves-to-equal-array-elements-ii/discuss/94923/2-lines-Python-2-ways
+        # diff based
+        nums.sort()
+        return sum(nums[~i] - nums[i] for i in range(len(nums) // 2))
 
 s = Solution()
 assert s.minMoves2([0,10]) == 10
