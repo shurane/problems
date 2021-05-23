@@ -27,6 +27,9 @@
 - [ ] delete-operation-for-two-strings (similar to edit distance, but only involves deletion)
 - [ ] super-palindromes
 - [ ] construct-target-array-with-multiple-sums
+- [ ] ambiguous-coordinates
+- [ ] binary-tree-cameras
+- [ ] n-queens
 
 etc:
     - levenshtein/edit distance (DP)
