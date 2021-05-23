@@ -121,11 +121,11 @@ class TreeNode:
 
         for i in range(1, len(lst)):
             node = None
-            if lst[i]: node = TreeNode(lst[i])
+            if lst[i] != None: node = TreeNode(lst[i])
             tree.append(node)
             parent = (i-1) // 2
 
-            if not node or not tree[parent]: continue
+            if node == None or tree[parent] == None: continue
 
             if i % 2 == 1:
                 tree[parent].left = node
@@ -147,3 +147,6 @@ class TreeNode:
             current = getattr(current, direction)
 
         return getattr(dummy, direction)
+
+# TODO how to use the Leetcode representation of a binary tree? It uses level order traversal, where null terminates a path
+# https://support.leetcode.com/hc/en-us/articles/360011883654-What-does-1-null-2-3-mean-in-binary-tree-representation-

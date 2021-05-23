@@ -24,3 +24,16 @@ assert list(w2.inorder()) == [1,2,4,8]
 assert w == w2
 assert w != t
 assert t != w
+
+z_r = TreeNode(0)
+z_r.right = TreeNode(0)
+z_r.right.right = TreeNode(0)
+z_r.right.right.right = TreeNode(0)
+z_r.right.right.right.right = TreeNode(0)
+z_r.right.right.right.right.right = TreeNode(0)
+zeroes_r = TreeNode.fromListDirectional([0,0,0,0,0,0])
+zeroes_l = TreeNode.fromListDirectional([0,0,0,0,0,0], dir=D.l)
+assert list(zeroes_r.inorder()) == [0,0,0,0,0,0]
+assert list(zeroes_l.inorder()) == [0,0,0,0,0,0]
+assert z_r == zeroes_r
+assert zeroes_r != zeroes_l
