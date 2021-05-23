@@ -4,6 +4,7 @@ t = TreeNode.fromList([1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]) # full
 # print(t.printAll())
 assert list(t.inorder()) == list(range(1,16))
 assert t != None
+
 # u = TreeNode.fromList([1000,200,300,40,None,None,7])
 # print(u.printAll())
 
