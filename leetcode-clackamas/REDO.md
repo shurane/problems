@@ -32,4 +32,8 @@
 - [ ] n-queens
 
 etc:
-    - levenshtein/edit distance (DP)
+- levenshtein/edit distance (DP)
+
+weaknesses?
+- not enough practice with graph problems, backtracking, parsing
+- should practice SQL as well
