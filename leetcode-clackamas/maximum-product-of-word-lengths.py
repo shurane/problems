@@ -20,6 +20,7 @@ class Solution:
         return ans
 
     def maxProduct(self, words: List[str]) -> int:
+        # time limit exceeded for large inputs
         codes = dict()
         for word in words:
             wordcode = [False] * 26
