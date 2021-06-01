@@ -12,12 +12,6 @@ class TrieNode:
     def __repr__(self):
         return f"TrieNode({self.char}, end={self.is_end})"
 
-    # def __lt__(self, other):
-    #     if not other:
-    #         return -1
-    #     else:
-    #         return ord(self.char) < ord(other.char)
-
 class Trie:
     def __init__(self):
         self.root = TrieNode("")
