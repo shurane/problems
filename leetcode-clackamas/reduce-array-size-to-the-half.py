@@ -2,6 +2,11 @@ from typing import List
 
 class Solution:
     def minSetSize(self, arr: List[int]) -> int:
+        # this is O(n log n) because of the sort. There's also a priority queue version, which is still O(n log n).
+        # for an O(n) solution, try using bucket sort.
+        # - https://leetcode.com/problems/reduce-array-size-to-the-half/discuss/1319437/Simple-Solution-w-Explanation-or-Delete-Elements-by-Max-Frequency-or-O(N)-Beats-100
+        # - https://leetcode.com/problems/reduce-array-size-to-the-half/discuss/1319416/C%2B%2BJavaPython-HashMap-and-Sort-then-Bucket-Sort-O(N)-Clean-and-Concise
+
         s = dict()
         for elem in arr:
             if elem not in s:
