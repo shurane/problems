@@ -69,11 +69,13 @@ class Solution:
 
 s = Solution()
 
+assert s.lengthOfLongestSubstringTwoDistinct("a") == 3
 assert s.lengthOfLongestSubstringTwoDistinct("eceba") == 3
 assert s.lengthOfLongestSubstringTwoDistinct("ccaabbb") == 5
 assert s.lengthOfLongestSubstringTwoDistinct("abbcccdddd") == 7
 assert s.lengthOfLongestSubstringTwoDistinct("ddddcccbba") == 7
 assert s.lengthOfLongestSubstringTwoDistinct("ababcc") == 4
+assert s.lengthOfLongestSubstringTwoDistinct("baabcc") == 4
 
 assert s.onepass("a") == 1
 assert s.onepass("eceba") == 3
@@ -83,6 +85,7 @@ assert s.onepass("ddddcccbba") == 7
 assert s.onepass("ababcc") == 4
 assert s.onepass("baabcc") == 4
 
+assert s.onepassTrack("a") == 1
 assert s.onepassTrack("eceba") == 3
 assert s.onepassTrack("ccaabbb") == 5
 assert s.onepassTrack("abbcccdddd") == 7
