@@ -1,59 +1,54 @@
-from typing import List
+from typing import List, Set
 from unittest import TestCase
 tc = TestCase()
 
 class Solution:
+    # This uses iterative DFS with a stack. It's also quite slow, according to Leetcode
     def findWords(self, board: List[List[str]], words: List[str]) -> List[str]:
         trie = Trie()
         for word in words:
             trie.insert(word)
 
-        m = len(board)
-        n = len(board[0])
+        board_ints = [[ord(col) - 97 for col in row] for row in board]
+        m = len(board_ints)
+        n = len(board_ints[0])
         results = set()
         for i in range(m):
             for j in range(n):
-                letter = board[i][j]
-                idx = ord(letter)
-                if trie.head.next[idx] is not None:
-                    for match in self.helper(board, i, j, m, n, trie.head.next[idx]):
-                        results.add(match)
+                if trie.head.next[board_ints[i][j]] is not None:
+                    self.helper(board_ints, i, j, m, n, trie.head.next[board_ints[i][j]], results)
 
         return list(results)
 
-    def helper(self, board, i: int, j: int, m: int, n: int, t: 'TrieNode') -> List[str]:
+    def helper(self, board, i: int, j: int, m: int, n: int, t: 'TrieNode', results: Set[str]):
         stack = [(i, j, t)]
-        results = []
-        visited = dict()
 
-        # print(" starting", i, j, board[i][j])
+        visited = dict()
+        for ii in range(m):
+            for jj in range(n):
+                visited[(ii,jj)] = False
 
         # was stuck for a while, but fixed after seeing https://leetcode.com/problems/word-search-ii/discuss/733402/Python-Trie-Iterative-Dfs
-        # TODO rewrite so ni,nj and nt are checked during the `while stack` loop.
         while stack:
             ni, nj, nt = stack[-1]
             # already visited, mark it as unvisited and continue to next iteration of loop
-            if (ni,nj) in visited and visited[(ni,nj)] == 1:
-                visited[(ni, nj)] = 0
+            if visited[(ni,nj)] == True:
+                visited[(ni, nj)] = False
                 stack.pop()
                 continue
 
-            visited[(ni, nj)] = 1
+            visited[(ni, nj)] = True
 
             if nt.end:
                 # print("found a match", nt.word)
-                results.append(nt.word)
+                results.add(nt.word)
 
-            for x, y in [(-1,0),(1,0),(0,-1),(0,1)]:
-                nix, njy = ni + x, nj + y
-                if 0 <= nix < m and 0 <= njy < n and visited.get((nix, njy), 0) == 0:
-                    next_letter = board[nix][njy]
-                    idx = ord(next_letter)
-                    if nt.next[idx] is not None:
-                        # print("appending", ni+x, nj+y, next_letter, stack)
-                        stack.append((nix, njy, nt.next[idx]))
-
-        return results
+            for nix, njy in [(ni-1,nj),(ni+1,nj),(ni,nj-1),(ni,nj+1)]:
+                if 0 <= nix < m and 0 <= njy < n \
+                    and visited[(nix,njy)] == False \
+                    and nt.next[board[nix][njy]] is not None:
+                    # print("appending", nix, njy, board[nix][njy], stack)
+                    stack.append((nix, njy, nt.next[board[nix][njy]]))
 
 class Trie:
     def __init__(self):
@@ -62,7 +57,7 @@ class Trie:
     def insert(self, word: str) -> None:
         c = self.head
         for letter in word:
-            i = ord(letter)
+            i = ord(letter) - 97 # ord("a")
             if c.next[i] is None:
                 c.next[i] = TrieNode()
             c = c.next[i]
@@ -71,9 +66,11 @@ class Trie:
 
 class TrieNode:
     def __init__(self):
-        self.end = False
+        self.next = [None] * 26
         self.word = None
-        self.next = [None] * 128
+        self.end = False
+
+    def __repr__(self): return "T"
 
 s = Solution()
 
@@ -99,6 +96,7 @@ b4 = [["b","a","b","a","b","a","b","a","b","a"]
      ,["a","b","a","b","a","b","a","b","a","b"]
      ,["b","a","b","a","b","a","b","a","b","a"]
      ,["a","b","a","b","a","b","a","b","a","b"]]
+
 w4 = ["aababababa","abbabababa","acbabababa","adbabababa","aebabababa","afbabababa","agbabababa"
      ,"ahbabababa","aibabababa","ajbabababa","akbabababa","albabababa","ambabababa","anbabababa"
      ,"aobabababa","apbabababa","aqbabababa","arbabababa","asbabababa","atbabababa","aubabababa"
