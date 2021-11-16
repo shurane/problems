@@ -45,16 +45,13 @@ class Solution:
                 results.append(nt.word)
 
             for x, y in [(-1,0),(1,0),(0,-1),(0,1)]:
-                if ni + x < 0 or ni + x >= m or nj + y < 0 or nj + y >= n or (ni+x, nj+y) in visited and visited[(ni+x, nj+y)] == 1:
-                    continue
-
-                next_letter = board[ni+x][nj+y]
-                idx = ord(next_letter)
-                if nt.next[idx] is None:
-                    continue
-
-                # print("appending", ni+x, nj+y, next_letter, visited)
-                stack.append((ni+x, nj+y, nt.next[idx]))
+                nix, njy = ni + x, nj + y
+                if 0 <= nix < m and 0 <= njy < n and visited.get((nix, njy), 0) == 0:
+                    next_letter = board[nix][njy]
+                    idx = ord(next_letter)
+                    if nt.next[idx] is not None:
+                        # print("appending", ni+x, nj+y, next_letter, stack)
+                        stack.append((nix, njy, nt.next[idx]))
 
         return results
 
