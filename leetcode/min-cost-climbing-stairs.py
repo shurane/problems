@@ -13,25 +13,24 @@ class Solution:
 
         return min(mc0, mc1)
 
-    # ok... i don't really understand this so I'll need to revisit this.
-    # see https://leetcode.com/problems/min-cost-climbing-stairs/discuss/110104/Easy-to-understand-Python-solution-O(1)-space
-
     def minCostClimbingStairs2(self, cost: List[int]) -> int:
-        totalCosts = [0 for _ in cost]
-        totalCosts[0] = cost[0]
-        totalCosts[1] = min(cost[0], cost[1])
+        if len(cost) <= 2:
+            return min(cost)
 
-
+        prev = cost[~0]
+        curr = cost[~1]
         for i in range(2, len(cost)):
-            totalCosts[i] = min(totalCosts[i-1], totalCosts[i-2]) + cost[i]
+            temp = min(prev, curr) + cost[~i]
+            prev = curr
+            curr = temp
 
-        finalCost = min(totalCosts[-1], totalCosts[-2])
-        print(totalCosts, finalCost)
-        return finalCost
-
-        # why doesn't minCostClimbingStairs2() work?
+        return min(prev, curr)
 
 s = Solution()
 assert s.minCostClimbingStairs([10, 15, 20]) == 15
 assert s.minCostClimbingStairs([1, 100, 1, 1, 1, 100, 1, 1, 100, 1]) == 6
 assert s.minCostClimbingStairs([0, 1, 1, 0]) == 1
+
+assert s.minCostClimbingStairs2([10, 15, 20]) == 15
+assert s.minCostClimbingStairs2([1, 100, 1, 1, 1, 100, 1, 1, 100, 1]) == 6
+assert s.minCostClimbingStairs2([0, 1, 1, 0]) == 1
