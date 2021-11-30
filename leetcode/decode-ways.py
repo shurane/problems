@@ -1,4 +1,4 @@
-values = [str(i) for i in range(1, 27)]
+values = set(str(i) for i in range(1, 27))
 
 def decode(digits):
     return digits in values
