@@ -2,48 +2,34 @@ from typing import List
 
 class Solution:
     def searchRange(self, nums: List[int], target: int) -> List[int]:
-        def binarySearch(lo, hi, target):
-            while lo <= hi:
-                mid = (lo + hi) // 2
-                if target < nums[mid]:
-                    hi = mid - 1
-                elif target > nums[mid]:
-                    lo = mid + 1
-                else:
-                    return mid
-            return -1
-
-        # TODO can I deduplicate leftSearch and rightSearch? it's basically the same code
-        def leftSearch(lo, hi, target):
+        # https://leetcode.com/problems/find-first-and-last-position-of-element-in-sorted-array/discuss/14699/Clean-iterative-solution-with-two-binary-searches-(with-explanation)
+        def searchBeginRange(lo, hi, target):
             while lo < hi:
                 mid = (lo + hi) // 2
-                if target == nums[mid]:
+                if nums[mid] < target:
+                    lo = mid + 1
+                elif nums[mid] > target:
                     hi = mid - 1
                 else:
-                    lo = mid + 1
+                    hi = mid
             return lo
 
-        def rightSearch(lo, hi, target):
+        def searchEndRange(lo, hi, target):
             while lo < hi:
-                mid = (lo + hi) // 2
-                if target == nums[mid]:
-                    lo = mid + 1
-                else:
+                # see linked solution about biasing mid to the right
+                mid = (lo + hi) // 2 + 1
+                if nums[mid] > target:
                     hi = mid - 1
+                else:
+                    lo = mid
             return lo
 
         n = len(nums) - 1
-        i = binarySearch(0, n, target)
-        if i == -1:
-            # print(-1, -1, "target", target)
-            return [-1, -1]
+        if n < 0: return [-1, -1]
+        l = searchBeginRange(0, n, target)
+        if nums[l] != target: return [-1, -1]
+        r = searchEndRange(0, n, target)
 
-        l = leftSearch(0, i, target)
-        r = rightSearch(i, n, target)
-        # shrink boundaries if l,r are off by one
-        if nums[l] != target: l += 1
-        if nums[r] != target: r -= 1
-        # print(l, r, "target", target)
         return [l,r]
 
 s = Solution()
