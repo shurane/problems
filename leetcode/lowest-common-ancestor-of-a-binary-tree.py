@@ -12,7 +12,7 @@ class Solution(object):
         """
         # return self.lowestCommonAncestorPath(root, p, q)
         return self.lowestCommonAncestorRecursive(root, p, q)
-    
+
     def lowestCommonAncestorRecursive(self, root, p, q):
         if root == None or root == p or root == q:
             return root
@@ -36,7 +36,7 @@ class Solution(object):
         i = 0
         while i < len(ps) and i < len(qs) and ps[i] == qs[i]:
             i += 1
-        
+
         return ps[i-1]
 
     def pathToNode(self, root, node):

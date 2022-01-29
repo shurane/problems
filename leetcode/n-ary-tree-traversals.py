@@ -70,14 +70,14 @@ class Solution:
             for l, value in values:
                 if len(levels) <= l:
                     levels.append([])
-                
+
                 levels[l].append(value)
-            
+
             return levels
 
         else:
             return values
-            
+
 
     def levelorder_iterative(self, root):
         if not root: return []
@@ -94,7 +94,7 @@ class Solution:
                 levels.append([])
 
             levels[level].append(node.val)
-        
+
         return levels
 
     def levelorder_iterative2(self, root):
@@ -107,7 +107,7 @@ class Solution:
             queue = [child for node in queue for child in node.children if child]
 
         return levels
-            
+
 
 s = Solution()
 

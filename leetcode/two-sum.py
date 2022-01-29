@@ -11,10 +11,10 @@ class Solution(object):
             left = target - nums[i]
             if left in visited:
                 return [visited[left], i]
-            
+
             visited[nums[i]] = i
             i += 1
-        
+
         return [-1, -1]
 
 s = Solution()

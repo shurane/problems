@@ -8,7 +8,7 @@ class Solution:
             total += nums[i*2]
             i += 1
         return total
-            
+
 s = Solution()
 
 assert s.arrayPairSum([1,4,3,2]) == 4

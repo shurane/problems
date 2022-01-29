@@ -36,7 +36,7 @@ class Solution(object):
                     l += 1
                 else:
                     r -= 1
-        
+
         return [list(combo) for combo in sorted(combinations)]
 
     def threeSumSorted(self, nums):
@@ -80,7 +80,7 @@ class Solution(object):
                 return mid
 
             mid = int((lo + hi) / 2)
-        
+
         return -1
 
     def threeSum(self, nums):
@@ -97,7 +97,7 @@ class Solution(object):
         while i < len(nums):
             target = 0 - nums[i]
             searchNums = nums[:i] + nums[i+1:]
-            
+
             results = self.twoSum(searchNums, target)
             # print("threeSum", nums[i], results)
             # print(searchNums, target)
@@ -131,7 +131,7 @@ class Solution(object):
         if results:
             return [list(combo) for combo in results]
         return []
-            
+
 
 s = Solution()
 

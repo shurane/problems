@@ -19,7 +19,7 @@ class Solution(object):
 
             if root.right:
                 right = self.minDepth(root.right)
-            
+
             if left and right:
                 return 1 + min(left, right)
             elif left:
@@ -41,7 +41,7 @@ class Solution(object):
             # print(depth, node)
             if self.isLeaf(node) and depth < minDepth:
                 minDepth = depth
-            
+
             if node.left:
                 nodes.append((depth + 1, node.left))
             if node.right:
@@ -50,7 +50,7 @@ class Solution(object):
         return minDepth
 
     def isLeaf(self, node):
-        return not node.left and not node.right        
+        return not node.left and not node.right
 
 t = listToTree([3, 9, 20, None, None, 15, 7])
 t1 = listToTree([1, 2])

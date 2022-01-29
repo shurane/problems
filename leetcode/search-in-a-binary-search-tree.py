@@ -8,5 +8,5 @@ class Solution:
             return self.searchBST(root.left, val)
         else:
             return self.searchBST(root.right, val)
-        
+
 # 1 minute

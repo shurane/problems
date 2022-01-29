@@ -4,13 +4,13 @@ class Solution:
     def isSymmetric(self, root):
         return self.isSymmetricMirror(root)
 
-    def isSymmetricIterative(self, root):     
+    def isSymmetricIterative(self, root):
         queue = [root, "EOL"]
         level = []
-        
+
         while queue:
             node = queue.pop(0)
-            
+
             if node == "EOL":
                 # compare elements of the same level
                 for l, r in zip(level, reversed(level)):
@@ -27,7 +27,7 @@ class Solution:
                 level.append(node)
                 if node != None:
                     queue.append(node.left)
-                    queue.append(node.right)              
+                    queue.append(node.right)
         return True
 
     def isSymmetricIterativeLeetcode(self, root):
@@ -48,7 +48,7 @@ class Solution:
             q.append(t2.right)
             q.append(t1.right)
             q.append(t2.left)
-        
+
         return True
 
     def isSymmetricMirror(self, root):
@@ -67,7 +67,7 @@ class Solution:
             and self.isMirror(l.right, r.left) \
             and self.isMirror(l.left, r.right)
 
-    def isSymmetricRecursive(self, root): 
+    def isSymmetricRecursive(self, root):
         # in order traversal with a stack would be better than using a generator
         # see: https://www.geeksforgeeks.org/inorder-tree-traversal-without-recursion/
         if root == None:
@@ -75,10 +75,10 @@ class Solution:
 
         left = self.in_order_traversal(root)
         right = self.reverse_in_order_traversal(root)
-        
+
         while True:
             lval = None
-            try: 
+            try:
                 lval = next(left)
             except StopIteration:
                 pass
@@ -96,7 +96,7 @@ class Solution:
             if lval == None and rval == None:
                 break
         return True
-        
+
     def in_order_traversal(self, root, level=0):
         if root.left:
             lefts = self.in_order_traversal(root.left, level+1)
@@ -105,9 +105,9 @@ class Solution:
                     yield next(lefts)
                 except StopIteration:
                     break
-        
+
         yield (root.val, level)
-        
+
         if root.right:
             rights = self.in_order_traversal(root.right)
             while True:
@@ -115,8 +115,8 @@ class Solution:
                     yield next(rights)
                 except StopIteration:
                     break
-            
-    
+
+
     def reverse_in_order_traversal(self, root, level=0):
         if root.right:
             rights = self.reverse_in_order_traversal(root.right, level+1)
@@ -125,9 +125,9 @@ class Solution:
                     yield next(rights)
                 except StopIteration:
                     break
-        
+
         yield (root.val, level)
-        
+
         if root.left:
             lefts = self.reverse_in_order_traversal(root.left)
             while True:
@@ -135,7 +135,7 @@ class Solution:
                     yield next(lefts)
                 except StopIteration:
                     break
-        
+
 s = Solution()
 
 t1 = TreeNode(1)

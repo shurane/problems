@@ -17,10 +17,10 @@ class Solution:
         for a, b in zip(evens(), odds()):
             lst.append(a)
             lst.append(b)
-        
+
         return lst
 
-    
+
 # [1,3,5,7,9,2,4,6,8,10]
 
 s = Solution()

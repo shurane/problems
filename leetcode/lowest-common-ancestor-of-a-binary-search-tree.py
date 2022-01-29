@@ -14,7 +14,7 @@ class Solution(object):
 
         if not ps or not qs:
             return None
-        
+
         i = 0
         while i < len(ps) and i < len(qs) and ps[i] == qs[i]:
             i += 1
@@ -50,12 +50,12 @@ class Solution(object):
                 break
             else:
                 root = root.right
-            
+
             if root == None:
                 path = []
 
         return path
-        
+
 t = TreeNode(6)
 
 t.left = TreeNode(2)

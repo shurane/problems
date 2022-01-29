@@ -10,7 +10,7 @@ class Solution:
         if not root:
             return True
         return self.isVal(root, root.val)
-        
+
     def isVal(self, tree: TreeNode, value) -> bool:
         if not tree:
             return True

@@ -60,14 +60,14 @@ class Solution(object):
                     t2_nodes.extend([r.left, r.right])
                 else:
                     t2_nodes.extend([None, None])
-                
+
                 m.left = TreeNode(0)
                 m.right = TreeNode(0)
                 t3_nodes.extend([m.left, m.right])
 
         return t3
 
-        
+
 left = listToTree([1,3,2,5])
 right = listToTree([2,1,3,None,4,None,7])
 

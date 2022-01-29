@@ -28,7 +28,7 @@ class Solution(object):
                 nodes.append((depth + 1, node.left))
             if node.right:
                 nodes.append((depth + 1, node.right))
-        
+
         return maxDepth
 
 s = Solution()

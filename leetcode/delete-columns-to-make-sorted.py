@@ -1,5 +1,7 @@
+from typing import List
+
 class Solution:
-    def minDeletionSize(self, A: 'List[str]') -> 'int':
+    def minDeletionSize(self, A: List[str]) -> int:
         length = len(A)
         width = len(A[0])
 
@@ -13,7 +15,7 @@ class Solution:
                     indexes.append(i)
                     break
         # print(indexes)
-        return len(indexes)     
+        return len(indexes)
 
 s = Solution()
 
