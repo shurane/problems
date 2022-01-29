@@ -24,9 +24,6 @@ class Solution:
                         break
             return successor
 
-
-
-
 s = Solution()
 t1 = create_tree([2,1,3])
 assert s.inorderSuccessor(t1, t1.left) == t1
