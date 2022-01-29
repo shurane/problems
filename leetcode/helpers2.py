@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Generator
 
 class TreeNode:
     def __init__(self, x):
@@ -11,6 +11,8 @@ class TreeNode:
 
     def __eq__(self, other):
         if other is None:
+            return False
+        if type(self) != type(other):
             return False
         return self.val == other.val
 
@@ -70,6 +72,18 @@ def height(self, root: TreeNode) -> int:
         return 0
     else:
         return 1 + max(self.height(root.left), self.height(root.right))
+
+def inorder(node: TreeNode) -> Generator[TreeNode, None, None]:
+    if not node:
+        return
+
+    if node.left:
+        yield from inorder(node.left)
+
+    yield node
+
+    if node.right:
+        yield from inorder(node.right)
 
 # Definition for singly-linked list.
 class ListNode:
@@ -135,6 +149,8 @@ class ListNode:
 
 #     recursive = create_tree_recursive(lst)
 #     print("recursive\n", recursive.printLevels())
+t1_lst = [8,4,12,2,6,10,14,1,3,5,7,9,11,13,15]
+assert [t.val for t in inorder(create_tree(t1_lst))] == [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]
 
 ## testing for listnode methods
 assert ListNode.fromList([1,2,3])       == ListNode.fromList([1,2,3])
