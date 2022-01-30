@@ -4,10 +4,7 @@ from helpers2 import TreeNode, create_tree, inorder
 class Solution:
     def inorderSuccessor(self, root: TreeNode, p: TreeNode, ancestors: List[TreeNode] = []) -> Optional[TreeNode]:
         if p.val < root.val:
-            if root.left and root.left == p and not root.left.right:
-                return root
-            else:
-                return self.inorderSuccessor(root.left, p, [root] + ancestors)
+            return self.inorderSuccessor(root.left, p, [root] + ancestors)
         elif root.val < p.val:
             return self.inorderSuccessor(root.right, p, [root] + ancestors)
         else: # root == p
