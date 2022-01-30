@@ -53,6 +53,19 @@ class Solution:
 
         return helper(root)
 
+    def inorderSuccessorNoSpace(self, root: TreeNode, p: TreeNode) -> Optional[TreeNode]:
+        succ = None
+
+        while root:
+            if p.val < root.val:
+                succ = root
+                root = root.left
+            else:
+                root = root.right
+
+        # print(p, succ)
+        return succ
+
 s = Solution()
 
 t1 = create_tree([2,1,3])
@@ -67,6 +80,15 @@ for i in range(len(t2_inorder) - 1):
     # print(t2_inorder[i], s.inorderSuccessor(t2,t2_inorder[i]))
     assert s.inorderSuccessor(t2, t2_inorder[i]) == t2_inorder[i+1]
     assert s.inorderSuccessorStack(t2, t2_inorder[i]) == t2_inorder[i+1]
+    assert s.inorderSuccessorNoSpace(t2, t2_inorder[i]) == t2_inorder[i+1]
 
 assert s.inorderSuccessor(t2, t2_inorder[-1]) == None
 assert s.inorderSuccessorStack(t2, t2_inorder[-1]) == None
+assert s.inorderSuccessorNoSpace(t2, t2_inorder[-1]) == None
+
+t3 = create_tree([16,8,24,4,12,20,28,2,6,10,14,18,22,26,30])
+t3_inorder = list(inorder(t3))
+
+for i in range(len(t3_inorder) - 1):
+    assert s.inorderSuccessorNoSpace(t3, t3_inorder[i]) == t3_inorder[i+1]
+assert s.inorderSuccessorNoSpace(t3, t3_inorder[-1]) == None
