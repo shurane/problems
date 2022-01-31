@@ -85,6 +85,15 @@ def inorder(node: TreeNode) -> Generator[TreeNode, None, None]:
     if node.right:
         yield from inorder(node.right)
 
+def preorder(node: TreeNode) -> Generator[TreeNode, None, None]:
+    if not node:
+        return
+    yield node
+    if node.left:
+        yield from preorder(node.left)
+    if node.right:
+        yield from preorder(node.right)
+
 # Definition for singly-linked list.
 class ListNode:
     def __init__(self, x):
