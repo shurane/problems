@@ -1,5 +1,7 @@
+from typing import List
+
 class Solution:
-    def flipAndInvertImage(self, A: 'List[List[int]]') -> 'List[List[int]]':
+    def flipAndInvertImage(self, A: List[List[int]]) -> List[List[int]]:
         for row in A:
             i = 0
             N = len(row)
@@ -18,7 +20,7 @@ class Solution:
 
         return A
 
-    def flipAndInvertImage2(self, A):
+    def flipAndInvertImage2(self, A: List[List[int]]) -> List[List[int]]:
 
         # drew inspiration from https://leetcode.com/problems/flipping-an-image/discuss/130590/C++JavaPython-Reverse-and-Toggle
         for row in A:
@@ -27,7 +29,7 @@ class Solution:
             while i * 2 < N:
                 if row[i] == row[N - i - 1]:
                     row[i] = row[N - i - 1] = 1 - row[i]
-                
+
                 i += 1
         return A
 

@@ -1,5 +1,7 @@
+from typing import List
+
 class Solution:
-    def sortedSquares(self, A):
+    def sortedSquares(self, A: List[int]) -> List[int]:
         return self.sortedSquaresInsideOut2(A)
 
     def sortedSquaresOutsideIn(self, A):
@@ -18,21 +20,21 @@ class Solution:
                 r -= 1
         return B
 
-    def sortedSquaresBisect(self, A):
+    def sortedSquaresBisect(self, A: List[int]) -> List[int]:
         ## first solution, O(nlogn)
         import bisect
         B = []
         for num in A:
             bisect.insort(B, num**2) # O(nlogn)
         return B
-    
-    def sortedSquaresSquareThenSort(self, A):
+
+    def sortedSquaresSquareThenSort(self, A: List[int]) -> List[int]:
         ## second solution, O(nlogn)
         for i in range(len(A)):
             A[i] = A[i]**2
         return sorted(A) # O(nlogn)
 
-    def sortedSquaresInsideOut(self, A):
+    def sortedSquaresInsideOut(self, A: List[int]) -> List[int]:
         import sys
         ## O(n), makes 2 passes, but slower runtime than the O(nlogn) solutions
         ## I guess this is inside out?
@@ -44,8 +46,8 @@ class Solution:
             if A[i] >= 0:
                 index = i
                 break
-        
- 
+
+
         l, r = index - 1, index
         l2, r2 = A[l] ** 2, A[r] ** 2
         while r - l < len(A) + 1:
@@ -58,7 +60,7 @@ class Solution:
                 l2 = sys.maxsize
             else:
                 l2 = A[l] ** 2
-            
+
             if l2 < r2:
                 B[r - l - 1] = l2
                 l -= 1
@@ -67,7 +69,7 @@ class Solution:
                 r += 1
         return B
 
-    def sortedSquaresInsideOut2(self, A):
+    def sortedSquaresInsideOut2(self, A: List[int]) -> List[int]:
         ## One more attempt, inspired by https://leetcode.com/problems/squares-of-a-sorted-array/discuss/224318/Python-O(N)-beats-100
         B = [0] * len(A)
         index = len(A) - 1
@@ -77,7 +79,7 @@ class Solution:
             if A[i] >= 0:
                 index = i
                 break
- 
+
         l, r = index - 1, index
         while r - l < len(A) + 1:
 
@@ -86,7 +88,7 @@ class Solution:
             ri = 0 if r >= len(A) else r
             l2, r2 = A[li] ** 2, A[ri] ** 2
             # print(l, r, l2, r2)
-            
+
             if l2 < r2:
                 B[r - l - 1] = l2
                 l -= 1

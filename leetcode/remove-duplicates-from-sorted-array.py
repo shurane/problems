@@ -1,3 +1,5 @@
+from typing import List
+
 class Solution:
     def removeDuplicates(self, nums: List[int]) -> int:
         i = 0
@@ -6,5 +8,5 @@ class Solution:
                 del nums[i]
             else:
                 i += 1
-        
+
         return len(nums)

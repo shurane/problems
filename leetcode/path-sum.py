@@ -10,7 +10,7 @@ class Solution:
             left = self.hasPathSum(root.left, sum - root.val)
             right = self.hasPathSum(root.right, sum - root.val)
             return left or right
-    
+
     def isLeaf(self, node: TreeNode) -> bool:
         return node != None and node.left == None and node.right == None
 

@@ -1,5 +1,7 @@
+from typing import List
+
 class Solution:
-    def selfDividingNumbers(self, left: 'int', right: 'int') -> 'List[int]':
+    def selfDividingNumbers(self, left: int, right: int) -> List[int]:
         matches = []
         for i in range(left, right + 1):
             j = i
@@ -16,7 +18,7 @@ class Solution:
             if div:
                 matches.append(i)
         return matches
-        
+
 
 s = Solution()
 

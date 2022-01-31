@@ -1,17 +1,18 @@
+from typing import List
 from colorama import init, Fore, Style
 init()
 
 class Solution:
-    def searchMatrix(self, matrix, target):
-        
+    def searchMatrix(self, matrix: List[List[int]], target: int) -> bool:
+
         lst = []
         for row in matrix:
             lst.extend(row)
         lst = sorted(lst)
-        
+
         lo = 0
         hi = len(lst) - 1
-        
+
         while lo <= hi:
             mid = (lo + hi) // 2
             if target < lst[mid]:
@@ -20,10 +21,10 @@ class Solution:
                 lo = mid + 1
             else:
                 return True
-        
+
         return False
 
-    def searchMatrixWithoutList(self, matrix, target):
+    def searchMatrixWithoutList(self, matrix: List[List[int]], target: int):
         if not matrix:
             return False
 
@@ -47,10 +48,10 @@ class Solution:
                 lo = mid + 1
             else:
                 return True
-        
+
         return False
 
-def printMatrix(matrix, y, x, color=Fore.RED):
+def printMatrix(matrix: List[List[int]], y: int, x: int) -> str:
     s = ""
     for i in range(0, len(matrix)):
         for j in range(0, len(matrix[i])):
@@ -61,7 +62,7 @@ def printMatrix(matrix, y, x, color=Fore.RED):
                 s += formatted
         s += "\n"
     return s
-        
+
 s = Solution()
 
 matrix = [[1,   3,  5,  7],
@@ -86,4 +87,3 @@ assert s.searchMatrixWithoutList(matrix, 50) == True
 assert s.searchMatrixWithoutList(matrix, 20) == True
 assert s.searchMatrixWithoutList(matrix, 21) == False
 assert s.searchMatrixWithoutList(matrix2, 21) == False
-        

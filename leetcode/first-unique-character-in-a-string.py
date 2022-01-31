@@ -1,5 +1,5 @@
 class Solution:
-    def firstUniqChar(self, s: 'str') -> 'int':
+    def firstUniqChar(self, s: str) -> int:
         # 2 passes. O(n)
         # 1st pass involves counting up each letter
         # 2nd pass returns the first letter whose count is 1
@@ -20,27 +20,27 @@ class Solution:
             letter = s[i]
             if counts[letter] == 1:
                 return i
-        
+
         return -1
 
-    def firstUniqChar2(self, s: 'str') -> 'int':
+    def firstUniqChar2(self, s: str) -> int:
         # inspiration from https://leetcode.com/problems/first-unique-character-in-a-string/discuss/86351/Python-3-lines-beats-100-(~-60ms)-!
 
         # this is faster than O(n*2), since for even a long string, it only has to count once for each letter.
         # For 26 letters, scanning 's' for the count takes O(n). Then finding the first occurrence takes O(n).
-        # Total of 26 * 2 * O(n), which is still just O(n). 
+        # Total of 26 * 2 * O(n), which is still just O(n).
         # Apparently it's faster than the hashmap variant since it relies on fast, built-in C code
         letters = 'abcdefghijklmnopqrstuvwxyz'
         indices = []
         for letter in letters:
             if s.count(letter) == 1:
                 indices.append(s.index(letter))
-        
+
         if len(indices) == 0:
             return -1
         return min(indices)
 
-    def firstUniqChar3(self, s: 'str') -> 'int':
+    def firstUniqChar3(self, s: str) -> int:
         # inspiration from https://leetcode.com/problems/first-unique-character-in-a-string/discuss/86511/Java-One-Pass-Solution-with-LinkedHashMap
         # could use ordereddict here, same idea as LinkedHashSet. Maintains order of insertions
         from collections import OrderedDict

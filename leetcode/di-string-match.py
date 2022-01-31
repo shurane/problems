@@ -1,5 +1,7 @@
+from typing import List
+
 class Solution:
-    def diStringMatch(self, S: 'str') -> 'List[int]':
+    def diStringMatch(self, S: str) -> List[int]:
         # this solution is non working
 
         N = len(S)
@@ -43,7 +45,7 @@ class Solution:
 
         return match
 
-    def diStringMatch2(self, S: 'str') -> 'List[int]':
+    def diStringMatch2(self, S: str) -> List[int]:
         match = []
         lo = 0
         hi = len(S)

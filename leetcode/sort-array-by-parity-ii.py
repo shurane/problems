@@ -1,5 +1,7 @@
+from typing import List
+
 class Solution:
-    def sortArrayByParityII(self, A):
+    def sortArrayByParityII(self, A: List[int]) -> List[int]:
         def odds():
             for elem in A:
                 if elem % 2 == 1:

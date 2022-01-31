@@ -1,10 +1,7 @@
-class Solution:
-    def sortArrayByParity(self, A):
-        """
-        :type A: List[int]
-        :rtype: List[int]
-        """
+from typing import List
 
+class Solution:
+    def sortArrayByParity(self, A: List[int]) -> List[int]:
         i = 0
         j = len(A) - 1
         while i < j:
@@ -16,9 +13,9 @@ class Solution:
                 i += 1
             else:
                 j -= 1
-        
+
         return A
-    
+
 s = Solution()
 print(s.sortArrayByParity([3,1,2,4]))
 print(s.sortArrayByParity(list(range(10))))

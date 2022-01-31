@@ -1,11 +1,5 @@
-class Solution(object):
-    def hammingDistance(self, x, y):
-        """
-        :type x: int
-        :type y: int
-        :rtype: int
-        """
-
+class Solution:
+    def hammingDistance(self, x: int, y: int) -> int:
         # grab bits in x, y
         # compare bits, left to right
 
@@ -17,8 +11,8 @@ class Solution(object):
             x = x >> 1
             y = y >> 1
         return diff
-    
-    def hammingDistance2(self, x: 'int', y: 'int') -> 'int':
+
+    def hammingDistance2(self, x: int, y: int) -> int:
         # print(format(x,'032b'), format(y,'032b'))
 
         count = 0
@@ -27,7 +21,7 @@ class Solution(object):
                 count += 1
         return count
 
-    def hammingDistance3(self, x: 'int', y: 'int') -> 'int':
+    def hammingDistance3(self, x: int, y: int) -> int:
         # print(format(x,'032b'), format(y,'032b'))
         result = x ^ y
         count = 0

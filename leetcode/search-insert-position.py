@@ -35,13 +35,13 @@ class Solution:
         else:
             return mid + 1
 
-    
+
     def searchInsert(self, nums: List[int], target: int) -> int:
         # referring to https://leetcode.com/problems/search-insert-position/discuss/15080/My-8-line-Java-solution
         # I guess it makes more sense to return lo outside of the while loop instead of mid
         lo = 0
         hi = len(nums) - 1
-        
+
         while lo <= hi:
             mid = (lo + hi) // 2
             if target == nums[mid]:
@@ -50,7 +50,7 @@ class Solution:
                 hi = mid - 1
             else:
                 lo = mid + 1
-            
+
         return lo
 
 s = Solution()

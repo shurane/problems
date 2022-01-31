@@ -1,3 +1,5 @@
+from typing import List
+
 # Definition for a Node.
 class Node:
     def __init__(self, val, children=[]):
@@ -6,7 +8,7 @@ class Node:
 
 class Solution:
     # https://leetcode.com/problems/n-ary-tree-postorder-traversal/
-    def postorder(self, root):
+    def postorder(self, root: Node) -> List[int]:
         if not root: return []
 
         lst = []
@@ -17,7 +19,7 @@ class Solution:
         lst.append(root.val)
         return lst
 
-    def postorder_iterative(self, root):
+    def postorder_iterative(self, root: Node) -> List[int]:
         if not root: return []
 
         stack = [root]
@@ -33,7 +35,7 @@ class Solution:
         return values[::-1]
 
     # https://leetcode.com/problems/n-ary-tree-preorder-traversal/
-    def preorder(self, root):
+    def preorder(self, root: Node) -> List[int]:
         if not root: return []
 
         lst = []
@@ -42,7 +44,7 @@ class Solution:
             lst.extend(values)
         return lst
 
-    def preorder_iterative(self, root):
+    def preorder_iterative(self, root: Node) -> List[int]:
         if not root: return []
 
         queue = [root]
@@ -56,7 +58,7 @@ class Solution:
         return values
 
     # https://leetcode.com/problems/n-ary-tree-level-order-traversal/
-    def levelorder(self, root, level=0):
+    def levelorder(self, root: Node, level:int = 0) -> List[int]:
         if not root: return []
 
         values = [(level, root.val)]
@@ -70,16 +72,16 @@ class Solution:
             for l, value in values:
                 if len(levels) <= l:
                     levels.append([])
-                
+
                 levels[l].append(value)
-            
+
             return levels
 
         else:
             return values
-            
 
-    def levelorder_iterative(self, root):
+
+    def levelorder_iterative(self, root: Node) -> List[int]:
         if not root: return []
 
         levels = []
@@ -94,10 +96,10 @@ class Solution:
                 levels.append([])
 
             levels[level].append(node.val)
-        
+
         return levels
 
-    def levelorder_iterative2(self, root):
+    def levelorder_iterative2(self, root: Node) -> List[int]:
         # inspiration from https://leetcode.com/problems/n-ary-tree-level-order-traversal/discuss/148877/Python-5-lines-BFS-solution
         queue = [root]
         levels = []
@@ -107,7 +109,7 @@ class Solution:
             queue = [child for node in queue for child in node.children if child]
 
         return levels
-            
+
 
 s = Solution()
 

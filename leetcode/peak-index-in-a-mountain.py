@@ -1,11 +1,13 @@
+from typing import List
+
 class Solution:
-    def peakIndexInMountainArray(self, A: 'List[int]') -> 'int':
+    def peakIndexInMountainArray(self, A: List[int]) -> int:
         # return A.index(max(A)) # O(n) solution
-        
+
         # O (n log n) solution
         lo = 0
         hi = len(A)
-        
+
         while lo < hi:
             mid = (lo + hi) // 2
             print(lo, mid, hi)

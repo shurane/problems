@@ -29,7 +29,7 @@ class Solution:
             if right != [[None]]:
                 for partial in right:
                     solutions.append([root.val] + partial)
-            
+
             # print(root, "solutions", solutions)
             return solutions
 
@@ -57,7 +57,7 @@ tc.assertCountEqual(s.pathSum(t1, 23), [])
 tc.assertCountEqual(s.pathSum(t1, 1), [])
 tc.assertCountEqual(s.pathSum(t2, 0), [])
 
-# https://leetcode.com/problems/path-sum-ii/discuss/36829/Python-solutions-(Recursively-BFS%2Bqueue-DFS%2Bstack) 
+# https://leetcode.com/problems/path-sum-ii/discuss/36829/Python-solutions-(Recursively-BFS%2Bqueue-DFS%2Bstack)
 # has many interesting approaches
 # recursively, BFS + queue, DFS + stack
 # I think my solution is the recursive approach

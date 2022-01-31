@@ -1,15 +1,11 @@
-# Definition for singly-linked list.
-# class ListNode:
-#     def __init__(self, x):
-#         self.val = x
-#         self.next = None
+from helpers2 import ListNode
 
 class Solution:
     def deleteDuplicates(self, head: ListNode) -> ListNode:
         current = head
         while current != None and current.next != None:
             successor = current.next
-            
+
             if current.val == successor.val:
                 current.next = successor.next
                 successor = successor.next
@@ -18,7 +14,6 @@ class Solution:
                 # current and successor don't match, advance current
                 current = successor
         return head
-        
 
 # test [1]
 # test [1,1,2]

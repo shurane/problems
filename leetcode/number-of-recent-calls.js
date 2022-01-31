@@ -1,7 +1,7 @@
 class RecentCounter{
     constructor(){
         this.arr = [];
-    }    
+    }
 }
 
 RecentCounter.prototype.ping = function(t) {

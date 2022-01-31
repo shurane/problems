@@ -9,7 +9,7 @@ class Solution:
                 leftindex = stack.pop()
                 if not stack:
                     primitives.append((leftindex, i))
-        
+
         result = ""
         for left, right in primitives:
             result += S[left+1:right]

@@ -16,7 +16,7 @@ s = Solution()
 t1 = create_tree([10,5,15,3,7,None,18])
 t2 = create_tree([10,5,15,3,7,13,18,1,None,6])
 
-print(t1.printLevels())
+# print(t1.printLevels())
 
 assert s.rangeSumBST(t1, 7, 15) == 32
-assert s.rangeSumBST(t2, 6, 10) == 23   
+assert s.rangeSumBST(t2, 6, 10) == 23

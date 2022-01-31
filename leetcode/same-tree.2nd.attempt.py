@@ -11,4 +11,3 @@ class Solution:
         else:
             #p.val == q.val, check their children
             return self.isSameTree(p.left, q.left) and self.isSameTree(p.right, q.right)
-        

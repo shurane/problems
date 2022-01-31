@@ -1,5 +1,5 @@
 class Solution:
-    def hammingDistance(self, x: 'int', y: 'int') -> 'int':
+    def hammingDistance(self, x: int, y: int) -> int:
         # print(format(x,'032b'), format(y,'032b'))
 
         count = 0
@@ -8,7 +8,7 @@ class Solution:
                 count += 1
         return count
 
-    def hammingDistance2(self, x: 'int', y: 'int') -> 'int':
+    def hammingDistance2(self, x: int, y: int) -> int:
         # print(format(x,'032b'), format(y,'032b'))
         result = x ^ y
         count = 0
