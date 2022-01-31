@@ -23,7 +23,7 @@ class Solution:
                 j += 1
             length = j - i
             print(f"S:{S}, i:{i}, j:{j} ==== lst:{lst}, match:{match}, letter:{letter}, length:{length})")
-            
+
             if letter == "I":
                 increasing = lst[len(lst) - length:]
                 print("increasing", increasing)
@@ -38,11 +38,11 @@ class Solution:
                 del lst[0:length + 1]
                 # match.append(lst[0])
                 # del lst[0]
-            
+
             i += 1
-        
+
         return match
-    
+
     def diStringMatch2(self, S: 'str') -> 'List[int]':
         match = []
         lo = 0
