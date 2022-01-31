@@ -62,7 +62,7 @@ assert s.lowestCommonAncestor(t, t.left, t.left.right.right) == t.left
 # print(s.lowestCommonAncestor(t, t.left, TreeNode(11))) # should be None, but not part of testcase
 
 """
-tt = listToTree([37,-34,-48,None,-100,-100,48,None,None,None,None,-54,None,-71,-22,None,None,None,8])
+tt = create_tree([37,-34,-48,None,-100,-100,48,None,None,None,None,-54,None,-71,-22,None,None,None,8])
 
                     37
            -34                    -48
