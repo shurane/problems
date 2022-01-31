@@ -1,12 +1,8 @@
-from helpers import TreeNode, listToTree
+from helpers2 import TreeNode, create_tree
 import sys
 
 class Solution(object):
-    def minDepth(self, root):
-        """
-        :type root: TreeNode
-        :rtype: int
-        """
+    def minDepth(self, root: TreeNode) -> int:
         if not root:
             return 0
         elif self.isLeaf(root):
@@ -27,7 +23,7 @@ class Solution(object):
             else:
                 return 1 + right
 
-    def minDepthIterative(self, root):
+    def minDepthIterative(self, root: TreeNode) -> int:
         if not root:
             return 0
         elif self.isLeaf(root):
@@ -49,19 +45,23 @@ class Solution(object):
 
         return minDepth
 
-    def isLeaf(self, node):
+    def isLeaf(self, node: TreeNode) -> bool:
         return not node.left and not node.right
 
-t = listToTree([3, 9, 20, None, None, 15, 7])
-t1 = listToTree([1, 2])
-t2 = listToTree([1,2,3,4,5])
-t3 = listToTree([])
-t4 = listToTree([1])
-t5 = listToTree(range(14))
+t = create_tree([3, 9, 20, None, None, 15, 7])
+t1 = create_tree([1, 2])
+t2 = create_tree([1,2,3,4,5])
+t3 = create_tree([])
+t4 = create_tree([1])
+t5 = create_tree(range(14))
+t6 = create_tree(range(125))
+t7 = create_tree(range(126))
 s = Solution()
-print(s.minDepthIterative(t), "====\n")
-print(s.minDepthIterative(t1), "====\n")
-print(s.minDepthIterative(t2), "====\n")
-print(s.minDepthIterative(t3), "====\n")
-print(s.minDepthIterative(t4), "====\n")
-print(s.minDepthIterative(t5), "====\n")
+assert s.minDepthIterative(t) == 2
+assert s.minDepthIterative(t1) == 2
+assert s.minDepthIterative(t2) == 2
+assert s.minDepthIterative(t3) == 0
+assert s.minDepthIterative(t4) == 1
+assert s.minDepthIterative(t5) == 4
+assert s.minDepthIterative(t6) == 6
+assert s.minDepthIterative(t7) == 7

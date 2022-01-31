@@ -1,13 +1,8 @@
-from helpers import TreeNode, listToTree
+from helpers2 import TreeNode, create_tree
 
 # https://leetcode.com/problems/merge-two-binary-trees/description/
 class Solution(object):
-    def mergeTrees(self, t1, t2):
-        """
-        :type t1: TreeNode
-        :type t2: TreeNode
-        :rtype: TreeNode
-        """
+    def mergeTrees(self, t1: TreeNode, t2: TreeNode) -> TreeNode:
         return self.mergeTreesIterative(t1, t2)
 
     def mergeTreesRecursive(self, t1, t2):
@@ -29,7 +24,7 @@ class Solution(object):
             node.right = self.mergeTreesRecursive(None, t2.right)
             return node
 
-    def mergeTreesIterative(self, t1, t2):
+    def mergeTreesIterative(self, t1: TreeNode, t2: TreeNode):
         t1_nodes = [t1]
         t2_nodes = [t2]
         t3 = TreeNode(0)
@@ -39,7 +34,7 @@ class Solution(object):
             l = t1_nodes.pop(0)
             r = t2_nodes.pop(0)
             m = t3_nodes.pop(0)
-            print(l, r, m, t1_nodes, t2_nodes, t3_nodes)
+            # print(l, r, m, t1_nodes, t2_nodes, t3_nodes)
 
             if l and r:
                 m.val = l.val + r.val
@@ -67,20 +62,20 @@ class Solution(object):
 
         return t3
 
+s = Solution()
 
-left = listToTree([1,3,2,5])
-right = listToTree([2,1,3,None,4,None,7])
-
-input1_t1 = listToTree([1,2,None,3])
-input1_t2 = listToTree([1,None,2,None,None,None,3])
+left = create_tree([1,3,2,5])
+right = create_tree([2,1,3,None,4,None,7])
+assert s.mergeTreesRecursive(left, right) == create_tree([3,4,5,5,4,None,7])
+assert s.mergeTreesIterative(left, right) == create_tree([3,4,5,5,4,None,7])
 
 """
-input1_t1
+l1
         1
     2      <>
   3  <>  <>  <>
 
-input1_t2
+r1
         1
     <>      2
   <>  <>  <>  3
@@ -91,7 +86,7 @@ output1
   3  <>   <>  3
 
 """
-
-s = Solution()
-merged = s.mergeTrees(left, right)
-output1 = s.mergeTrees(input1_t1, input1_t2)
+l1 = create_tree([1,2,None,3])
+r1 = create_tree([1,None,2,None,None,None,3])
+assert s.mergeTreesRecursive(l1, r1) == create_tree([2,2,2,3,None,None,3])
+assert s.mergeTreesIterative(l1, r1) == create_tree([2,2,2,3,None,None,3])

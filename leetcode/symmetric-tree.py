@@ -1,10 +1,10 @@
-from helpers import TreeNode
+from helpers2 import TreeNode
 
 class Solution:
-    def isSymmetric(self, root):
+    def isSymmetric(self, root: TreeNode) -> bool:
         return self.isSymmetricMirror(root)
 
-    def isSymmetricIterative(self, root):
+    def isSymmetricIterative(self, root: TreeNode):
         queue = [root, "EOL"]
         level = []
 
@@ -30,7 +30,7 @@ class Solution:
                     queue.append(node.right)
         return True
 
-    def isSymmetricIterativeLeetcode(self, root):
+    def isSymmetricIterativeLeetcode(self, root: TreeNode):
         q = []
         q.append(root)
         q.append(root)
@@ -51,13 +51,13 @@ class Solution:
 
         return True
 
-    def isSymmetricMirror(self, root):
+    def isSymmetricMirror(self, root: TreeNode):
         if root == None:
             return True
         else:
             return self.isMirror(root.left, root.right)
 
-    def isMirror(self, l, r):
+    def isMirror(self, l: TreeNode, r: TreeNode):
         if l == None and r == None:
             return True
         elif l == None or r == None:
@@ -67,7 +67,7 @@ class Solution:
             and self.isMirror(l.right, r.left) \
             and self.isMirror(l.left, r.right)
 
-    def isSymmetricRecursive(self, root):
+    def isSymmetricRecursive(self, root: TreeNode):
         # in order traversal with a stack would be better than using a generator
         # see: https://www.geeksforgeeks.org/inorder-tree-traversal-without-recursion/
         if root == None:
@@ -97,7 +97,7 @@ class Solution:
                 break
         return True
 
-    def in_order_traversal(self, root, level=0):
+    def in_order_traversal(self, root: TreeNode, level: int = 0):
         if root.left:
             lefts = self.in_order_traversal(root.left, level+1)
             while True:
@@ -117,7 +117,7 @@ class Solution:
                     break
 
 
-    def reverse_in_order_traversal(self, root, level=0):
+    def reverse_in_order_traversal(self, root: TreeNode, level: int = 0):
         if root.right:
             rights = self.reverse_in_order_traversal(root.right, level+1)
             while True:

@@ -1,14 +1,7 @@
-from helpers import TreeNode
+from helpers2 import TreeNode, create_tree
 
 class Solution(object):
-    def lowestCommonAncestor(self, root, p, q):
-        """
-        :type root: TreeNode
-        :type p: TreeNode
-        :type q: TreeNode
-        :rtype: TreeNode
-        """
-
+    def lowestCommonAncestor(self, root: TreeNode, p: TreeNode, q: TreeNode) -> TreeNode:
         ps = self.binarySearchPathIterative(root, p)
         qs = self.binarySearchPathIterative(root, q)
 
@@ -21,15 +14,14 @@ class Solution(object):
 
         return ps[i-1]
 
-
-    def binarySearchPathRecursive(self, root, node):
+    def binarySearchPathRecursive(self, root: TreeNode, node: TreeNode):
         path = self.binarySearchPathRecursiveHelper(root, node)
         if None in path:
             return []
         else:
             return path
 
-    def binarySearchPathRecursiveHelper(self, root, node):
+    def binarySearchPathRecursiveHelper(self, root: TreeNode, node: TreeNode):
         if root == None:
             return [None]
         elif node.val < root.val:
@@ -39,7 +31,7 @@ class Solution(object):
         else:
             return [root] + self.binarySearchPathRecursiveHelper(root.right, node)
 
-    def binarySearchPathIterative(self, root, node):
+    def binarySearchPathIterative(self, root: TreeNode, node: TreeNode):
         path = []
         while root:
             path.append(root)
@@ -56,21 +48,12 @@ class Solution(object):
 
         return path
 
-t = TreeNode(6)
-
-t.left = TreeNode(2)
-t.left.left = TreeNode(0)
-t.left.right = TreeNode(4)
-t.left.right.left = TreeNode(3)
-t.left.right.right = TreeNode(5)
-
-t.right = TreeNode(8)
-t.right.left = TreeNode(7)
-t.right.right = TreeNode(9)
-
 s = Solution()
 
-# print(s.binarySearchPath(t, TreeNode(6)))
-# print(s.binarySearchPath(t, TreeNode(5)))
-# print(s.binarySearchPath(t, TreeNode(11)))
-print(s.lowestCommonAncestor(t, t.left, t.right))
+t = create_tree([6,2,8,0,4,7,9,None,None,3,5])
+# print(t.printLevels())
+
+assert [node.val for node in s.binarySearchPathIterative(t, TreeNode(6))] == [6]
+assert [node.val for node in s.binarySearchPathIterative(t, TreeNode(5))] == [6,2,4,5]
+assert s.binarySearchPathIterative(t, TreeNode(11)) == []
+assert s.lowestCommonAncestor(t, t.left, t.right) == t
