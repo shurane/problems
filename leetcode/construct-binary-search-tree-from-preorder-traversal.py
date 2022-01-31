@@ -2,6 +2,7 @@ from typing import Optional, List
 from helpers2 import TreeNode, create_tree, inorder, preorder as ppreorder
 
 class Solution:
+    # this is O(n log n) time, because of the while loop. If we can get rid of that loop, we can reduce this to O(n), as discussed with Rajib
     def bstFromPreorder(self, preorder: List[int]) -> Optional[TreeNode]:
         def helper(start: int, end: int) -> Optional[TreeNode]:
             if start > end or end > n - 1:
@@ -22,6 +23,8 @@ class Solution:
         result = helper(0, n - 1)
         # print([t.val for t in list(ppreorder(result))])
         return result
+
+    # TODO solve in O(n) time
 
 s = Solution()
 
