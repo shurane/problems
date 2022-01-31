@@ -1,22 +1,22 @@
 from typing import List, Generator
 
 class TreeNode:
-    def __init__(self, x):
+    def __init__(self, x: int):
         self.val = x
         self.left = None
         self.right = None
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         return f"TreeNode({self.val})"
 
-    def __eq__(self, other):
+    def __eq__(self, other) -> bool:
         if other is None:
             return False
         if type(self) != type(other):
             return False
         return self.val == other.val
 
-    def printLevels(self, level = 0):
+    def printLevels(self, level: int = 0) -> str:
         s = f"{' ' * (2*level)}{level}:{self}\n"
 
         if self.left:
@@ -27,8 +27,16 @@ class TreeNode:
 
         return s
 
+    def binarySearchInsert(self, x: int) -> None:
+        if self.val == None:
+            self.val = x
+        if x < self.val:
+            self.binarySearchInsert(self.left, x)
+        else:
+            self.binarySearchInsert(self.right, x)
+
 # TODO this should be part of class Tree
-def create_tree(lst: List):
+def create_tree(lst: List) -> TreeNode:
     if len(lst) == 0:
         return None
 
@@ -51,7 +59,7 @@ def create_tree(lst: List):
     return q[0]
 
 # TODO this should be part of class Tree
-def create_tree_recursive(lst: List, i: int = 0):
+def create_tree_recursive(lst: List, i: int = 0) -> TreeNode:
     if not lst:
         return None
 
@@ -94,13 +102,16 @@ def preorder(node: TreeNode) -> Generator[TreeNode, None, None]:
     if node.right:
         yield from preorder(node.right)
 
+# TODO generate random tree from list
+# TODO generate random balanced tree of height h
+
 # Definition for singly-linked list.
 class ListNode:
-    def __init__(self, x):
+    def __init__(self, x: int):
         self.val = x
         self.next = None
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         s = f"{self.val}"
         c = self.next
         while c:
@@ -115,7 +126,7 @@ class ListNode:
             yield current
             current = current.next
 
-    def __eq__(self, other):
+    def __eq__(self, other) -> bool:
         if not other:
             return False
 
@@ -148,18 +159,16 @@ class ListNode:
 
     @classmethod
     def reverseList(start, end):
+        # TODO
         pass
 
-## testing for tree methods
-# for lst in [[1,2,3,4,5,6], [1,2,3,4,None,6]]:
-#     print("working with this list:", lst)
-#     iterative = create_tree(lst)
-#     print("iterative\n", iterative.printLevels())
-
-#     recursive = create_tree_recursive(lst)
-#     print("recursive\n", recursive.printLevels())
 t1_lst = [8,4,12,2,6,10,14,1,3,5,7,9,11,13,15]
 assert [t.val for t in inorder(create_tree(t1_lst))] == [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]
+assert [t.val for t in inorder(create_tree_recursive(t1_lst))] == [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]
+
+t2_lst = [8,4,12,2,6,10,14,1,None,5,None,9,None,13,None]
+assert [t.val for t in inorder(create_tree(t2_lst))] == [1,2,4,5,6,8,9,10,12,13,14]
+assert [t.val for t in inorder(create_tree_recursive(t2_lst))] == [1,2,4,5,6,8,9,10,12,13,14]
 
 ## testing for listnode methods
 assert ListNode.fromList([1,2,3])       == ListNode.fromList([1,2,3])
