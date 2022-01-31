@@ -53,6 +53,7 @@ class Solution:
 
         return helper(root)
 
+    # https://leetcode.com/problems/inorder-successor-in-bst/discuss/72656/JavaPython-solution-O(h)-time-and-O(1)-space-iterative
     def inorderSuccessorNoSpace(self, root: TreeNode, p: TreeNode) -> Optional[TreeNode]:
         succ = None
 
@@ -65,6 +66,25 @@ class Solution:
 
         # print(p, succ)
         return succ
+
+    # easier to read, courtesy of @dico from mentioned leetcode solution
+    def inorderSuccessorEasierToRead(self, root: TreeNode, p: TreeNode) -> Optional[TreeNode]:
+        succ = None
+
+        while root != p:
+            if p.val < root.val:
+                succ = root
+                root = root.left
+            else:
+                root = root.right
+
+        if root.right:
+            left = root.right
+            while left.left:
+                left = left.left
+            return left
+        else:
+            return succ
 
 s = Solution()
 
@@ -81,14 +101,9 @@ for i in range(len(t2_inorder) - 1):
     assert s.inorderSuccessor(t2, t2_inorder[i]) == t2_inorder[i+1]
     assert s.inorderSuccessorStack(t2, t2_inorder[i]) == t2_inorder[i+1]
     assert s.inorderSuccessorNoSpace(t2, t2_inorder[i]) == t2_inorder[i+1]
+    assert s.inorderSuccessorEasierToRead(t2, t2_inorder[i]) == t2_inorder[i+1]
 
 assert s.inorderSuccessor(t2, t2_inorder[-1]) == None
 assert s.inorderSuccessorStack(t2, t2_inorder[-1]) == None
 assert s.inorderSuccessorNoSpace(t2, t2_inorder[-1]) == None
-
-t3 = create_tree([16,8,24,4,12,20,28,2,6,10,14,18,22,26,30])
-t3_inorder = list(inorder(t3))
-
-for i in range(len(t3_inorder) - 1):
-    assert s.inorderSuccessorNoSpace(t3, t3_inorder[i]) == t3_inorder[i+1]
-assert s.inorderSuccessorNoSpace(t3, t3_inorder[-1]) == None
+assert s.inorderSuccessorEasierToRead(t2, t2_inorder[-1]) == None
