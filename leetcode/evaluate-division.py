@@ -1,7 +1,7 @@
 from typing import List
 
 class Solution:
-    # TODO union-find version
+    # TODO union-find version, see https://leetcode.com/problems/evaluate-division/discuss/270993/Python-BFS-and-UF(detailed-explanation)
     def calcEquation(self, equations: List[List[str]], values: List[float], queries: List[List[str]]) -> List[float]:
         graph = dict()
 
@@ -9,23 +9,13 @@ class Solution:
         def solveGraph(a, b):
             # a > b > c, builds link a > c
             for c in list(graph[b]):
-                if c in graph[a] or c == a:
+                if c in graph[a]:
                     continue
 
                 value = graph[a][b] * graph[b][c]
                 graph[a][c] = value
                 graph[c][a] = 1 / value
                 solveGraph(a, c)
-
-            # b > a > c, builds link b > c
-            for c in list(graph[a]):
-                if c in graph[b] or c == b:
-                    continue
-
-                value = graph[a][c] * graph[b][a]
-                graph[b][c] = value
-                graph[c][b] = 1 / value
-                solveGraph(b, c)
 
         for index, (a, b) in enumerate(equations):
             if a not in graph:
@@ -38,20 +28,14 @@ class Solution:
 
         for a, b in equations:
             solveGraph(a, b)
+            solveGraph(b, a)
 
         answers = []
         for a, b in queries:
-            if a not in graph or b not in graph:
+            if a not in graph or b not in graph[a]:
                 answers.append(-1.0)
-                continue
-            elif a == b:
-                answers.append(1.0)
-                continue
-
-            if b in graph[a]:
-                answers.append(graph[a][b])
             else:
-                answers.append(-1.0)
+                answers.append(graph[a][b])
 
         return answers
 
