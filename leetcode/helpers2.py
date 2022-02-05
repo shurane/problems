@@ -1,10 +1,10 @@
-from typing import List, Generator
+from typing import Sequence, Optional, Any, Generator
 
 class TreeNode:
-    def __init__(self, x: int):
-        self.val = x
-        self.left = None
-        self.right = None
+    def __init__(self, x: Any):
+        self.val: Any = x
+        self.left: Optional[TreeNode] = None
+        self.right: Optional[TreeNode] = None
 
     def __repr__(self) -> str:
         return f"TreeNode({self.val})"
@@ -27,16 +27,20 @@ class TreeNode:
 
         return s
 
-    def binarySearchInsert(self, x: int) -> None:
-        if self.val == None:
-            self.val = x
+    def binarySearchInsert(self, x: Any) -> None:
         if x < self.val:
-            self.binarySearchInsert(self.left, x)
+            if self.left:
+                self.left.binarySearchInsert(x)
+            else:
+                self.left = TreeNode(x)
         else:
-            self.binarySearchInsert(self.right, x)
+            if self.right:
+                self.right.binarySearchInsert(x)
+            else:
+                self.right = TreeNode(x)
 
 # TODO this should be part of class Tree
-def create_tree(lst: List) -> TreeNode:
+def create_tree(lst: Sequence[Any]) -> Optional[TreeNode]:
     if len(lst) == 0:
         return None
 
@@ -54,12 +58,12 @@ def create_tree(lst: List) -> TreeNode:
             else:
                 q[parent].right = node
         else:
-            q.append(None)
+            q.append(TreeNode(None))
 
     return q[0]
 
 # TODO this should be part of class Tree
-def create_tree_recursive(lst: List, i: int = 0) -> TreeNode:
+def create_tree_recursive(lst: Sequence[Any], i: int = 0) -> Optional[TreeNode]:
     if not lst:
         return None
 
@@ -75,13 +79,13 @@ def create_tree_recursive(lst: List, i: int = 0) -> TreeNode:
 
     return node
 
-def height(self, root: TreeNode) -> int:
+def height(self, root: Optional[TreeNode]) -> int:
     if not root:
         return 0
     else:
         return 1 + max(self.height(root.left), self.height(root.right))
 
-def inorder(node: TreeNode) -> Generator[TreeNode, None, None]:
+def inorder(node: Optional[TreeNode]) -> Generator[TreeNode, None, None]:
     if not node:
         return
 
@@ -93,7 +97,7 @@ def inorder(node: TreeNode) -> Generator[TreeNode, None, None]:
     if node.right:
         yield from inorder(node.right)
 
-def preorder(node: TreeNode) -> Generator[TreeNode, None, None]:
+def preorder(node: Optional[TreeNode]) -> Generator[TreeNode, None, None]:
     if not node:
         return
     yield node
@@ -107,9 +111,9 @@ def preorder(node: TreeNode) -> Generator[TreeNode, None, None]:
 
 # Definition for singly-linked list.
 class ListNode:
-    def __init__(self, x: int):
-        self.val = x
-        self.next = None
+    def __init__(self, x: Any):
+        self.val: Any = x
+        self.next: Optional[ListNode] = None
 
     def __repr__(self) -> str:
         s = f"{self.val}"
@@ -144,7 +148,7 @@ class ListNode:
         return True
 
     @classmethod
-    def fromList(cls, lst: List):
+    def fromList(cls, lst: Sequence[Any]):
         head = ListNode(None)
         current = head
         for elem in lst:
@@ -154,7 +158,7 @@ class ListNode:
         return head.next
 
     @classmethod
-    def fromArgs(cls, *args):
+    def fromArgs(cls, *args: Any):
         return ListNode.fromList(args)
 
     @classmethod
@@ -178,7 +182,7 @@ assert ListNode.fromList([1,2,3])       != ListNode.fromList([1,2,3,4])
 assert ListNode.fromList([1,2,3,4])     != ListNode.fromList([1,2,3])
 assert ListNode.fromArgs(1,2,3)         == ListNode.fromList([1,2,3])
 
-def compareListOfLists(first: List[List[str]], second: List[List[str]]) -> bool:
+def compareListOfLists(first: Sequence[Sequence[Any]], second: Sequence[Sequence[Any]]) -> bool:
     if len(first) != len(second):
         return False
 
@@ -194,7 +198,7 @@ def compareListOfLists(first: List[List[str]], second: List[List[str]]) -> bool:
 
 assert compareListOfLists([], []) == True
 assert compareListOfLists([["a"]], []) == False
-assert compareListOfLists([["a"]], ["a"]) == True
+assert compareListOfLists([["a"]], [["a"]]) == True
 assert compareListOfLists([["a", "b"], ["c"]], [["c"], ["b", "a"]]) == True
 assert compareListOfLists([["a", "b"], ["c", "d"]], [["d", "c"], ["b", "a"]]) == True
 assert compareListOfLists([["a", "b"], ["c"]], [["d"], ["b", "a"]]) == False
