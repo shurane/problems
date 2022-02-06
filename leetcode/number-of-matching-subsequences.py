@@ -51,9 +51,12 @@ class Trie:
 
 s = Solution()
 
-assert s.numMatchingSubseq("abcde", ["a","bb","acd","ace"]) == 3
-assert s.numMatchingSubseq("dsahjpjauf", ["ahjpjau","ja","ahbwzgqnuk","tnmlanowax"]) == 2
-assert s.numMatchingSubseq("qlhxagxdqh", ["qlhxagxdq","qlhxagxdq","lhyiftwtut","yfzwraahab"]) == 2
+# assert s.numMatchingSubseq("abcde", ["a","bb","acd","ace"]) == 3
+# assert s.numMatchingSubseq("dsahjpjauf", ["ahjpjau","ja","ahbwzgqnuk","tnmlanowax"]) == 2
+# assert s.numMatchingSubseq("qlhxagxdqh", ["qlhxagxdq","qlhxagxdq","lhyiftwtut","yfzwraahab"]) == 2
+# assert s.numMatchingSubseq("a" * 20, ["a" * i for i in range(1,21)]) == 20
+assert s.numMatchingSubseq("a" * 50, ["a" * i for i in range(1,51)]) == 50
+# assert s.numMatchingSubseq("a" * 100, ["a" * i for i in range(1,101)]) == 100
 # s.numMatchingSubseq(
 # ("ricogwqznwxxcpueelcobbbkuvxxrvgyehsudccpsnuxpcqobtvwkuvsubiidjtccoqvuahijyefbpqhbejuisk" +
 #  "sutsowhufsygtwteiqyligsnbqglqblhpdzzeurtdohdcbjvzgjwylmmoiundjscnlhbrhookmioxqighkxfugp" +
