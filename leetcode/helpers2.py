@@ -1,7 +1,7 @@
 from typing import Sequence, Optional, Any, Generator
 
 class TreeNode:
-    def __init__(self, x: Any):
+    def __init__(self, x: Any = None):
         self.val: Any = x
         self.left: Optional[TreeNode] = None
         self.right: Optional[TreeNode] = None
