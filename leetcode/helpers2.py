@@ -108,6 +108,8 @@ def preorder(node: Optional[TreeNode]) -> Generator[TreeNode, None, None]:
 
 # TODO generate random tree from list
 # TODO generate random balanced tree of height h
+# TODO generate balanced BST from input
+# TODO generate tree diagram
 
 # Definition for singly-linked list.
 class ListNode:
