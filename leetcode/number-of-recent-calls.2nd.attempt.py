@@ -1,5 +1,4 @@
 class RecentCounter:
-
     def __init__(self):
         self.past = []
 
@@ -28,7 +27,6 @@ class RecentCounter:
 
     def ping3(self, t: int) -> int:
         # TODO implement LinkedList in tests.data.structures.py and use that in solution
-        pass
+        return 0
 
 # 5 minutes
-# TODO would it be faster to use a linked list?
