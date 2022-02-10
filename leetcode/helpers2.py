@@ -162,7 +162,7 @@ class ListNode:
         return ListNode.fromList(args)
 
     @classmethod
-    def reverseList(start, end):
+    def reverseList(cls, start, end):
         # TODO
         pass
 
