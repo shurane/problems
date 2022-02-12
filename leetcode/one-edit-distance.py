@@ -1,4 +1,5 @@
 class Solution:
+    # non DP approach
     # https://leetcode.com/problems/one-edit-distance/discuss/50190/JavaPython-two-pointer-solution
     def isOneEditDistance(self, s: str, t: str) -> bool:
         m = len(s)
