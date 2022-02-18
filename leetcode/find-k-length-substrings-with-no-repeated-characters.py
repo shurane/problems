@@ -18,10 +18,10 @@ class Solution:
 
                 m[prevLetter] -= 1
 
-                # k=4, 'aabc', > 'abcd', single a now (2 to 1)
+                # k=4, 'aabc', > 'abcd', single 'a' now (2 to 1)
                 if m[prevLetter] == 1:
                     match += 1
-                # k=4, 'abcd' > 'bcde', a gets evicted (1 to 0)
+                # k=4, 'abcd' > 'bcde', 'a' gets evicted (1 to 0)
                 elif m[prevLetter] == 0:
                     match -= 1
 
