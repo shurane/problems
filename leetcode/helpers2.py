@@ -1,3 +1,4 @@
+from __future__ import annotations
 from typing import Sequence, Optional, Any, Generator
 
 class TreeNode:
@@ -118,13 +119,7 @@ class ListNode:
         self.next: Optional[ListNode] = None
 
     def __repr__(self) -> str:
-        s = f"{self.val}"
-        c = self.next
-        while c:
-            s += f" -> {c.val}"
-            c = c.next
-
-        return s
+        return self.trail()
 
     def __iter__(self):
         current = self
@@ -149,6 +144,20 @@ class ListNode:
 
         return True
 
+    def trail(self, k: Optional[int] = None) -> str:
+        """
+        Returns string trail of k nodes after self. If k is None, returns all nodes.
+        """
+        i = 0
+        s = f"{self.val}"
+        c = self.next
+        while c:
+            if k is not None and i >= k: break
+            i += 1
+            s += f" -> {c.val}"
+            c = c.next
+        return s
+
     @classmethod
     def fromList(cls, lst: Sequence[Any]):
         head = ListNode(None)
@@ -168,22 +177,6 @@ class ListNode:
         # TODO
         pass
 
-t1_lst = [8,4,12,2,6,10,14,1,3,5,7,9,11,13,15]
-assert [t.val for t in inorder(create_tree(t1_lst))] == [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]
-assert [t.val for t in inorder(create_tree_recursive(t1_lst))] == [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]
-
-t2_lst = [8,4,12,2,6,10,14,1,None,5,None,9,None,13,None]
-assert [t.val for t in inorder(create_tree(t2_lst))] == [1,2,4,5,6,8,9,10,12,13,14]
-assert [t.val for t in inorder(create_tree_recursive(t2_lst))] == [1,2,4,5,6,8,9,10,12,13,14]
-
-## testing for listnode methods
-assert ListNode.fromList([1,2,3])       == ListNode.fromList([1,2,3])
-assert ListNode.fromList([])            != ListNode.fromList([1,2,3])
-assert ListNode.fromList([1,2,3])       != ListNode.fromList([])
-assert ListNode.fromList([1,2,3])       != ListNode.fromList([1,2,3,4])
-assert ListNode.fromList([1,2,3,4])     != ListNode.fromList([1,2,3])
-assert ListNode.fromArgs(1,2,3)         == ListNode.fromList([1,2,3])
-
 def compareListOfLists(first: Sequence[Sequence[Any]], second: Sequence[Sequence[Any]]) -> bool:
     if len(first) != len(second):
         return False
@@ -198,9 +191,38 @@ def compareListOfLists(first: Sequence[Sequence[Any]], second: Sequence[Sequence
 
     return True
 
-assert compareListOfLists([], []) == True
-assert compareListOfLists([["a"]], []) == False
-assert compareListOfLists([["a"]], [["a"]]) == True
-assert compareListOfLists([["a", "b"], ["c"]], [["c"], ["b", "a"]]) == True
-assert compareListOfLists([["a", "b"], ["c", "d"]], [["d", "c"], ["b", "a"]]) == True
-assert compareListOfLists([["a", "b"], ["c"]], [["d"], ["b", "a"]]) == False
+if __name__ == "__main__":
+    t1_lst = [8,4,12,2,6,10,14,1,3,5,7,9,11,13,15]
+    assert [t.val for t in inorder(create_tree(t1_lst))] == [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]
+    assert [t.val for t in inorder(create_tree_recursive(t1_lst))] == [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]
+
+    t2_lst = [8,4,12,2,6,10,14,1,None,5,None,9,None,13,None]
+    assert [t.val for t in inorder(create_tree(t2_lst))] == [1,2,4,5,6,8,9,10,12,13,14]
+    assert [t.val for t in inorder(create_tree_recursive(t2_lst))] == [1,2,4,5,6,8,9,10,12,13,14]
+
+    ## testing for listnode methods
+    assert ListNode.fromList([1,2,3])       == ListNode.fromList([1,2,3])
+    assert ListNode.fromList([])            != ListNode.fromList([1,2,3])
+    assert ListNode.fromList([1,2,3])       != ListNode.fromList([])
+    assert ListNode.fromList([1,2,3])       != ListNode.fromList([1,2,3,4])
+    assert ListNode.fromList([1,2,3,4])     != ListNode.fromList([1,2,3])
+    assert ListNode.fromArgs(1,2,3)         == ListNode.fromList([1,2,3])
+
+    assert compareListOfLists([], []) == True
+    assert compareListOfLists([["a"]], []) == False
+    assert compareListOfLists([["a"]], [["a"]]) == True
+    assert compareListOfLists([["a", "b"], ["c"]], [["c"], ["b", "a"]]) == True
+    assert compareListOfLists([["a", "b"], ["c", "d"]], [["d", "c"], ["b", "a"]]) == True
+    assert compareListOfLists([["a", "b"], ["c"]], [["d"], ["b", "a"]]) == False
+
+    trail = ListNode.fromList([1,2,3,4,5])
+    assert repr(trail) == "1 -> 2 -> 3 -> 4 -> 5"
+    if trail:
+        assert trail.trail() == "1 -> 2 -> 3 -> 4 -> 5"
+        assert trail.trail(0) == "1"
+        assert trail.trail(1) == "1 -> 2"
+        assert trail.trail(2) == "1 -> 2 -> 3"
+        assert trail.trail(3) == "1 -> 2 -> 3 -> 4"
+        assert trail.trail(4) == "1 -> 2 -> 3 -> 4 -> 5"
+        assert trail.trail(5) == "1 -> 2 -> 3 -> 4 -> 5"
+        assert trail.trail(100) == "1 -> 2 -> 3 -> 4 -> 5"
