@@ -36,6 +36,6 @@ cases = [([-10,-5,0,3,7], 3),
          ([-10,-5,3,4,7,9], -1),
          ([-10,-5,-2,0,4,5,6,7,8,9,10], 4)]
 
-for array, expected in cases:
-    assert s.fixedPointLinear(array) == expected
-    assert s.fixedPoint(array) == expected
+for case, expected in cases:
+    assert s.fixedPointLinear(case) == expected
+    assert s.fixedPoint(case) == expected
