@@ -82,6 +82,29 @@ class Solution:
 
         return max(skip, take)
 
+    def deleteAndEarnOverArray(self, nums: List[int]) -> int:
+        points = [0 for _ in range(10001)]
+        minimum = nums[0]
+        maximum = nums[0]
+        for num in nums:
+            points[num] += num
+            minimum = min(minimum, num)
+            maximum = max(maximum, num)
+
+        skip = 0
+        take = points[minimum]
+
+        for i in range(minimum+1, maximum+1):
+
+            if points[i-1] != 0:
+                temp = take
+                take = skip + points[i]
+                skip = max(skip, temp)
+            else:
+                skip = max(skip, take)
+                take = skip + points[i]
+
+        return max(skip, take)
 
 s = Solution()
 cases = [([1], 1),
@@ -90,10 +113,10 @@ cases = [([1], 1),
          ([2,2,2,2,3,3,4,4], 16),
          ([2,2,3,3,3,4], 9),
          ([8,7,3,8,1,4,10,10,10,2], 52),
-         # ([10,8,4,2,1,3,4,8,2,9,10,4,8,5,9,1,5,1,6,8,1,1,6,7,8,9,1,7,6,8,4,5,4,1,5,9,8,6,10,6,4,3,8,4,10,8,8,10,6,4,4,4,9,6,9,10,7,1,5,3,4,4,8,1,1,2,1,4,1,1,4,9,4,7,1,5,1,10,3,5,10,3,10,2,1,10,4,1,1,4,1,2,10,9,7,10,1,2,7,5], 338)]
-         ]
+         ([10,8,4,2,1,3,4,8,2,9,10,4,8,5,9,1,5,1,6,8,1,1,6,7,8,9,1,7,6,8,4,5,4,1,5,9,8,6,10,6,4,3,8,4,10,8,8,10,6,4,4,4,9,6,9,10,7,1,5,3,4,4,8,1,1,2,1,4,1,1,4,9,4,7,1,5,1,10,3,5,10,3,10,2,1,10,4,1,1,4,1,2,10,9,7,10,1,2,7,5], 338)]
 
 for case, expected in cases:
     assert s.deleteAndEarnFirstAttempt(case) == expected
     assert s.deleteAndEarnBetter(case) == expected
     assert s.deleteAndEarnBest(case) == expected
+    assert s.deleteAndEarnOverArray(case) == expected
