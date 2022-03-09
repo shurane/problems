@@ -114,9 +114,9 @@ def preorder(node: Optional[TreeNode]) -> Generator[TreeNode, None, None]:
 
 # Definition for singly-linked list.
 class ListNode:
-    def __init__(self, x: Any):
+    def __init__(self, x: Any, next: Optional[ListNode] =None):
         self.val: Any = x
-        self.next: Optional[ListNode] = None
+        self.next: Optional[ListNode] =next
 
     def __repr__(self) -> str:
         return self.trail()
