@@ -144,6 +144,10 @@ class ListNode:
 
         return True
 
+    def __hash__(self):
+        """ See https://stackoverflow.com/questions/2909106/whats-a-correct-and-good-way-to-implement-hash """
+        return hash(self.val)
+
     def trail(self, k: Optional[int] = None) -> str:
         """
         Returns string trail of k nodes after self. If k is None, returns all nodes.
