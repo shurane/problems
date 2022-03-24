@@ -148,17 +148,19 @@ class ListNode:
         """ See https://stackoverflow.com/questions/2909106/whats-a-correct-and-good-way-to-implement-hash """
         return hash(self.val)
 
-    def trail(self, k: Optional[int] = None) -> str:
+    def trail(self, k: Optional[int] = None, pad: int = 0) -> str:
         """
         Returns string trail of k nodes after self. If k is None, returns all nodes.
         """
         i = 0
-        s = f"{self.val}"
+        # s = f"{self.val:pad}"
+        s = str(self.val).rjust(pad, " ")
         c = self.next
         while c:
             if k is not None and i >= k: break
             i += 1
-            s += f" -> {c.val}"
+            # s += f" -> {c.val:pad}"
+            s += " -> " + str(c.val).rjust(pad, " ")
             c = c.next
         return s
 
