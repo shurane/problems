@@ -1,5 +1,4 @@
 from typing import List
-import heapq
 
 class Solution:
     def twoCitySchedCost(self, costs: List[List[int]]) -> int:
@@ -32,43 +31,6 @@ class Solution:
 
         return total
 
-    # def twoCitySchedCostHeap(self, costs: List[List[int]]) -> int:
-        # acount = bcount = len(costs) // 2
-        # A = []
-        # B = []
-        # visited =  [False] * len(costs)
-        # for i, cost in enumerate(costs):
-            # heapq.heappush(A, (cost[0], i))
-            # heapq.heappush(B, (cost[1], i))
-
-        # total = 0
-        # while acount > 0 or bcount > 0:
-            # print("total", total, "acount", acount, "bcount", bcount, "A", A, "B", B)
-            # cost, i = None, None
-            # if acount > 0 and A[0][0] < B[0][0]:
-                # acount -= 1
-                # cost, i = heapq.heappop(A)
-            # elif bcount > 0 and B[0][0] < A[0][0]:
-                # bcount -= 1
-                # cost, i = heapq.heappop(B)
-            # else:
-                # if acount > 0:
-                    # acount -= 1
-                    # cost, i = heapq.heappop(A)
-                # else:
-                    # bcount -= 1
-                    # cost, i = heapq.heappop(B)
-
-            # visited[i] = True
-            # total += cost
-
-            # while A and visited[A[0][1]] == True: heapq.heappop(A)
-            # while B and visited[B[0][1]] == True: heapq.heappop(B)
-
-        # print("acount", acount, "bcount", bcount)
-
-        # return total
-
 s = Solution()
 
 testcases = [[[[1,9],[1,9],[1,9],[1,9]], 20],
@@ -83,6 +45,4 @@ testcases = [[[[1,9],[1,9],[1,9],[1,9]], 20],
 for costs, expected in testcases:
     assert s.twoCitySchedCost(costs) == expected
     assert s.twoCitySchedCostShorter(costs) == expected
-    # print(s.twoCitySchedCostHeap(costs), expected)
-    # assert s.twoCitySchedCostHeap(costs) == expected
 
