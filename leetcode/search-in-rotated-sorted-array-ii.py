@@ -9,21 +9,16 @@ class Solution:
             mid = (lo + hi) // 2
 
             if nums[mid] == target or nums[lo] == target or nums[hi] == target:
-            # if nums[mid] == target:
                 return True
             elif nums[lo] < nums[mid]:
-                # if nums[lo] <= target < nums[mid]:
                 if nums[lo] < target < nums[mid]:
-                    # hi = mid
                     hi = mid - 1
                 else:
                     lo = mid + 1
             elif nums[mid] < nums[lo]:
-                # if nums[mid] < target <= nums[hi]:
                 if nums[mid] < target < nums[hi]:
                     lo = mid + 1
                 else:
-                    # hi = mid
                     hi = mid - 1
             else:
                 lo += 1
