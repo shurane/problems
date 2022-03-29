@@ -4,6 +4,31 @@ class Solution:
     def search(self, nums: List[int], target: int) -> bool:
         lo = 0
         hi = len(nums) - 1
+
+        while lo <= hi:
+            mid = (lo + hi) // 2
+
+            # if nums[mid] == target or nums[lo] == target or nums[hi] == target:
+            if nums[mid] == target:
+                return True
+            elif nums[lo] < nums[mid]:
+                if nums[lo] <= target < nums[mid]:
+                    hi = mid
+                else:
+                    lo = mid + 1
+            elif nums[mid] < nums[lo]:
+                if nums[mid] < target <= nums[hi]:
+                    lo = mid + 1
+                else:
+                    hi = mid
+            else:
+                lo += 1
+
+        return False
+
+    def searchSlow(self, nums: List[int], target: int) -> bool:
+        lo = 0
+        hi = len(nums) - 1
         pivot = 0
         mid = -1
 
@@ -57,12 +82,15 @@ assert s.search([2,5,6,0,0,1,2], 0) == True
 assert s.search([2,5,6,0,0,1,2], 3) == False
 assert s.search([1,0,1,1,1], 0) == True
 
-n = 64
+n = 32
 
 l1 = [0 for _ in range(n)]
 assert s.search(l1, 0) == True
 assert s.search(l1, -1) == False
 assert s.search(l1, 1) == False
+assert s.searchSlow(l1, 0) == True
+assert s.searchSlow(l1, -1) == False
+assert s.searchSlow(l1, 1) == False
 
 l2 = []
 for i in range(n): l2.extend([i,i])
@@ -72,16 +100,35 @@ for i in range(n*2):
 
     assert s.search(newl, -1) == False
     assert s.search(newl, n) == False
+    assert s.searchSlow(newl, -1) == False
+    assert s.searchSlow(newl, n) == False
     for target in range(n):
         # print(target, newl)
         assert s.search(newl, target) == True
+        assert s.searchSlow(newl, target) == True
 
 l3 = [0]
 for i in range(n): l3.extend([i] * i)
+
 for i in range(len(l3)):
     newl = l3[i:] + l3[:i]
     assert s.search(newl, -1) == False
     assert s.search(newl, n) == False
+    assert s.searchSlow(newl, -1) == False
+    assert s.searchSlow(newl, n) == False
     for target in range(n):
         # print(target, newl)
         assert s.search(newl, target) == True
+        assert s.searchSlow(newl, target) == True
+
+for i in range(n):
+    newl = [1] * n
+    newl[i] = 0
+    assert s.search(newl, 0) == True
+    assert s.searchSlow(newl, 0) == True
+
+for i in range(n):
+    newl = [0] * n
+    newl[i] = 1
+    assert s.search(newl, 1) == True
+    assert s.searchSlow(newl, 1) == True
