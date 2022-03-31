@@ -19,30 +19,6 @@ class Solution:
                 return n - max(countA[i], countB[i])
         return -1
 
-    def minDominoRotationsWrong(self, tops: List[int], bottoms: List[int]) -> int:
-        t = tops[0]
-        b = bottoms[0]
-
-        rotations = 0
-
-        for i in range(1, len(tops)):
-            print(i, t, b)
-            if tops[i] == t or bottoms[i] == b:
-                if bottoms[i] != b and tops[i] == t and tops[i] != b:
-                    b = 0
-                elif tops[i] != t and bottoms[i] == b and bottoms[i] != t:
-                    t = 0
-            elif tops[i] == b or bottoms[i] == t:
-                if bottoms[i] != t and tops[i] == b and tops[i] != t:
-                    t = 0
-                elif tops[i] != b and bottoms[i] == t and bottoms[i] != b:
-                    b = 0
-                rotations += 1
-            else:
-                return -1
-
-        return min(rotations, len(tops) - rotations)
-
 s = Solution()
 
 assert s.minDominoRotations([1,1], [2,2]) == 0
