@@ -8,26 +8,23 @@ using namespace std;
 class Solution {
 public:
     void nextPermutation(vector<int>& nums) {
-        int k=0;
+        int k=-1;
         for(int i=0; i+1 < nums.size(); i++){
             if (nums[i] < nums[i+1]){
                 k = i;
             }
         }
 
-        int best = k;
-        for (int i=k; i < nums.size(); i++){
-            if (nums[i] > nums[k]){
-                best = i;
+        if (k != -1){
+            int best = k+1;
+            for (int i=k+1; i < nums.size(); i++){
+                if (nums[i] > nums[k]){
+                    best = i;
+                }
             }
-        }
-        if (best != k){
             swap(nums[k], nums[best]);
-            reverse(nums.begin() + k + 1, nums.end());
         }
-        else {
-            reverse(nums.begin(), nums.end());
-        }
+        reverse(nums.begin()+k+1, nums.end());
     }
 };
 
