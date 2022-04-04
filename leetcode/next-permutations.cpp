@@ -66,7 +66,7 @@ int main()
         int inext = (i + 1) % v.size();
         s.nextPermutation(c);
         //cout << v[i] << " | " << c << endl;
-        assert (c == v[inext]);
+        assert(c == v[inext]);
     }
 }
 

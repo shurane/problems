@@ -67,8 +67,8 @@ int main()
         //cout << testcase.first << " " << testcase.second << endl;
         assert(s.expand(testcase.first) == testcase.second);
     }
-    assert (s.expand("{a,b,c,d}{e,f,g,h},{i,j,k,l}").size() == 64);
-    assert (s.expand("{a,b,c,d}{e,f,g,h},{i,j,k,l}{m,n,o,p}").size() == 256);
-    assert (s.expand("{a,b,c,d}{e,f,g,h},{i,j,k,l}{m,n,o,p}{q,r,s,t}").size() == 1024);
-    assert (s.expand("{a,b,c,d}{e,f,g,h},{i,j,k,l}{m,n,o,p}{q,r,s,t}{u,v,x,y}").size() == 4096);
+    assert(s.expand("{a,b,c,d}{e,f,g,h},{i,j,k,l}").size() == 64);
+    assert(s.expand("{a,b,c,d}{e,f,g,h},{i,j,k,l}{m,n,o,p}").size() == 256);
+    assert(s.expand("{a,b,c,d}{e,f,g,h},{i,j,k,l}{m,n,o,p}{q,r,s,t}").size() == 1024);
+    assert(s.expand("{a,b,c,d}{e,f,g,h},{i,j,k,l}{m,n,o,p}{q,r,s,t}{u,v,x,y}").size() == 4096);
 }
