@@ -11,7 +11,7 @@ public:
     vector<string> expand(string s) {
         vector<string> results = {""};
 
-        int i=0;
+        size_t i=0;
         while (i < s.size()){
             //cout << i << " " << results << endl;
             if (s[i] != '{'){
