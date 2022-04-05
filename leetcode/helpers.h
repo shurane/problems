@@ -56,6 +56,7 @@ static bool operator==(ListNode &lhs, ListNode &rhs)
 static bool operator!=(ListNode &lhs, ListNode &rhs) { return !(lhs == rhs); }
 
 // should I investigate constraints and concepts... https://en.cppreference.com/w/cpp/language/constraints
+// or using iterator traits: https://stackoverflow.com/questions/20244743/pass-iterator-as-a-function-parameter
 // https://stackoverflow.com/questions/53252321/how-to-write-a-function-that-can-take-in-an-array-or-a-vector
 template<class Iterable>
 ListNode* toList(Iterable a, Iterable b)
