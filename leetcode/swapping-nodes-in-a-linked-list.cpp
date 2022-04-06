@@ -55,6 +55,4 @@ int main()
         deleteList(l1);
         deleteList(l2);
     }
-    // TODO need to be able to copy and compare swapped values
-    //  with values of k between 1-10
 }
