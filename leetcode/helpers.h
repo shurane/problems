@@ -16,7 +16,7 @@ std::ostream& operator<< (std::ostream& out, const std::vector<T>& v)
     return out;
 }
 
-// TODO ListNode helpers and testcases
+// TODO ListNode helpers
 struct ListNode
 {
     int val;
