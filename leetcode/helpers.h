@@ -16,7 +16,7 @@ std::ostream& operator<< (std::ostream& out, const std::vector<T>& v)
     return out;
 }
 
-// TODO ListNode helpers
+// TODO ListNode helpers, see helpers2.py for reference
 struct ListNode
 {
     int val;
@@ -55,6 +55,7 @@ static bool operator==(ListNode &lhs, ListNode &rhs)
 }
 static bool operator!=(ListNode &lhs, ListNode &rhs) { return !(lhs == rhs); }
 
+// is this a situation to use unique_ptr?
 // should I investigate constraints and concepts... https://en.cppreference.com/w/cpp/language/constraints
 // or using iterator traits: https://stackoverflow.com/questions/20244743/pass-iterator-as-a-function-parameter
 // https://stackoverflow.com/questions/53252321/how-to-write-a-function-that-can-take-in-an-array-or-a-vector
