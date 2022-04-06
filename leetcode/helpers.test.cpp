@@ -33,4 +33,10 @@ int main()
     assert(*lst2 != *lst1);
     assert(*lst1 != *lst3);
     assert(*lst3 == *lst3copy);
+
+    deleteList(lst1);
+    deleteList(lst1copy);
+    deleteList(lst2);
+    deleteList(lst3);
+    deleteList(lst3copy);
 }

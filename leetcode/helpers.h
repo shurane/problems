@@ -79,3 +79,13 @@ ListNode* toList(const T& container)
 {
     return toList(std::begin(container), std::end(container));
 }
+
+static void deleteList(ListNode* head)
+{
+    ListNode* curr = head;
+    while(curr != nullptr) {
+        ListNode* next = curr->next;
+        delete curr;
+        curr = next;
+    }
+}
