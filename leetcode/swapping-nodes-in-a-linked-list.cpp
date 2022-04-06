@@ -1,6 +1,6 @@
-#include "helpers.h"
 #include <vector>
 #include <assert.h>
+#include "helpers.h"
 using namespace std;
 
 class Solution {
