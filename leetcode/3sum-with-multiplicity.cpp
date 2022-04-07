@@ -1,6 +1,7 @@
 #include <tuple>
 #include <vector>
 #include <map>
+#include <unordered_map>
 #include <assert.h>
 #include "helpers.h"
 using namespace std;
@@ -53,6 +54,22 @@ public:
         }
         return res % mod;
     }
+    // https://leetcode.com/problems/3sum-with-multiplicity/discuss/1918457/C%2B%2B-Simplest-Solution-or-W-Easy-Explanation-or-Intuitive
+    int threeSumMulti2(vector<int>& arr, int target) {
+        int n = arr.size();
+        int mod = 1e9+7;
+        int ans = 0;
+        unordered_map<int, int> m;
+
+        for (int i=0; i<n; i++){
+            ans = (ans + m[target - arr[i]]) % mod;
+
+            for (int j=0; j<i; j++){
+                m[arr[i] + arr[j]]++;
+            }
+        }
+        return ans % mod;
+    }
 };
 
 int main()
@@ -73,8 +90,7 @@ int main()
     for (auto testcase: testcases){
         auto & [arr, target, expected] = testcase;
 
-        int result = s.threeSumMulti(arr, target);
-        //cout << arr.size() << " " << target << " | " << result << " " << expected << endl;
-        assert(result == expected);
+        assert(s.threeSumMulti(arr, target) == expected);
+        assert(s.threeSumMulti2(arr, target) == expected);
     }
 }
