@@ -11,10 +11,8 @@ public:
             q.push(stone);
         }
         while (q.size() > 1){
-            int first = q.top();
-            q.pop();
-            int second = q.top();
-            q.pop();
+            int first = q.top(); q.pop();
+            int second = q.top(); q.pop();
             if (first - second > 0){
                 q.push(first - second);
             }
