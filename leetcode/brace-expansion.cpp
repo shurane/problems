@@ -64,8 +64,9 @@ int main()
         {"{b,a}c{e,d}f", {"acdf","acef","bcdf","bcef"}},
     };
     for (auto testcase: testcases){
-        //cout << testcase.first << " " << testcase.second << endl;
-        assert(s.expand(testcase.first) == testcase.second);
+        auto & [str, expected] = testcase;
+        //cout << str << " " << expected << endl;
+        assert(s.expand(str) == expected);
     }
     assert(s.expand("{a,b,c,d}{e,f,g,h},{i,j,k,l}").size() == 64);
     assert(s.expand("{a,b,c,d}{e,f,g,h},{i,j,k,l}{m,n,o,p}").size() == 256);
