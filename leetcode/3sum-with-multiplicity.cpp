@@ -33,7 +33,6 @@ public:
                     long times = m[i] * m[j] * m[k];
                     //cout << "match " << i << " " << j << " " << k << " times: " << times << endl;
                     res += times;
-                    res = res % mod;
                 }
             }
 
@@ -43,7 +42,6 @@ public:
                 long times =  choose(m[i], 2) * m[j];
                 //cout << "match " << i << " " << i << " " << j << " times: " << times << endl;
                 res += times;
-                res = res % mod;
             }
         }
 
@@ -52,9 +50,8 @@ public:
             long times = choose(m[target/3], 3);
             //cout << "match " << target/3 << " " << target/3 << " " << target/3 << " times: " << times << endl;
             res += times;
-            res = res % mod;
         }
-        return res;
+        return res % mod;
     }
 };
 
@@ -77,7 +74,7 @@ int main()
         auto & [arr, target, expected] = testcase;
 
         int result = s.threeSumMulti(arr, target);
-        cout << arr.size() << " " << target << " | " << result << " " << expected << endl;
+        //cout << arr.size() << " " << target << " | " << result << " " << expected << endl;
         assert(result == expected);
     }
 }
