@@ -24,6 +24,7 @@ struct ListNode
     ListNode() : val(0), next(nullptr) {}
     ListNode(int x) : val(x), next(nullptr) {}
     ListNode(int x, ListNode *next) : val(x), next(next) {}
+    ~ListNode(){ if (next) delete next; }
 };
 
 static std::ostream& operator<< (std::ostream& out, const ListNode *l)
@@ -62,15 +63,15 @@ static bool operator!=(ListNode &lhs, ListNode &rhs) { return !(lhs == rhs); }
 template<class Iterable>
 ListNode* toList(Iterable a, Iterable b)
 {
-    ListNode *dummy = new ListNode();
-    ListNode *curr = dummy;
+    ListNode dummy = ListNode();
+    ListNode *curr = &dummy;
     while (a != b){
         curr->next = new ListNode(*a);
         curr = curr->next;
         a++;
     }
-    curr = dummy->next;
-    delete dummy;
+    curr = dummy.next;
+    dummy.next = nullptr;
     return curr;
 }
 
@@ -78,14 +79,4 @@ template<class T>
 ListNode* toList(const T& container)
 {
     return toList(std::begin(container), std::end(container));
-}
-
-static void deleteList(ListNode* head)
-{
-    ListNode* curr = head;
-    while(curr != nullptr) {
-        ListNode* next = curr->next;
-        delete curr;
-        curr = next;
-    }
 }

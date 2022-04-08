@@ -1,5 +1,6 @@
 #include <vector>
 #include <sstream>
+#include <memory>
 #include <assert.h>
 #include "helpers.h"
 
@@ -34,9 +35,9 @@ int main()
     assert(*lst1 != *lst3);
     assert(*lst3 == *lst3copy);
 
-    deleteList(lst1);
-    deleteList(lst1copy);
-    deleteList(lst2);
-    deleteList(lst3);
-    deleteList(lst3copy);
+    delete lst1;
+    delete lst1copy;
+    delete lst2;
+    delete lst3;
+    delete lst3copy;
 }

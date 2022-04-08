@@ -52,7 +52,7 @@ int main()
         ListNode *l2 = toList(expected);
         s.swapNodes(l1, i);
         assert(*l1 == *l2);
-        deleteList(l1);
-        deleteList(l2);
+        delete l1;
+        delete l2;
     }
 }
