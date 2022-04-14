@@ -70,6 +70,31 @@ public:
         }
         return ans % mod;
     }
+    // https://leetcode.com/problems/3sum-with-multiplicity/discuss/181131/C%2B%2BJavaPython-O(N-%2B-101-*-101)
+    // It's O(101 * 101) because there are only 101 possible values in arr, from [0, 100]
+    // similar to my solution, but doesn't worry about iterators or using a 'triangular' loop instead of a 'square' loop
+    int threeSumMulti3(vector<int>& arr, int target) {
+        unordered_map<int, long> c;
+        for (int i: arr)
+            c[i]++;
+
+        long res = 0;
+        for (auto it: c){
+            for (auto it2: c){
+                int i = it.first;
+                int j = it2.first;
+                int k = target - i - j;
+                if (!c.count(k)) continue;
+                if (i == j && j == k)
+                    res += c[i] * (c[i] - 1) * (c[i] - 2) / 6; // n choose 3?
+                else if (i == j && j != k)
+                    res += c[i] * (c[i] - 1) / 2 * c[k];
+                else if (i < j && j < k)
+                    res += c[i] * c[j] * c[k];
+            }
+        }
+        return res % int(1e9+7);
+    }
 };
 
 int main()
@@ -92,5 +117,6 @@ int main()
 
         assert(s.threeSumMulti(arr, target) == expected);
         assert(s.threeSumMulti2(arr, target) == expected);
+        assert(s.threeSumMulti3(arr, target) == expected);
     }
 }
