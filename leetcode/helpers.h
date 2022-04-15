@@ -27,6 +27,8 @@ struct ListNode
     ~ListNode(){ if (next) delete next; }
 };
 
+// TODO TreeNode helpers
+
 static std::ostream& operator<< (std::ostream& out, const ListNode *l)
 {
     out << "{";
