@@ -29,6 +29,7 @@ void printMatrix(std::ostream& out, vector<vector<int>>& matrix, string message 
 
 class Solution {
 public:
+    // even shorter solution to look at: https://leetcode.com/problems/set-matrix-zeroes/discuss/26014/Any-shorter-O(1)-space-solution
     void setZeroes(vector<vector<int>>& matrix) {
         int m = matrix.size();
         int n = matrix[0].size();
