@@ -1,7 +1,6 @@
 class MyCircularQueue:
-
     def __init__(self, k: int):
-        self.q = [0 for i in range(k)]
+        self.q = [0 for _ in range(k)]
         self.k = k
         self.count = 0
         self.front = 0
@@ -26,7 +25,6 @@ class MyCircularQueue:
             self.count -= 1
 
         if self.count == 0:
-            # self.q[self.front] = 0
             self.front = 0
             self.rear = -1
 
