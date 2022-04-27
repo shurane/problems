@@ -1,53 +1,44 @@
 class MyCircularQueue:
 
     def __init__(self, k: int):
-        self.q = [None for i in range(k)]
+        self.q = [0 for i in range(k)]
         self.k = k
         self.count = 0
-        self.front = -1
+        self.front = 0
         self.rear = -1
-
 
     def enQueue(self, value: int) -> bool:
         # print("enqueue", f"{self.count:3}, {self.front:3}, {self.rear:3}", f"enqueing {value:3} at {self.rear:3}", self.q)
         if self.count == self.k:
             return False
-        elif self.count == 0:
-            self.q[0] = value
-            self.front = 0
-            self.rear = 0
-            self.count += 1
-        elif self.count < self.k:
-            rearNextPos = (self.rear + 1) % self.k
-            self.q[rearNextPos] = value
-            self.rear = rearNextPos
+        else:
+            self.rear = (self.rear + 1) % self.k
+            self.q[self.rear] = value
             self.count += 1
         return True
-
 
     def deQueue(self) -> bool:
         # print("dequeue", f"{self.count:3}, {self.front:3}, {self.rear:3}", f"dequeing     at {self.front:3}", self.q)
         if self.count == 0:
             return False
-        elif self.count == 1:
-            self.q[self.front] = None
-            self.front = -1
-            self.rear = -1
-            self.count -= 1
         else:
-            self.q[self.front] = None
-            frontNextPos = (self.front + 1) % self.k
-            self.front = frontNextPos
+            self.front = (self.front + 1) % self.k
             self.count -= 1
+
+        if self.count == 0:
+            # self.q[self.front] = 0
+            self.front = 0
+            self.rear = -1
+
         return True
 
     def Front(self) -> int:
-        if self.front == -1:
+        if self.count == 0:
             return -1
         return self.q[self.front]
 
     def Rear(self) -> int:
-        if self.rear == -1:
+        if self.count == 0:
             return -1
         return self.q[self.rear]
 
@@ -98,8 +89,6 @@ for i in range(2):
 
 assert obj.deQueue() == True
 assert obj.deQueue() == False
-
-print("later tests")
 
 obj.enQueue(100)
 
