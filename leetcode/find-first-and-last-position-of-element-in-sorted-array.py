@@ -1,4 +1,5 @@
 from typing import List
+from helpers2 import Color as C
 
 class Solution:
     def searchRange(self, nums: List[int], target: int) -> List[int]:
@@ -44,27 +45,16 @@ assert s.searchRange(l1, 2) == [1, 998]
 assert s.searchRange(l2, 2) == [20,39]
 assert s.searchRange(l3, 2) == [50,59]
 
-# https://www.lihaoyi.com/post/BuildyourownCommandLinewithANSIescapecodes.html
-BLACK   = "\u001b[30m"
-RED     = "\u001b[31m"
-GREEN   = "\u001b[32m"
-YELLOW  = "\u001b[33m"
-BLUE    = "\u001b[34m"
-MAGENTA = "\u001b[35m"
-CYAN    = "\u001b[36m"
-WHITE   = "\u001b[37m"
-RESET   = "\u001b[0m"
-
 def coloredlist(lst, target):
     s = "["
     for i, elem in enumerate(lst):
         if elem < target:
-            s += YELLOW
+            s += C.YELLOW
         elif elem > target:
-            s += MAGENTA
+            s += C.MAGENTA
         else:
-            s += GREEN
-        s += f"{elem}{RESET}"
+            s += C.GREEN
+        s += f"{elem}{C.RESET}"
 
         if i != len(lst) - 1:
             s += ", "

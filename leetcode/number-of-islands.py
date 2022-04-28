@@ -6,7 +6,7 @@ class Solution:
             stack = [(y, x)]
             while stack:
                 i, j = stack.pop()
-                grid[i][j] = None
+                grid[i][j] = ""
                 for ni, nj in [(1,0), (-1,0), (0,1),(0,-1)]:
                     if 0 <= i + ni < m and 0 <= j + nj < n and grid[ni + i][nj + j] == "1":
                         stack.append((i + ni, j  + nj))
@@ -49,22 +49,11 @@ class Solution:
 #         print(*(" ".join([c(i) for i in row]) for row in grid), sep="\n")
 
 
-# # https://www.lihaoyi.com/post/BuildyourownCommandLinewithANSIescapecodes.html
-# BLACK   = "\u001b[30m"
-# RED     = "\u001b[31m"
-# B_RED   = "\u001b[91m"
-# GREEN   = "\u001b[32m"
-# YELLOW  = "\u001b[33m"
-# BLUE    = "\u001b[34m"
-# MAGENTA = "\u001b[35m"
-# CYAN    = "\u001b[36m"
-# WHITE   = "\u001b[37m"
-# RESET   = "\u001b[0m"
-
+# from helpers2 import Color as C
 # def c(i):
 #     if int(i) == 0: return f"{int(i):2}"
-#     elif int(i) == 1: return f"{RED}{int(i):2}{RESET}"
-#     else: return f"{BLUE}{i:2}{RESET}"
+#     elif int(i) == 1: return f"{C.RED}{int(i):2}{C.RESET}"
+#     else: return f"{C.BLUE}{i:2}{C.RESET}"
 
 def to_s(grid: List[List[int]]) -> List[List[str]]:
     return [[str(x) for x in row] for row in grid]

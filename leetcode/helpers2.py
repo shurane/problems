@@ -1,6 +1,19 @@
 from __future__ import annotations
 from typing import Sequence, Optional, Any, Generator
 
+# https://www.lihaoyi.com/post/BuildyourownCommandLinewithANSIescapecodes.html
+class Color:
+    BLACK   = "\u001b[30m"
+    RED     = "\u001b[31m"
+    B_RED   = "\u001b[91m"
+    GREEN   = "\u001b[32m"
+    YELLOW  = "\u001b[33m"
+    BLUE    = "\u001b[34m"
+    MAGENTA = "\u001b[35m"
+    CYAN    = "\u001b[36m"
+    WHITE   = "\u001b[37m"
+    RESET   = "\u001b[0m"
+
 class TreeNode:
     def __init__(self, x: Any = None):
         self.val: Any = x
