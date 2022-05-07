@@ -63,8 +63,7 @@ int main()
         {"{a,b}c{d,e}f", {"acdf","acef","bcdf","bcef"}},
         {"{b,a}c{e,d}f", {"acdf","acef","bcdf","bcef"}},
     };
-    for (auto testcase: testcases){
-        auto & [str, expected] = testcase;
+    for (auto & [str, expected]: testcases){
         //cout << str << " " << expected << endl;
         assert(s.expand(str) == expected);
     }
