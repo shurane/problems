@@ -1,4 +1,5 @@
 *.pyc
 *.elf
+*.exe
 a.out
 .vscode/
