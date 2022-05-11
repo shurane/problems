@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <utility>
 
 // https://stackoverflow.com/a/23397700/198348
 template<typename T>
@@ -14,6 +15,13 @@ std::ostream& operator<< (std::ostream& out, const std::vector<T>& v)
     }
     out << "}";
     return out;
+}
+
+// https://stackoverflow.com/a/16956609/198348
+template<typename T, typename U>
+std::ostream& operator<<(std::ostream& o, const std::pair<T,U>& p)
+{
+  return o << "{" << p.first << ", " << p.second << "}";
 }
 
 // TODO ListNode helpers, see helpers2.py for reference
