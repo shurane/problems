@@ -12,8 +12,6 @@ public:
         while (i < n) {
             if (nums[i] < 1 || nums[i] >= n){
                 i++;
-            } else if (nums[i] == i){
-                i++;
             } else if (nums[i] == nums[nums[i]]) {
                 i++;
             } else {
@@ -30,6 +28,24 @@ public:
         if (nums[0] == i)
             i++;
         return i;
+    }
+
+    int firstMissingPositiveCleaner(vector<int>& nums) {
+        int n = nums.size();
+
+        for (int i=0; i<n; i++) {
+            while(0 < nums[i] && nums[i] < n && nums[i] != nums[nums[i]])
+                swap(nums[i], nums[nums[i]]);
+        }
+
+        for (int i=1; i<n; i++)
+            if (nums[i] != i)
+                return i;
+
+        if (nums[0] == n)
+            return n+1;
+
+        return n;
     }
 
     int firstMissingPositiveSecondAttempt(vector<int>& nums) {
@@ -84,6 +100,7 @@ int main()
 
     for (auto & [testcase, expected]: testcases) {
         assert(s.firstMissingPositive(testcase) == expected);
+        assert(s.firstMissingPositiveCleaner(testcase) == expected);
         assert(s.firstMissingPositiveSecondAttempt(testcase) == expected);
         assert(s.firstMissingPositiveThirdAttempt(testcase) == expected);
     }
