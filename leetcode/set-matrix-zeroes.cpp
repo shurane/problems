@@ -86,7 +86,7 @@ int main()
 
         {
             initMatrix(matrix, n, n);
-            printMatrix(cout, matrix, "initial", ' ', 2);
+            //printMatrix(cout, matrix, "initial", ' ', 2);
 
             s.setZeroes(matrix);
 
@@ -102,10 +102,10 @@ int main()
             // odd rows are set to zero, also the first column
             for (int i=1; i<n; i+=2)
                 matrix[i][0] = 0;
-            printMatrix(cout, matrix, "odd rows to 0, first column to 0, before", ' ', 2);
+            //printMatrix(cout, matrix, "odd rows to 0, first column to 0, before", ' ', 2);
 
             s.setZeroes(matrix);
-            printMatrix(cout, matrix, "odd rows to 0, first column to 0, after", ' ', 2);
+            //printMatrix(cout, matrix, "odd rows to 0, first column to 0, after", ' ', 2);
 
             // first column is all zeroes
             if (n > 1){
@@ -130,10 +130,10 @@ int main()
             // odd columns are set to zero, also the first row
             for (int j=1; j<n; j+=2)
                 matrix[0][j] = 0;
-            printMatrix(cout, matrix, "odd columns to 0, first row to 0, before", ' ', 2);
+            //printMatrix(cout, matrix, "odd columns to 0, first row to 0, before", ' ', 2);
 
             s.setZeroes(matrix);
-            printMatrix(cout, matrix, "odd columns to 0, first row to 0, after", ' ', 2);
+            //printMatrix(cout, matrix, "odd columns to 0, first row to 0, after", ' ', 2);
 
             // first row is all zeroes
             if (n > 1){
@@ -157,10 +157,10 @@ int main()
 
             for (int i=0; i<n; i++)
                 matrix[i][i] = 0;
-            printMatrix(cout, matrix, "main diagonal to 0, before", ' ', 2);
+            //printMatrix(cout, matrix, "main diagonal to 0, before", ' ', 2);
 
             s.setZeroes(matrix);
-            printMatrix(cout, matrix, "main diagonal to 0, after", ' ', 2);
+            //printMatrix(cout, matrix, "main diagonal to 0, after", ' ', 2);
 
             // all values in the matrix should be zero
             for (int i=0; i<n; i++)
@@ -174,10 +174,10 @@ int main()
 
             for (int i=0; i<n; i++)
                 matrix[n-i-1][i] = 0;
-            printMatrix(cout, matrix, "antidiagonal to 0, before", ' ', 2);
+            //printMatrix(cout, matrix, "antidiagonal to 0, before", ' ', 2);
 
             s.setZeroes(matrix);
-            printMatrix(cout, matrix, "antidiagonal to 0, after", ' ', 2);
+            //printMatrix(cout, matrix, "antidiagonal to 0, after", ' ', 2);
 
             // all values in the matrix should be zero
             for (int i=0; i<n; i++)
