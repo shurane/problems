@@ -1,3 +1,6 @@
+# https://stackoverflow.com/questions/4122831/disable-make-builtin-rules-and-variables-from-inside-the-make-file
+.SUFFIXES:
+
 # https://embeddedartistry.com/blog/2017/06/07/warnings-weverything-and-the-kitchen-sink/
 # https://quuxplusone.github.io/blog/2018/12/06/dont-use-weverything/
 # https://stackoverflow.com/questions/20738232/gcc-4-9-undefined-behavior-sanitizer
@@ -8,9 +11,10 @@ SOURCES := $(wildcard *.cpp)
 OBJECTS := $(patsubst %.cpp, %.elf, $(SOURCES))
 
 %.elf: %.cpp
-	clang++ $(CXXFLAGS) $< -o $@ #&& ./$@
+	clang++ $(CXXFLAGS) $< -o $@ && ./$@
 
 all: $(OBJECTS)
 
 #EXECUTABLES := $(wildcard *.elf)
 #run: $(EXECUTABLES)
+#make -j4 all
