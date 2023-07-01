@@ -1,5 +1,6 @@
 *.pyc
 *.elf
 *.exe
+*.obj
 a.out
 .vscode/
