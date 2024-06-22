@@ -96,16 +96,16 @@ int main()
         {{1,2,3,4,5,6,7,8,9,2}, true},
         {{10,9,8,7,6,7,8,9,10,2,1,6}, false},
         {{10,9,8,7,6,7,8,9,10,2,1,7}, true}, // 6, 10, 7
+        {{}, false},
     };
 
-    testcases.push_back({{}, false});
     vector<int>& last = testcases.back().first;
 
     for (int i=0; i<int(2*10e5); i++) {
         last.push_back(i*1000*(i%2 == 1 ? -1 : 1));
     }
 
-    for (auto & [nums, expected]: testcases){
+    for (auto & [nums, expected]: testcases) {
         // if (nums.size() < 500)
         //     cout << nums << " " << (expected ? "true" : "false") << endl;
         assert(s.find132pattern(nums) == expected);
