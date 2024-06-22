@@ -53,7 +53,7 @@ int main()
         {{{1,1},{1,0}}, {{1,1},{1,1}}}
     };
 
-    for (auto & [board, next] : testcases){
+    for (auto & [board, next] : testcases) {
         s.gameOfLife(board);
         assert(board == next);
     }

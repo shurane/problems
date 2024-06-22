@@ -112,7 +112,7 @@ int main()
     };
     for (int i=0; i<3000; i++){ get<0>(testcases[testcases.size()-1]).push_back(0); }
 
-    for (auto testcase: testcases){
+    for (auto testcase: testcases) {
         auto & [arr, target, expected] = testcase;
 
         assert(s.threeSumMulti(arr, target) == expected);

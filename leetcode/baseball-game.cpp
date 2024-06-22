@@ -43,7 +43,7 @@ int main()
         {{"2","D","D","D","D","C","C","C","C"}, 2},
     };
 
-    for (auto testcase: testcases){
+    for (auto testcase: testcases) {
         auto & [ops, expected] = testcase;
         assert(s.calPoints(ops) == expected);
     }

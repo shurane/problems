@@ -38,7 +38,7 @@ int main()
         {{20,20,20}, 20},
     };
 
-    for (auto testcase: testcases){
+    for (auto testcase: testcases) {
         auto & [arr, expected] = testcase;
         assert(s.lastStoneWeight(arr) == expected);
     }
