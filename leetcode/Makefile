@@ -11,7 +11,7 @@ SOURCES := $(wildcard *.cpp)
 OBJECTS := $(patsubst %.cpp, %.elf, $(SOURCES))
 
 %.elf: %.cpp
-	clang++ $(CXXFLAGS) $< -o $@ && ./$@
+	$(CXX) $(CXXFLAGS) $< -o $@ && ./$@
 
 all: $(OBJECTS)
 
