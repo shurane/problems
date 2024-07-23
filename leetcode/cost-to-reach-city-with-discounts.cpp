@@ -11,13 +11,18 @@ using namespace std;
 class Solution {
 public:
     int minimumCost(int n, vector<vector<int>>& highways, int discounts) {
-        discounts = min(n-1, discounts);
         vector<vector<pair<int, int>>> graph(n);
+        int rate = 1;
+
+        if (discounts >= n-1) {
+            discounts = 0;
+            rate = 2;
+        }
 
         for (const auto& h: highways) {
             const int cityA = h[0];
             const int cityB = h[1];
-            const int toll = h[2];
+            const int toll = h[2] / rate;
             graph[cityA].push_back({cityB, toll});
             graph[cityB].push_back({cityA, toll});
         }
@@ -67,6 +72,7 @@ int main()
         {5, {{0,1,4}, {2,1,3}, {1,4,11}, {3,2,3}, {3,4,2}}, 1, 9},
         {4, {{1,3,17}, {1,2,7}, {3,2,5}, {0,1,6}, {3,0,20}}, 20, 8},
         {4, {{0,1,3}, {2,3,2}}, 0, -1},
+        {5, {{0,2,2},{2,1,4},{2,3,3},{3,1,4},{2,4,5},{3,0,5}}, 4, 3},
     };
 
     for (auto& [n, highways, discounts, expected]: testcases) {
