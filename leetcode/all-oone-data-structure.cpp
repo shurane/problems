@@ -9,7 +9,6 @@ using namespace std;
 
 class MyListNode {
 public:
-    // probably don't need both size and count variables
     MyListNode* prev = nullptr;
     MyListNode* next = nullptr;
     MyListNode* prevWithValue = nullptr;
@@ -22,10 +21,9 @@ public:
 class AllOne {
 public:
     MyListNode* front = nullptr;
-    MyListNode* minKeyLocation = nullptr;
-    MyListNode* back = nullptr;
+    MyListNode* minNode = nullptr;
+    MyListNode* maxNode = nullptr;
     unordered_map<string, MyListNode*> mapping;
-    int size = 0;
     // AllOne() {}
     ~AllOne() {
         MyListNode* curr = front;
@@ -40,9 +38,9 @@ public:
         MyListNode* curr = front;
         while (curr) {
             cout << "Node(" << curr->count << ")";
-            if (curr == minKeyLocation)
+            if (curr == minNode)
                 cout << "(min)";
-            else if (curr == back)
+            else if (curr == maxNode)
                 cout << "(max)";
             cout << ": ";
             for (const string& s: curr->container) {
@@ -60,17 +58,16 @@ public:
         front->container.insert(key);
         mapping[key] = front;
 
-        if (size == 0) {
-            back = front;
-            size++;
+        if (!minNode) {
+            maxNode = front;
         }
 
-        if (minKeyLocation != front) {
+        if (minNode != front) {
             // cout << "new minKey: " << key << endl;
-            if (minKeyLocation)
-                minKeyLocation->prevWithValue = front;
-            front->nextWithValue = minKeyLocation;
-            minKeyLocation = front;
+            if (minNode)
+                minNode->prevWithValue = front;
+            front->nextWithValue = minNode;
+            minNode = front;
         }
     }
 
@@ -91,15 +88,14 @@ public:
         position->next->container.insert(key);
         mapping[key] = position->next;
 
-        if (back == position) {
-            back = position->next;
-            size++;
+        if (maxNode == position) {
+            maxNode = position->next;
         }
 
         if (position->container.size() == 0) {
             // cout << "count: " << position->count << " is empty, rerouting" << endl;
-            if (minKeyLocation == position)
-                minKeyLocation = position->next;
+            if (minNode == position)
+                minNode = position->next;
             // skip empty nodes
             MyListNode* np = position->prevWithValue;
             MyListNode* nn = position->nextWithValue;
@@ -134,16 +130,15 @@ public:
 
         if (position->container.size() == 0) {
             // cout << "count: " << position->count << " is empty, rerouting" << endl;
-            if (back == position) {
-                back = position->prev;
-                size--;
+            if (maxNode == position) {
+                maxNode = position->prev;
             }
 
-            if (minKeyLocation == position) {
-                if (minKeyLocation->prev) {
-                    minKeyLocation = position->prev;
+            if (minNode == position) {
+                if (minNode->prev) {
+                    minNode = position->prev;
                 } else {
-                    minKeyLocation = position->nextWithValue;
+                    minNode = position->nextWithValue;
                 }
             }
 
@@ -161,15 +156,15 @@ public:
     string getMaxKey() {
         // cout << "getMaxKey()" << endl;
         // getState();
-        if (size == 0) return "";
-        return *back->container.begin();
+        if (!maxNode) return "";
+        return *maxNode->container.begin();
     }
 
     string getMinKey() {
         // cout << "getMinKey()" << endl;
         // getState();
-        if (size == 0) return "";
-        return *minKeyLocation->container.begin();
+        if (!minNode) return "";
+        return *minNode->container.begin();
     }
 };
 
@@ -288,12 +283,3 @@ int main() {
         assert(container.getMinKey() == "lala");
     }
 }
-
-/**
- * Your AllOne object will be instantiated and called as such:
- * AllOne* obj = new AllOne();
- * obj->inc(key);
- * obj->dec(key);
- * string param_3 = obj->getMaxKey();
- * string param_4 = obj->getMinKey();
- */
