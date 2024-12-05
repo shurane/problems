@@ -9,41 +9,29 @@ using namespace std;
 class Solution {
 public:
     bool canChange(string start, string target) {
-        vector<pair<int, char>> start_pos;
-        vector<pair<int, char>> target_pos;
+        vector<int> s_inds;
+        vector<int> t_inds;
 
         for (int i=0; i<start.size(); i++) {
-            if (start[i] == 'L') {
-                start_pos.push_back({i, 'L'});
-            } else if (start[i] == 'R') {
-                start_pos.push_back({i, 'R'});
+            if (start[i] != '_') {
+                s_inds.push_back(i);
             }
-
-            if (target[i] == 'L') {
-                target_pos.push_back({i, 'L'});
-            } else if (target[i] == 'R') {
-                target_pos.push_back({i, 'R'});
+            if (target[i] != '_') {
+                t_inds.push_back(i);
             }
         }
 
         int i=0;
         int j=0;
-        for (;i<start_pos.size() && j<target_pos.size(); i++) {
-            if (start_pos[i].second != target_pos[j].second) {
+        for (;i<s_inds.size() && j<t_inds.size(); i++, j++) {
+            if (start[s_inds[i]] != target[t_inds[j]] ||
+                (start[s_inds[i]] == 'L' && s_inds[i] < t_inds[i]) ||
+                (start[s_inds[i]] == 'R' && s_inds[i] > t_inds[i])) {
                 return false;
             }
-
-            if (start_pos[i].second == 'L' && target_pos[j].first > start_pos[i].first) {
-                return false;
-            }
-
-            if (start_pos[i].second == 'R' && start_pos[i].first > target_pos[j].first) {
-                return false;
-            }
-            j++;
         }
 
-        return i == start_pos.size() && j == target_pos.size();
+        return i == s_inds.size() && j == t_inds.size();
     }
 };
 
