@@ -26,7 +26,7 @@ def anagramQ2(words: list[str]) -> list[list[str]]:
 
 # question 3: reverse the order in the original list of words that are anagrams
 # anagramQ3(w1) == ["teinls", "netils", "tac", "obb", "net", "listen", "cat", "bob"]
-def anagramQ3(words: list[str]) -> list[list[str]]:
+def anagramQ3(words: list[str]) -> list[str]:
     anagrams: dict[tuple[int, ...], list[int]] = defaultdict(list)
 
     for index, word in enumerate(words):
