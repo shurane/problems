@@ -18,15 +18,14 @@ def word_count_engine(document: str) -> list[list[str]]:
     if "" in wordmap:
         del wordmap[""]
 
-    def keyfn(item: tuple[str, tuple[int,int]]) -> tuple[int, int]:
-        count = item[1][0]
-        index = item[1][1]
+    def key_fn(item: tuple[str, tuple[int,int]]) -> tuple[int, int]:
+        count, index = item[1]
         return (-count, index)
 
     def to_str(item: tuple[str, tuple[int,int]]) -> list[str]:
         return [item[0], str(item[1][0])]
 
-    values = list(map(to_str, sorted(wordmap.items(), key=keyfn)))
+    values = list(map(to_str, sorted(wordmap.items(), key=key_fn)))
     # pprint(values)
 
     return values
