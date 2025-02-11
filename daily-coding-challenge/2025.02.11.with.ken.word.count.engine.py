@@ -2,12 +2,12 @@ from string import ascii_lowercase
 from pprint import pprint
 
 def lower_and_remove_punctuation(s: str):
-    return "".join(c for c in s.lower() if c in ascii_lowercase)
+    return "".join(c for c in s if c in ascii_lowercase)
 
 def word_count_engine(document: str) -> list[list[str]]:
     wordmap: dict[str, tuple[int,int]] = dict()
 
-    for i, word in enumerate(document.split(" ")):
+    for i, word in enumerate(document.lower().split(" ")):
         normalized_word = lower_and_remove_punctuation(word)
         if normalized_word not in wordmap:
             wordmap[normalized_word] = (1,i)
