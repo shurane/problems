@@ -1,31 +1,33 @@
 from string import ascii_lowercase
-from collections import defaultdict
 from pprint import pprint
 
 def lower_and_remove_punctuation(s: str):
     return "".join(c for c in s.lower() if c in ascii_lowercase)
 
 def word_count_engine(document: str) -> list[list[str]]:
-    wordmap: dict[str, int] = defaultdict(int)
-    word_occurrence: dict[str, int] = dict()
+    wordmap: dict[str, tuple[int,int]] = dict()
 
     for i, word in enumerate(document.split(" ")):
         normalized_word = lower_and_remove_punctuation(word)
-        wordmap[normalized_word] += 1
-        if normalized_word not in word_occurrence:
-            word_occurrence[normalized_word] = i
+        if normalized_word not in wordmap:
+            wordmap[normalized_word] = (1,i)
+        else:
+            a,b = wordmap[normalized_word]
+            wordmap[normalized_word] = (a+1, b)
 
     if "" in wordmap:
         del wordmap[""]
 
-    def keyfn(item: tuple[str, int]):
-        return (-item[1], word_occurrence[item[0]])
+    def keyfn(item: tuple[str, tuple[int,int]]) -> tuple[int, int]:
+        count = item[1][0]
+        index = item[1][1]
+        return (-count, index)
 
-    def to_str(item: tuple[str, int]):
-        return [item[0], str(item[1])]
+    def to_str(item: tuple[str, tuple[int,int]]) -> list[str]:
+        return [item[0], str(item[1][0])]
 
     values = list(map(to_str, sorted(wordmap.items(), key=keyfn)))
-    pprint(values)
+    # pprint(values)
 
     return values
 
