@@ -9,7 +9,7 @@ T = TypeVar("T")
 # very similar to a decorator but more like a higher order function, since we're interested in the result
 # found while looking up different ways to time in python from https://builtin.com/articles/timing-functions-python
 # there's time.perf_counter(), time.time(), timeit module (which doesn't preserve the return value), and cProfile/profile
-def time_perf_counter(func: Callable[..., T]) -> tuple[T, float]:
+def time_perf_counter(func: Callable[[], T]) -> tuple[T, float]:
     start = time.perf_counter()
     result = func()
     end = time.perf_counter()
