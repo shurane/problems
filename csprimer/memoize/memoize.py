@@ -1,37 +1,51 @@
 import urllib.request
+from http.client import HTTPResponse
+import json
 import time
-from typing import Any
+from typing import TypeVar
+from collections.abc import Callable
 
-# TODO type hints could be a bit better with U, V, etc.
-def time_perf_counter(f, *args) -> tuple[Any, float]:
+T = TypeVar("T")
+# very similar to a decorator but more like a higher order function, since we're interested in the result
+def time_perf_counter(func: Callable[..., T]) -> tuple[T, float]:
     start = time.perf_counter()
-    result = f(*args)
+    result = func()
     end = time.perf_counter()
     elapsed = end - start
     return (result, elapsed)
 
 
-def memoize(f, lookup, *args):
-    if args in lookup:
-        return lookup[args]
+def memoize(func: Callable[..., T]) -> Callable[..., T]:
+    lookup = {}
+    def wrapper(*args, **kwargs):
+        key = (args, frozenset(kwargs.items()))
+        if key in lookup:
+            return lookup[key]
 
-    lookup[args] = f(*args)
-    return lookup[args]
+        lookup[key] = func(*args, **kwargs)
+        return lookup[key]
+    return wrapper
 
-def fetch(url):
+@memoize
+def fetch(url: str) -> str:
+    response: HTTPResponse
     with urllib.request.urlopen(url) as response:
-        content = response.read().decode('utf-8')
+        content = response.read().decode("utf-8")
         return content
 
-def fib(n):
+@memoize
+def fib(n: int) -> int:
     if n <= 1:
         return n
     return fib(n - 1) + fib(n - 2)
 
-lookup = {}
-n = 35
+n = 100
 for i in range(n):
-    result, elapsed = time_perf_counter(lambda: memoize(fib, lookup, n))
-    print(f"fib({n}) == {result}, elapsed={elapsed}")
+    result, elapsed = time_perf_counter(lambda: fib(i))
+    print(f"fib({i}) == {result}, elapsed={elapsed}")
 
-print(fetch('http://google.com')[:80])
+for i in range(n):
+    content = fetch("https://httpbin.org/uuid")
+    data = json.loads(content)
+    uuid = data["uuid"]
+    print(f"request #{i:3}: , {uuid}")
