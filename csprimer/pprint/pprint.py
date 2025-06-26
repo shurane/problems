@@ -69,6 +69,7 @@ def create_tree_dict(n: int):
 
 for d in [{1:1}, {1:1, 2:2}, {1: {}, 2: {2: 2}, 3: {3: {3: 3}}}, create_nested_dict(10), create_tree_dict(5)]:
     with StringIO() as s:
-        print(f"pprint: {d}")
+        print(f"original: {d}")
+        print("pprint:")
         pp(s, d)
         print(s.getvalue())
