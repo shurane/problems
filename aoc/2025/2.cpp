@@ -10,17 +10,17 @@
 using namespace std;
 
 // thanks https://stackoverflow.com/a/1490088/198348
-int count_digits(long long number) {
-    int count = 1;
+int len_digits(long long number) {
+    int len = 1;
     long long pow10 = 10;
     while (pow10 <= number) {
-        count++;
+        len++;
         pow10 *= 10;
     }
-    return count;
+    return len;
 }
 
-void part1(istream&& file) {
+void part1(istream&& file, bool debug=true) {
     string line;
     long long total = 0;
 
@@ -34,24 +34,26 @@ void part1(istream&& file) {
         const long long left = stoll(left_str);
         const long long right = stoll(right_str);
 
-        cout << "left: " << left << ", right: " << right << endl;
+        if (debug)
+            cout << "left: " << left << ", right: " << right << endl;
 
         for (long long num=left; num<=right; num++) {
-            // could count digits, shift half, then compare first half to second half
+            // could len digits, shift half, then compare first half to second half
             // would be much faster, right?
             // we should also just skip all odd ranges...
 
-            int count = count_digits(num);
+            int len = len_digits(num);
 
-            if (count % 2 == 1) {
-                long long next = pow(10, count) - 1;
-                cout << rang::fg::yellow << "skipping this range: "
-                     << num << " to " << next << rang::fg::reset << endl;
+            if (len % 2 == 1) {
+                long long next = pow(10, len) - 1;
+                if (debug)
+                    cout << rang::fg::yellow << "skipping this range: "
+                         << num << " to " << next << rang::fg::reset << endl;
                 num = next;
                 continue;
             }
 
-            const int half = count / 2;
+            const int half = len / 2;
             // kind of annoying that this is the same for the entire range of numbers with the same length of digits
             // only way to avoid recomputing is iterating over each length of digits, i.e. 0-9, 10-99, 100-999, etc
             const long long pow10_to_half = pow(10, half);
@@ -61,25 +63,86 @@ void part1(istream&& file) {
             //cout << "num: " << num << ", r_half: " << r_half << ", recomposed: " << recomposed << endl;
 
             if (num == recomposed) {
-                cout << "match: " << num << endl;
+                if (debug)
+                    cout << "match: " << num << endl;
                 total += num;
             }
         }
     }
 
-    cout << rang::fg::green << "total: " << total << rang::fg::reset << endl;
+    cout << "part1: " << rang::fg::green << "total: " << total << rang::fg::reset << endl;
 }
 
-void part2(istream&& file) {
+bool check(long long number) {
+    const int len = len_digits(number);
+
+    for (int i=1; i<=len/2; i++) {
+        if (len % i != 0) continue;
+
+        const long long pow10 = pow(10, i);
+        const long long partial = number % pow10;
+        if (partial == 0) continue;
+
+        long long compare = 0;
+
+        while (compare < number) {
+            compare = compare * pow10 + partial;
+        }
+
+        if (compare == number) {
+            return true;
+        }
+    }
+
+    return false;
+}
+
+void part2(istream&& file, bool debug=true) {
+    string line;
+    long long total = 0;
+
+    while(getline(file, line, ',') && line.size() != 0) {
+        istringstream iss(line);
+        string left_str;
+        string right_str;
+        getline(iss, left_str, '-');
+        getline(iss, right_str, '-');
+
+        const long long left = stoll(left_str);
+        const long long right = stoll(right_str);
+
+        if (debug)
+            cout << "left: " << left << ", right: " << right << endl;
+
+        for (long long num=left; num<=right; num++) {
+            if (check(num)) {
+                if (debug)
+                    cout << "match: " << num << endl;
+                total += num;
+            }
+        }
+    }
+
+    cout << "part2: " << rang::fg::green << "total: " << total << rang::fg::reset << endl;
 }
 
 int main() {
+    //assert(check(11));
+    //assert(check(22));
+    //assert(check(111));
+    //assert(check(123) == false);
+    //assert(check(123123));
+    //assert(check(123123123));
+
     // check that it's skipping the correct ranges
     //part1(istringstream("1-50000"));
     //part1(istringstream("995-1015"));
 
-    //part1(ifstream("2.sample.in"));
-    //part1(ifstream("2.in"));
-    part2(ifstream("2.sample.in"));
-    //part2(ifstream("2.in"));
+    part1(ifstream("2.sample.in"), false);
+    part1(ifstream("2.in"), false);
+
+    //part2(istringstream("95-115"));
+    //part2(istringstream("2121212118-2121212124"));
+    part2(ifstream("2.sample.in"), false);
+    part2(ifstream("2.in"), false);
 }
