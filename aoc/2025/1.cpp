@@ -3,7 +3,6 @@
 #include <sstream>
 #include <string>
 #include <format>
-
 #include <assert.h>
 
 // https://github.com/agauniyal/rang
