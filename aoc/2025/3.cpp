@@ -1,6 +1,5 @@
 #include <format>
 #include <fstream>
-#include <sstream>
 #include <string>
 #include <vector>
 #include <assert.h>
@@ -32,11 +31,11 @@ string format_runs(vector<vector<int>>& stacks) {
 
     for (const auto& stack :stacks) {
         for (const int num: stack) {
-           if (num == -1) {
-               result.push_back('_');
-           } else {
-               result.push_back('0' + num);
-           }
+            if (num == -1) {
+                result.push_back('_');
+            } else {
+                result.push_back('0' + num);
+            }
         }
 
         if (stack != stacks.back()) {
@@ -47,8 +46,8 @@ string format_runs(vector<vector<int>>& stacks) {
     return result;
 }
 
-
-long long joltage_stacks(string& line, const int keep, bool debug = false) {
+// I could make this work, but would need to combine the stack to an adjacent stack when it's only composed of 1 digit
+long long joltage_runs(const string& line, const int keep, bool debug = false) {
     int kick = line.size() - keep;
     vector<vector<int>> stacks = {{}};
 
@@ -60,8 +59,10 @@ long long joltage_stacks(string& line, const int keep, bool debug = false) {
         stacks.back().push_back(n);
     }
 
-    if (debug)
+    if (debug) {
+        cout << rang::fg::cyan << "initial: " << line << rang::fg::reset << endl;
         cout << format(" initial     : kick: {}, stacks: {}", kick, format_runs(stacks)) << endl;
+    }
 
     for (int i=0; i<stacks.size() && kick > 0; i++) {
         auto& stack = stacks[i];
@@ -100,7 +101,35 @@ long long joltage_stacks(string& line, const int keep, bool debug = false) {
         }
     }
 
+    if (debug)
+        cout << rang::fg::yellow << "result: " << result << rang::fg::reset << endl;
+
     return result;
+}
+
+long long joltage_stack(const string& line, const int keep) {
+    int kick = line.size() - keep;
+    vector<int> stack;
+
+    for (const char c: line) {
+        const int n = c - '0';
+        while (!stack.empty() && kick > 0 && stack.back() < n) {
+            stack.pop_back();
+            kick--;
+        }
+        stack.push_back(n);
+    }
+
+    while (kick > 0) {
+        stack.pop_back();
+        kick--;
+    }
+
+    long long value = 0;
+    for (int n: stack) {
+        value = (value * 10) + n;
+    }
+    return value;
 }
 
 void part2(istream&& file, bool debug=false) {
@@ -108,16 +137,19 @@ void part2(istream&& file, bool debug=false) {
 
     long long total = 0;
     while (getline(file, line) && line.size() != 0) {
-        total += joltage_stacks(line, 12, debug);
+        const long long value = joltage_stack(line, 12);
+        if (debug)
+            cout << "value: " << value << endl;
+        total += value;
     }
-    cout << "part 2: " << total << endl;
+    cout << rang::fg::green << "part 2: " << total << rang::fg::reset << endl;
 }
 
 int main() {
     // part1(ifstream("3.sample.in"));
     // part1(ifstream("3.in"));
 
-    // part2(ifstream("3.sample.in"), true);
-    part2(istringstream("987654321111111\n811111111111119\n234234234234278\n818181911112111"), true);
+    // part2(istringstream("987654321111111\n811111111111119\n234234234234278\n818181911112111"), true);
+    part2(ifstream("3.sample.in"), true);
     part2(ifstream("3.in"));
 }
