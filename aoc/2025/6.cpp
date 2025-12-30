@@ -93,7 +93,6 @@ void part1(istream&& file) {
 void part2(ifstream&& file) {
     vector<string> lines;
     string line;
-
     size_t longest = 0;
 
     while (getline(file, line) && line.size() != 0) {
@@ -109,26 +108,37 @@ void part2(ifstream&& file) {
 
     string operators = lines.back();
     lines.pop_back();
+    long long result = 0;
 
-
-    int i=0;
-    while (i<longest) {
-        char op = operators[i];
-        int j=i+1;
-        while (j+1 < longest && operators[j+1] == ' ') {
-            j++;
+    int l=0;
+    while (l<longest) {
+        int r=l+1;
+        while (r+1 < longest && operators[r+1] == ' ') {
+            r++;
         }
 
-        // i is the operator character, j is the last space before the next operator or end of line
-        int width = j - i - 2;
-        if (j+1 == longest) {
-            width = j - i;
+        // l is the operator character, r is the last space before the next operator or end of line
+        int width = r - l - 2;
+        if (r+1 == longest) {
+            width = r - l;
         }
 
-        i = j+1;
+        long long value;
+        char op = operators[l];
+        std::function<long long(long long, long long)> f;
+
+        if (op == '+') {
+            value = 0;
+            f = std::plus<>();
+        } else {
+            value = 1;
+            f = std::multiplies<>();
+        }
+
+        l = r+1;
     }
 
-    cout << rang::fg::green << "part 2: " << 0 << rang::fg::reset << endl;
+    cout << rang::fg::green << "part 2: " << result << rang::fg::reset << endl;
 
 }
 
